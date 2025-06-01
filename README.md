@@ -45,7 +45,7 @@ I specialize in **end-to-end product lifecycle management**, digital transformat
 
 - 🔗 [LinkedIn](https://www.linkedin.com/in/rajeshr2r/)
 - 📧 Email: [rajeshr2r@gmail.com](mailto:rajeshr2r@gmail.com)
-- 🌍 Portfolio/Website: Coming soon (maybe **PixelToPitch.com** 😉)
+- 🌍 Portfolio/Website: www.rajeshr2r.com 😉)
 
 ---
 
