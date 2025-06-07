@@ -72,6 +72,15 @@ section h2 {
   margin-top: 2rem;
 }
 
+.prototype {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+
 .project-card {
   background-color: #fff;
   border-radius: 16px;
