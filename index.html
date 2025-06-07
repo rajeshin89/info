@@ -24,6 +24,20 @@
             },
             fontFamily: {
               inter: ['Inter', 'sans-serif']
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-8px)' }
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              }
+            },
+            animation: {
+              float: 'float 3s ease-in-out infinite',
+              fadeInUp: 'fadeInUp 1s ease-out forwards'
             }
           }
         }
@@ -31,15 +45,15 @@
     </script>
   </head>
   <body class="bg-light text-dark font-inter">
-    <header class="bg-white shadow-md py-6">
+    <header class="bg-white shadow-md py-6 animate-fadeInUp">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-3xl font-bold text-primary">Rajesh Kumar K</h1>
+        <h1 class="text-3xl font-bold text-primary animate-float">Rajesh Kumar K</h1>
         <p class="text-gray-600">Product Manager | Agile Leader | Digital Transformation Enthusiast</p>
         <p class="text-sm mt-1">Transforming Vision Into Products</p>
       </div>
     </header>
 
-    <section id="about" class="py-12">
+    <section id="about" class="py-12 animate-fadeInUp">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-2xl font-semibold mb-4">✨ About Me</h2>
         <p class="text-gray-700 leading-relaxed">
@@ -49,11 +63,11 @@
       </div>
     </section>
 
-    <section id="projects" class="bg-white py-12">
+    <section id="projects" class="bg-white py-12 animate-fadeInUp">
       <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-2xl font-semibold mb-6">🚀 Projects</h2>
         <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-light shadow-md rounded-lg overflow-hidden">
+          <div class="bg-light shadow-md rounded-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
             <img src="images/Sample1.jpeg" alt="SaaS Platform" class="w-full h-48 object-cover" />
             <div class="p-4">
               <h3 class="text-lg font-semibold">SaaS Re-Architecture (Exterro)</h3>
@@ -61,7 +75,7 @@
               <a href="#" class="text-primary mt-2 inline-block">View Live →</a>
             </div>
           </div>
-          <div class="bg-light shadow-md rounded-lg overflow-hidden">
+          <div class="bg-light shadow-md rounded-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
             <img src="images/sample2.jpeg" alt="IoT Dashboard" class="w-full h-48 object-cover" />
             <div class="p-4">
               <h3 class="text-lg font-semibold">IoT App for CRI Pumps</h3>
@@ -69,7 +83,7 @@
               <a href="#" class="text-primary mt-2 inline-block">View Case Study →</a>
             </div>
           </div>
-          <div class="bg-light shadow-md rounded-lg overflow-hidden text-center p-4 flex flex-col items-center justify-center">
+          <div class="bg-light shadow-md rounded-lg overflow-hidden text-center p-4 flex flex-col items-center justify-center transform hover:scale-105 transition duration-300">
             <img src="images/sample3.jpeg" alt="Prototypes" class="w-full h-48 object-cover rounded-lg" />
             <a href="prototypes.html" class="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700">🖼️ View Product Prototypes</a>
             <p class="mt-2 text-sm"><a href="https://oneproduct-universe-hub.lovable.app/" target="_blank" class="text-primary">One Product Landing Page</a></p>
@@ -78,10 +92,10 @@
       </div>
     </section>
 
-    <section class="py-12">
+    <section class="py-12 animate-fadeInUp">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-2xl font-semibold mb-4">🛠️ Skills & Tools</h2>
-        <ul class="list-disc list-inside text-gray-700">
+        <ul class="list-disc list-inside text-gray-700 space-y-1">
           <li>Jira, Confluence, Trello</li>
           <li>MixPanel, Heap, Pendo</li>
           <li>Figma, Canva, Miro</li>
@@ -90,10 +104,10 @@
       </div>
     </section>
 
-    <section class="bg-light py-12">
+    <section class="bg-light py-12 animate-fadeInUp">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-2xl font-semibold mb-4">🎓 Certifications</h2>
-        <ul class="list-disc list-inside text-gray-700">
+        <ul class="list-disc list-inside text-gray-700 space-y-1">
           <li>Product Discovery (Product School)</li>
           <li>Enterprise Design Thinking (IBM)</li>
           <li>Digital Marketing (Google)</li>
@@ -103,7 +117,7 @@
       </div>
     </section>
 
-    <section class="py-12">
+    <section class="py-12 animate-fadeInUp">
       <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-2xl font-semibold mb-4">📄 My Reads</h2>
         <p class="mb-4 text-gray-700">You can explore my reads and insights directly below:</p>
@@ -111,7 +125,7 @@
       </div>
     </section>
 
-    <footer class="bg-dark text-white py-6">
+    <footer class="bg-dark text-white py-6 animate-fadeInUp">
       <div class="max-w-4xl mx-auto text-center text-sm">
         <p>📍 Tamil Nadu, India • 📞 <a href="tel:+919952156121" class="underline">+91-9952-156-121</a> • 📧 <a href="mailto:rajeshr2r@gmail.com" class="underline">rajeshr2r@gmail.com</a></p>
         <p class="mt-2">🔗 <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="underline">Connect on LinkedIn</a> | <a href="https://github.com/rajesh/info.git" target="_blank" class="underline">GitHub</a></p>
