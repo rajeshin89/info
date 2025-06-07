@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Prototypes | Rajesh Kumar K</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .gallery-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+    }
+    .gallery-item h3 {
+      margin: 0;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <h1>🧪 Product Prototype Showcase</h1>
+    <p>Explore visual prototypes from past and current product work.</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/oneproduct.jpg" alt="OneProduct Prototype">
+        <h3>OneProduct</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="images/dealday.jpg" alt="Deal Day Prototype">
+        <h3>Deal Day</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="images/childsafety.jpg" alt="Child Safety App">
+        <h3>Child Safety</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="images/storybook.jpg" alt="Story Book">
+        <h3>Story Book</h3>
+      </div>
+    </div>
+
+    <p><a href="index.html">← Back to Portfolio</a></p>
+  </div>
+</body>
+</html>
