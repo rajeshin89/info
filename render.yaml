@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: rajesh-portfolio
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    autoDeploy: true
+    branch: master
+    healthCheckPath: /
+    plan: free
