@@ -1,141 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rajesh Kumar K | Product Manager Portfolio</title>
-    <meta
-      name="description"
-      content="Rajesh Kumar K – Product Manager Portfolio. Explore 12+ years of SaaS, IoT, and Agile product experience across LegalTech, EdTech, and eCommerce. View live projects, download resume, and connect."
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#2563EB',
-              dark: '#1E293B',
-              light: '#F1F5F9'
-            },
-            fontFamily: {
-              inter: ['Inter', 'sans-serif']
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-8px)' }
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' }
-              }
-            },
-            animation: {
-              float: 'float 3s ease-in-out infinite',
-              fadeInUp: 'fadeInUp 1s ease-out forwards'
-            }
-          }
-        }
-      }
-    </script>
-  </head>
-  <body class="bg-light text-dark font-inter">
-    <header class="bg-white shadow-md py-6 animate-fadeInUp">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-3xl font-bold text-primary animate-float">Rajesh Kumar K</h1>
-        <p class="text-gray-600">Product Manager | Agile Leader | Digital Transformation Enthusiast</p>
-        <p class="text-sm mt-1">Transforming Vision Into Products</p>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rajesh Kumar K | Product Manager Portfolio</title>
+  <meta name="description" content="Rajesh Kumar K – Product Manager Portfolio. Explore 12+ years of SaaS, IoT, and Agile product experience across LegalTech, EdTech, and eCommerce. View live projects, download resume, and connect." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Local stylesheet (no Tailwind needed) -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header fade-in">
+    <div class="container">
+      <h1 class="float">Rajesh Kumar K</h1>
+      <p>Product Manager | Agile Leader | Digital Transformation Enthusiast</p>
+      <p class="tagline">Transforming Vision Into Products</p>
+    </div>
+  </header>
 
-    <section id="about" class="py-12 animate-fadeInUp">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-semibold mb-4">✨ About Me</h2>
-        <p class="text-gray-700 leading-relaxed">
-          I’m Rajesh Kumar K, a results-driven Product Manager with 12+ years of experience delivering high-impact digital products across SaaS, IoT, EdTech, and enterprise platforms.
-          With a strong foundation in Agile, Scrum, and low-code technologies, I specialize in turning business challenges into innovative software solutions.
-        </p>
-      </div>
-    </section>
+  <section id="about" class="about fade-in">
+    <div class="container">
+      <h2>✨ About Me</h2>
+      <p>I’m Rajesh Kumar K, a results‑driven Product Manager with 12+ years of experience delivering high‑impact digital products across SaaS, IoT, EdTech, and enterprise platforms. With a strong foundation in Agile, Scrum, and low‑code technologies, I specialize in turning business challenges into innovative software solutions.</p>
+    </div>
+  </section>
 
-    <section id="projects" class="bg-white py-12 animate-fadeInUp">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl font-semibold mb-6">🚀 Projects</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-light shadow-md rounded-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
-            <img src="images/Sample1.jpeg" alt="SaaS Platform" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-lg font-semibold">SaaS Re-Architecture (Exterro)</h3>
-              <p class="text-gray-600">Led migration of legal risk compliance platform using low-code tools. Improved user experience and sprint velocity by 20%.</p>
-              <a href="#" class="text-primary mt-2 inline-block">View Live →</a>
-            </div>
-          </div>
-          <div class="bg-light shadow-md rounded-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
-            <img src="images/sample2.jpeg" alt="IoT Dashboard" class="w-full h-48 object-cover" />
-            <div class="p-4">
-              <h3 class="text-lg font-semibold">IoT App for CRI Pumps</h3>
-              <p class="text-gray-600">Built real-time telemetry mobile app integrated with CRM. Enabled proactive service tracking and analytics.</p>
-              <a href="#" class="text-primary mt-2 inline-block">View Case Study →</a>
-            </div>
-          </div>
-          <div class="bg-light shadow-md rounded-lg overflow-hidden text-center p-4 flex flex-col items-center justify-center transform hover:scale-105 transition duration-300">
-            <img src="images/sample3.jpeg" alt="Prototypes" class="w-full h-48 object-cover rounded-lg" />
-            <a href="prototypes.html" class="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-700">🖼️ View Product Prototypes</a>
-            <p class="mt-2 text-sm"><a href="https://oneproduct-universe-hub.lovable.app/" target="_blank" class="text-primary">One Product Landing Page</a></p>
-          </div>
+  <section id="projects" class="projects fade-in">
+    <div class="container">
+      <h2>🚀 Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="images/Sample1.jpeg" alt="SaaS Platform" />
+          <h3>SaaS Re‑Architecture (Exterro)</h3>
+          <p>Led migration of legal‑risk compliance platform using low‑code tools. Improved user experience and sprint velocity by 20%.</p>
+          <a href="#">View Live →</a>
+        </div>
+        <div class="project-card">
+          <img src="images/sample2.jpeg" alt="IoT Dashboard" />
+          <h3>IoT App for CRI Pumps</h3>
+          <p>Built real‑time telemetry mobile app integrated with CRM. Enabled proactive service tracking and analytics.</p>
+          <a href="#">View Case Study →</a>
+        </div>
+        <div class="project-card">
+          <img src="images/sample3.jpeg" alt="Prototypes" />
+          <h3>Product Prototypes</h3>
+          <p><a href="prototypes.html">🖼️ View Product Prototypes</a></p>
+          <p><a href="https://oneproduct-universe-hub.lovable.app/" target="_blank">One Product Landing Page</a></p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="py-12 animate-fadeInUp">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-semibold mb-4">🛠️ Skills & Tools</h2>
-        <ul class="list-disc list-inside text-gray-700 space-y-1">
-          <li>Jira, Confluence, Trello</li>
-          <li>MixPanel, Heap, Pendo</li>
-          <li>Figma, Canva, Miro</li>
-          <li>Postman, API Testing, Pega, CRM</li>
-        </ul>
+  <section id="skills" class="skills fade-in">
+    <div class="container">
+      <h2>🛠️ Skills &amp; Tools</h2>
+      <ul>
+        <li>Jira, Confluence, Trello</li>
+        <li>MixPanel, Heap, Pendo</li>
+        <li>Figma, Canva, Miro</li>
+        <li>Postman, API Testing, Pega, CRM</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="certifications" class="certifications fade-in">
+    <div class="container">
+      <h2>🎓 Certifications</h2>
+      <ul>
+        <li>Product Discovery (Product School)</li>
+        <li>Enterprise Design Thinking (IBM)</li>
+        <li>Digital Marketing (Google)</li>
+        <li>Google Cybersecurity Professional</li>
+        <li>Figma to Lottie Animation (Lottie Files)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="myreads" class="notion-section fade-in">
+    <div class="container">
+      <h2>📄 My Reads</h2>
+      <p>You can explore my reads and insights directly below:</p>
+      <iframe src="https://rajeshpro.notion.site/ebd/205b931909f680c2bff0e1e7d5c3a212" width="100%" height="300" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section id="newsletter" class="newsletter fade-in">
+    <div class="container">
+      <h2>📬 Stay in the Loop</h2>
+      <p>Get occasional product updates and insights. No spam.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" id="email-input" placeholder="Your email address" required />
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+      <p id="response-msg" class="response"></p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact fade-in">
+    <footer class="footer">
+      <div class="container">
+        <p>📍 Tamil Nadu, India • 📞 <a href="tel:+919952156121">+91‑9952‑156‑121</a> • 📧 <a href="mailto:rajeshr2r@gmail.com">rajeshr2r@gmail.com</a></p>
+        <p>🔗 <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank">Connect on LinkedIn</a> | <a href="https://github.com/rajesh/info.git" target="_blank">GitHub</a></p>
+        <p>© 2025 rajeshkumar. All rights reserved.</p>
+        <button id="darkToggle" class="btn-secondary">🌙 Toggle Dark Mode</button>
       </div>
-    </section>
-
-    <section class="bg-light py-12 animate-fadeInUp">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-semibold mb-4">🎓 Certifications</h2>
-        <ul class="list-disc list-inside text-gray-700 space-y-1">
-          <li>Product Discovery (Product School)</li>
-          <li>Enterprise Design Thinking (IBM)</li>
-          <li>Digital Marketing (Google)</li>
-          <li>Google Cybersecurity Professional</li>
-          <li>Figma to Lottie Animation (Lottie Files)</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="py-12 animate-fadeInUp">
-      <div class="max-w-4xl mx-auto px-4">
-        <h2 class="text-2xl font-semibold mb-4">📄 My Reads</h2>
-        <p class="mb-4 text-gray-700">You can explore my reads and insights directly below:</p>
-        <iframe src="https://rajeshpro.notion.site/ebd/205b931909f680c2bff0e1e7d5c3a212" width="100%" height="300" frameborder="0" class="rounded shadow"></iframe>
-      </div>
-    </section>
-
-    <footer class="bg-dark text-white py-6 animate-fadeInUp">
-      <div class="max-w-4xl mx-auto text-center text-sm">
-        <p>📍 Tamil Nadu, India • 📞 <a href="tel:+919952156121" class="underline">+91-9952-156-121</a> • 📧 <a href="mailto:rajeshr2r@gmail.com" class="underline">rajeshr2r@gmail.com</a></p>
-        <p class="mt-2">🔗 <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="underline">Connect on LinkedIn</a> | <a href="https://github.com/rajesh/info.git" target="_blank" class="underline">GitHub</a></p>
-        <p class="mt-2">© 2025 rajeshkumar. All rights reserved.</p>
-      </div>
-      <button id="darkToggle" class="mt-4 bg-dark text-white px-4 py-2 rounded hover:bg-gray-800">
-  🌙 Toggle Dark Mode
-</button>
-
     </footer>
-    <script src="script.js"></script>
-  </body>
+  </section>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
 </html>
