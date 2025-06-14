@@ -86,19 +86,6 @@
     </div>
   </section>
 
-  <!-- Newsletter -->
-<section id="newsletter" class="newsletter fade-in">
-    <div class="container">
-      <h2>📬 Stay in the Loop</h2>
-      <p>Get occasional product updates and insights. No spam.</p>
-      <form id="newsletter-form" class="newsletter-form">
-        <input type="email" id="email-input" placeholder="Your email address" required />
-        <button type="submit" class="btn">Subscribe</button>
-      </form>
-      <p id="response-msg" class="response"></p>
-    </div>
-   </section>
-
   <section id="contact" class="contact fade-in">
     <footer class="footer">
       <div class="container">
@@ -109,81 +96,5 @@
       </div>
     </footer>
   </section>
-
-  <!-- JavaScript -->
- <script src="script.js"></script>
-  <section id="contact-form" class="fade-in">
-  <div class="container">
-    <h2>📞 Contact Me</h2>
-    <form id="firebase-contact-form">
-      <input type="text" id="name" placeholder="Your Name" required /><br><br>
-      <input type="tel" id="phone" placeholder="Phone Number" required /><br><br>
-      <input type="email" id="email" placeholder="Email Address" required /><br><br>
-      <button type="submit" class="btn">Submit</button>
-    </form>
-    <p id="form-status" class="response"></p>
-  </div>
-</section>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js"></script>
-
-  <script>
-  // ✅ Actual Firebase config
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDmK3zPx1465qMssBXCL0_2alpzO-NxLbk",
-    authDomain: "rajeshr2r-1.firebaseapp.com",
-    databaseURL: "https://rajeshr2r-1-default-rtdb.firebaseio.com",
-    projectId: "rajeshr2r-1",
-    storageBucket: "rajeshr2r-1.firebasestorage.app",
-    messagingSenderId: "98106863795",
-    appId: "1:98106863795:web:8cb8b5fdf30e23345a80c6",
-    measurementId: "G-2Z85K0CEJ2"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  // Handle form submission
-  const form = document.getElementById('firebase-contact-form');
-  const statusMsg = document.getElementById('form-status');
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-
-    try {
-      await db.collection("users").add({
-        name: name,
-        phone: phone,
-        email: email,
-        timestamp: new Date()
-      });
-
-      statusMsg.textContent = "✅ Submitted successfully!";
-      form.reset();
-    } catch (error) {
-      console.error("🔥 Error adding document: ", error);
-      statusMsg.textContent = "❌ Submission failed. Check console.";
-    }
-  });
- </script>
 </body>
 </html>
