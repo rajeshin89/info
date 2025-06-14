@@ -6,94 +6,166 @@
   <title>Rajesh Kumar K | Product Manager Portfolio</title>
   <meta name="description" content="Rajesh Kumar K – Product Manager Portfolio. Explore 12+ years of SaaS, IoT, and Agile product experience across LegalTech, EdTech, and eCommerce. View live projects, download resume, and connect." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <!-- Local stylesheet (no Tailwind needed) -->
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #f9f9f9;
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      padding: 4rem 2rem;
+      background: linear-gradient(120deg, #e2e2e2, #c9d6ff);
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    header .tagline {
+      font-style: italic;
+      color: #555;
+    }
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #000;
+      padding-left: 0.5rem;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+    }
+    .project-card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 1.2rem;
+    }
+    iframe {
+      border-radius: 8px;
+    }
+    footer {
+      padding: 2rem;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+    }
+    footer a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+    .portrait {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
-  <header class="header fade-in">
-    <div class="container">
-      <h1 class="float">Rajesh Kumar K</h1>
-      <p>Product Manager | Agile Leader | Digital Transformation Enthusiast</p>
-      <p class="tagline">Transforming Vision Into Products</p>
-    </div>
+  <header>
+    <img src="images/portrait.jpg" alt="Rajesh Portrait" class="portrait" />
+    <h1>Rajesh Kumar K</h1>
+    <p>Product Manager | Agile Leader | Digital Transformation Enthusiast</p>
+    <p class="tagline">Transforming Vision Into Products</p>
   </header>
 
-  <section id="about" class="about fade-in">
-    <div class="container">
-      <h2>✨ About Me</h2>
-      <p>I’m Rajesh Kumar K, a results‑driven Product Manager with 12+ years of experience delivering high‑impact digital products across SaaS, IoT, EdTech, and enterprise platforms. With a strong foundation in Agile, Scrum, and low‑code technologies, I specialize in turning business challenges into innovative software solutions.</p>
-    </div>
+  <section id="about">
+    <h2>✨ About Me</h2>
+    <p>I’m Rajesh Kumar K, a results‑driven Product Manager with 12+ years of experience delivering high‑impact digital products across SaaS, IoT, EdTech, and enterprise platforms. With a strong foundation in Agile, Scrum, and low‑code technologies, I specialize in turning business challenges into innovative software solutions.</p>
   </section>
 
-  <section id="projects" class="projects fade-in">
-    <div class="container">
-      <h2>🚀 Projects</h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <img src="images/Sample1.jpeg" alt="SaaS Platform" />
-          <h3>SaaS Re‑Architecture (Exterro)</h3>
-          <p>Led migration of legal‑risk compliance platform using low‑code tools. Improved user experience and sprint velocity by 20%.</p>
-          <a href="#">View Live →</a>
-        </div>
-        <div class="project-card">
-          <img src="images/sample2.jpeg" alt="IoT Dashboard" />
-          <h3>IoT App for CRI Pumps</h3>
-          <p>Built real‑time telemetry mobile app integrated with CRM. Enabled proactive service tracking and analytics.</p>
-          <a href="#">View Case Study →</a>
-        </div>
-        <div class="project-card">
-          <img src="images/sample3.jpeg" alt="Prototypes" />
-          <h3>Product Prototypes</h3>
-          <p><a href="prototypes.html">🖼️ View Product Prototypes</a></p>
-          <p><a href="https://oneproduct-universe-hub.lovable.app/" target="_blank">One Product Landing Page</a></p>
-          <p><a href="https://9000-firebase-studio-1749874899272.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev" target="_blank">Data Visualization Page</a></p>
-          
-        </div>
+  <section id="projects">
+    <h2>🚀 Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="images/Sample1.jpeg" alt="SaaS Platform" />
+        <h3>SaaS Re‑Architecture (Exterro)</h3>
+        <p>Led migration of legal‑risk compliance platform using low‑code tools. Improved user experience and sprint velocity by 20%.</p>
+        <a href="#">View Live →</a>
+      </div>
+      <div class="project-card">
+        <img src="images/sample2.jpeg" alt="IoT Dashboard" />
+        <h3>IoT App for CRI Pumps</h3>
+        <p>Built real‑time telemetry mobile app integrated with CRM. Enabled proactive service tracking and analytics.</p>
+        <a href="#">View Case Study →</a>
+      </div>
+      <div class="project-card">
+        <img src="images/sample3.jpeg" alt="Prototypes" />
+        <h3>Product Prototypes</h3>
+        <p><a href="prototypes.html">🖼️ View Product Prototypes</a></p>
+        <p><a href="https://oneproduct-universe-hub.lovable.app/" target="_blank">One Product Landing Page</a></p>
+        <p><a href="https://9000-firebase-studio-1749874899272.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev" target="_blank">Data Visualization Page</a></p>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="skills fade-in">
-    <div class="container">
-      <h2>🛠️ Skills &amp; Tools</h2>
-      <ul>
-        <li>Jira, Confluence, Trello</li>
-        <li>MixPanel, Heap, Pendo</li>
-        <li>Figma, Canva, Miro</li>
-        <li>Postman, API Testing, Pega, CRM</li>
-      </ul>
-    </div>
+  <section id="skills">
+    <h2>🛠️ Skills & Tools</h2>
+    <ul>
+      <li>Jira, Confluence, Trello</li>
+      <li>MixPanel, Heap, Pendo</li>
+      <li>Figma, Canva, Miro</li>
+      <li>Postman, API Testing, Pega, CRM</li>
+    </ul>
   </section>
 
-  <section id="certifications" class="certifications fade-in">
-    <div class="container">
-      <h2>🎓 Certifications</h2>
-      <ul>
-        <li>Product Discovery (Product School)</li>
-        <li>Enterprise Design Thinking (IBM)</li>
-        <li>Digital Marketing (Google)</li>
-        <li>Google Cybersecurity Professional</li>
-        <li>Figma to Lottie Animation (Lottie Files)</li>
-      </ul>
-    </div>
+  <section id="certifications">
+    <h2>🎓 Certifications</h2>
+    <ul>
+      <li>Product Discovery (Product School)</li>
+      <li>Enterprise Design Thinking (IBM)</li>
+      <li>Digital Marketing (Google)</li>
+      <li>Google Cybersecurity Professional</li>
+      <li>Figma to Lottie Animation (Lottie Files)</li>
+    </ul>
   </section>
 
-  <section id="myreads" class="notion-section fade-in">
-    <div class="container">
-      <h2>📄 My Reads</h2>
-      <p>You can explore my reads and insights directly below:</p>
-      <iframe src="https://rajeshpro.notion.site/ebd/205b931909f680c2bff0e1e7d5c3a212" width="100%" height="300" frameborder="0"></iframe>
-    </div>
+  <section id="myreads">
+    <h2>📄 My Reads</h2>
+    <p>You can explore my reads and insights directly below:</p>
+    <iframe src="https://rajeshpro.notion.site/ebd/205b931909f680c2bff0e1e7d5c3a212" width="100%" height="300" frameborder="0"></iframe>
   </section>
 
-  <section id="contact" class="contact fade-in">
-    <footer class="footer">
-      <div class="container">
-        <p>📍 Tamil Nadu, India • 📞 <a href="tel:+919952156121">+91‑9952‑156‑121</a> • 📧 <a href="mailto:rajeshr2r@gmail.com">rajeshr2r@gmail.com</a></p>
-        <p>🔗 <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank">Connect on LinkedIn</a> | <a href="https://github.com/rajesh/info.git" target="_blank">GitHub</a></p>
-        <p>© 2025 rajeshkumar. All rights reserved.</p>
-        <button id="darkToggle" class="btn-secondary">🌙 Toggle Dark Mode</button>
-      </div>
+  <section id="contact">
+    <footer>
+      <p>📍 Tamil Nadu, India • 📞 <a href="tel:+919952156121">+91‑9952‑156‑121</a> • 📧 <a href="mailto:rajeshr2r@gmail.com">rajeshr2r@gmail.com</a></p>
+      <p>🔗 <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank">Connect on LinkedIn</a> | <a href="https://github.com/rajesh/info.git" target="_blank">GitHub</a></p>
+      <p>© 2025 rajeshkumar. All rights reserved.</p>
+      <button id="darkToggle" class="btn-secondary">🌙 Toggle Dark Mode</button>
     </footer>
   </section>
 </body>
