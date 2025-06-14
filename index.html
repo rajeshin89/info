@@ -163,5 +163,18 @@
       <p>© 2025 rajeshkumar. All rights reserved.</p>
     </footer>
   </section>
+  <script>
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  });
+
+  document.querySelectorAll(".column").forEach((el) => observer.observe(el));
+</script>
+
 </body>
 </html>
