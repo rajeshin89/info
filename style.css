@@ -167,6 +167,72 @@ footer a {
   h2 {
     font-size: 1.8rem;
   }
+  /* Section Layout */
+.two-column-section {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Column Box */
+.column {
+  flex: 1 1 45%;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-width: 300px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.column h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #000;
+  padding-left: 0.5rem;
+}
+
+/* List styling with icons */
+.column ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.column li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #333;
+}
+
+.column li i {
+  color: #007acc;
+  min-width: 20px;
+}
+
+/* Fade-in Effects */
+.fade-in-left {
+  transform: translateX(-30px);
+}
+
+.fade-in-right {
+  transform: translateX(30px);
+}
+
+/* Activated on scroll */
+.column.visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
 
   .project-card h3 {
     font-size: 1.1rem;
