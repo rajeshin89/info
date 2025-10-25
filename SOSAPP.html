@@ -15,6 +15,10 @@
             font-family: 'Inter', sans-serif;
             background-color: #f1f5f9; /* Slate 100 */
         }
+        /* Style for the fixed header */
+        .app-header {
+            background-color: #ffffff;
+        }
         .score-display {
             transition: all 0.5s ease-in-out;
             background-image: radial-gradient(circle at center, #1e3a8a 0%, #1e3a8a 50%, #172554 100%);
@@ -26,14 +30,57 @@
         .risk-color-high { background-color: #dc2626; } /* Red 600 */
         .risk-color-medium { background-color: #fbbf24; } /* Amber 400 */
         .risk-color-low { background-color: #10b981; } /* Emerald 500 */
+        .teal-button {
+             background-color: #03989e; /* Custom teal for consistency with image */
+        }
+        .teal-button:hover {
+             background-color: #05888e;
+        }
+        .tab-button.active {
+            border-bottom: 3px solid #4f46e5; /* Indigo 600 */
+            color: #4f46e5;
+            font-weight: 600;
+        }
     </style>
 </head>
-<body class="min-h-screen p-4 sm:p-8">
+<body class="min-h-screen">
 
-    <div class="max-w-4xl mx-auto">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">SOS Security & Behavior Component (Integrable)</h1>
-            <p class="text-gray-500">AI-driven risk assessment tool for platform companies, institutions, and social media networks.</p>
+    <!-- INTEGRATED PLATFORM NAVIGATION HEADER PANE (Unchanged) -->
+    <header class="app-header w-full shadow-lg sticky top-0 z-20">
+        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
+            <!-- Logo/Branding -->
+            <div class="flex items-center space-x-2">
+                <span class="bg-teal-600 text-white font-extrabold text-xl p-1 rounded-full w-8 h-8 flex items-center justify-center">RK</span>
+                <span class="text-xl font-bold text-gray-800 hidden sm:block">Rajesh Kandasamy</span>
+            </div>
+
+            <!-- Navigation Links (Hidden on small screens for brevity, focus on main content) -->
+            <nav class="hidden lg:flex items-center space-x-6 text-gray-600 font-medium">
+                <a href="#" class="hover:text-teal-600 transition duration-150">About</a>
+                <a href="#" class="hover:text-teal-600 transition duration-150">Experience</a>
+                <a href="#" class="hover:text-teal-600 transition duration-150">Skills</a>
+                <a href="#" class="hover:text-teal-600 transition duration-150">Prototypes</a>
+                <a href="#" class="hover:text-teal-600 transition duration-150">Thoughts & Articles</a>
+            </nav>
+
+            <!-- CTAs/Icons -->
+            <div class="flex items-center space-x-3">
+                <a href="#" title="Twitter" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" title="LinkedIn" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" title="Mail" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                <a href="#" title="GitHub" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <button class="teal-button text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-200 flex items-center">
+                    <i data-lucide="message-square" class="w-4 h-4 mr-1"></i> Let's Talk
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER PANE -->
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-8">
+        <header class="text-center mb-10 mt-6">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">SOS Security & Behavior Component</h1>
+            <p class="text-gray-500">AI-driven risk assessment tool for platform companies to detect bot and malicious user activity.</p>
         </header>
 
         <!-- Input Panel -->
@@ -42,31 +89,20 @@
                 <i data-lucide="user-search" class="w-5 h-5 mr-2 text-indigo-600"></i> Select User Account for Analysis
             </h2>
             <div class="flex flex-col sm:flex-row gap-4">
-                <!-- Dropdown Selector -->
+                <!-- Dropdown Selector - Account suffixes removed per request -->
                 <select id="userIdInput"
                         class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     <option value="" disabled selected>-- Select a User to Analyze --</option>
-                    <optgroup label="High Risk (Potential Bot/Spam)">
-                        <option value="jack_high">Jack - High Risk (SOS 9)</option>
-                        <option value="jane_high">Jane - High Risk (SOS 12)</option>
-                        <option value="john_high">John - High Risk (SOS 23)</option>
-                        <option value="mike_high">Mike - High Risk (SOS 36)</option>
-                        <option value="nick_high">Nick - High Risk (SOS 46)</option>
-                    </optgroup>
-                    <optgroup label="Medium Risk (Mixed Signals)">
-                        <option value="mike_medium">Mike - Medium Risk (SOS 55)</option>
-                        <option value="jane_medium">Jane - Medium Risk (SOS 61)</option>
-                        <option value="jack_medium">Jack - Medium Risk (SOS 61)</option>
-                        <option value="nick_medium">Nick - Medium Risk (SOS 63)</option>
-                        <option value="john_medium">John - Medium Risk (SOS 65)</option>
-                    </optgroup>
-                    <optgroup label="Low Risk (Organic/Safe)">
-                        <option value="mike_low">Mike - Low Risk (SOS 84)</option>
-                        <option value="nick_low">Nick - Low Risk (SOS 87)</option>
-                        <option value="jane_low">Jane - Low Risk (SOS 89)</option>
-                        <option value="jack_low">Jack - Low Risk (SOS 93)</option>
-                        <option value="john_low">John - Low Risk (SOS 97)</option>
-                    </optgroup>
+                    <option value="user_1">Aria</option>
+                    <option value="user_2">Ben</option>
+                    <option value="user_3">Chloe</option>
+                    <option value="user_4">David</option>
+                    <option value="user_5">Emily</option>
+                    <option value="user_6">Finn</option>
+                    <option value="user_7">Grace</option>
+                    <option value="user_8">Henry</option>
+                    <option value="user_9">Ivy</option>
+                    <option value="user_10">Jake</option>
                 </select>
                 
                 <button id="analyzeButton"
@@ -77,49 +113,97 @@
             <p id="error-message" class="text-red-500 text-sm mt-2 hidden">Please select a user ID from the dropdown.</p>
         </div>
 
-        <!-- Loading Indicator & Output Section -->
+        <!-- Loading Indicator -->
         <div id="loadingIndicator" class="hidden bg-yellow-500 text-white p-4 rounded-lg shadow-md mb-8 text-center font-semibold">
             <div class="flex items-center justify-center">
                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Running deep AI analysis... Simulating Social Media and Behavioral Data Ingestion.
+                Running deep AI analysis... Incorporating new Digital Footprint and Political Polarity factors.
             </div>
         </div>
-
-        <!-- Results Dashboard -->
-        <div id="resultsDashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <!-- 1. SOS Score Card -->
-            <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-600">
-                <h3 class="text-lg font-bold mb-4 text-indigo-700 flex items-center">
-                    <i data-lucide="shield-check" class="w-5 h-5 mr-2"></i> Social Operating Score (SOS)
-                </h3>
-                <div id="sosScoreCard" class="score-display rounded-xl text-center p-8 text-white shadow-xl">
-                    <p class="text-sm font-light mb-1 opacity-75">RISK INDEX (0-100)</p>
-                    <div class="score-text" id="finalSosScore">--</div>
-                    <p class="text-xl font-semibold mt-1" id="riskLevelText">--</p>
-                </div>
-                <p class="text-sm text-gray-500 mt-4">SOS is a composite index. Higher is better (Safer/More Organic).</p>
+        
+        <!-- Results Container (Hidden by default) -->
+        <div id="resultsContainer" class="hidden">
+            <!-- Tabs for switching views -->
+            <div class="flex border-b border-gray-300 mb-6">
+                <button id="tabAnalyst" onclick="switchView('analyst')" class="tab-button active py-2 px-4 text-gray-600 hover:text-indigo-600 transition duration-150">
+                    <i data-lucide="database" class="w-4 h-4 mr-1 inline"></i> Platform Analyst View
+                </button>
+                <button id="tabSelf" onclick="switchView('self')" class="tab-button py-2 px-4 text-gray-600 hover:text-indigo-600 transition duration-150">
+                    <i data-lucide="user" class="w-4 h-4 mr-1 inline"></i> User Self-Analysis
+                </button>
             </div>
 
-            <!-- 2. Detailed Metrics Panel -->
-            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
-                <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
-                    <i data-lucide="layout-list" class="w-5 h-5 mr-2 text-gray-500"></i> AI & Behavior Metrics
-                </h3>
+            <!-- 1. Platform Analyst View (Original Dashboard) -->
+            <div id="analystView">
+                <div id="resultsDashboard" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <div class="space-y-4" id="metricsContainer">
-                    <!-- Metric Item Template -->
+                    <!-- 1. SOS Score Card -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-600">
+                        <h3 class="text-lg font-bold mb-4 text-indigo-700 flex items-center">
+                            <i data-lucide="shield-check" class="w-5 h-5 mr-2"></i> Social Operating Score (SOS)
+                        </h3>
+                        <div id="sosScoreCard" class="score-display rounded-xl text-center p-8 text-white shadow-xl">
+                            <p class="text-sm font-light mb-1 opacity-75">RISK INDEX (0-100)</p>
+                            <div class="score-text" id="finalSosScore">--</div>
+                            <p class="text-xl font-semibold mt-1" id="riskLevelText">--</p>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">SOS is a composite index. Higher is better (Safer/More Organic).</p>
+                    </div>
+
+                    <!-- 2. Detailed Metrics Panel -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <i data-lucide="layout-list" class="w-5 h-5 mr-2 text-gray-500"></i> AI & Behavior Metrics
+                        </h3>
+
+                        <div class="space-y-4" id="metricsContainer">
+                            <!-- Metric Item Template rendered by JS -->
+                        </div>
+
+                        <div class="mt-6 p-4 rounded-lg bg-indigo-50 border border-indigo-200">
+                            <h4 class="font-semibold text-indigo-800 flex items-center"><i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i> Platform Action Recommended</h4>
+                            <p id="recommendationText" class="text-sm text-indigo-700 mt-1">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. User Self-Analysis View (New Tab) -->
+            <div id="selfAnalysisView" class="hidden bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i data-lucide="trending-up" class="w-6 h-6 mr-2 text-teal-600"></i> Your Digital Wellness Report
+                </h2>
+                <p class="text-gray-500 mb-6">This report shows your engagement and social health score. Use these insights to build a positive reputation on the platform.</p>
+                
+                <!-- Summary Card -->
+                <div class="p-5 mb-6 rounded-xl shadow-inner bg-teal-50 border border-teal-200">
+                    <p class="text-sm font-medium text-teal-800">Your Current SOS (Overall Score):</p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-4xl font-extrabold text-teal-700" id="selfSosScore">--</p>
+                        <span class="text-lg font-semibold" id="selfRiskText">--</span>
+                    </div>
                 </div>
 
-                <div class="mt-6 p-4 rounded-lg bg-indigo-50 border border-indigo-200">
-                    <h4 class="font-semibold text-indigo-800 flex items-center"><i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i> Platform Action Recommended</h4>
-                    <p id="recommendationText" class="text-sm text-indigo-700 mt-1">...</p>
+                <!-- Breakdown -->
+                <div class="space-y-6" id="selfAnalysisMetrics">
+                    <!-- Metrics rendered by JS will go here -->
+                </div>
+
+                <div class="mt-8 p-4 bg-indigo-100 rounded-lg">
+                    <p class="font-semibold text-indigo-700 flex items-center"><i data-lucide="lightbulb" class="w-5 h-5 mr-2"></i> Quick Tips for Improvement</p>
+                    <ul class="list-disc list-inside text-sm text-indigo-600 mt-2 space-y-1">
+                        <li>Increase positive comments to boost your Goodwill Score.</li>
+                        <li>Avoid sharing overly polarizing or one-sided political content.</li>
+                        <li>Ensure your account is linked to legitimate social profiles to improve your Digital Footprint.</li>
+                        <li>Engage with videos and posts consistently, rather than in large, short bursts.</li>
+                    </ul>
                 </div>
             </div>
         </div>
+        
 
         <!-- No Results Message -->
         <div id="initialMessage" class="mt-12 text-center text-gray-500 p-8 border-2 border-dashed border-gray-300 rounded-xl">
@@ -138,72 +222,90 @@
             const userIdInput = document.getElementById('userIdInput');
             const analyzeButton = document.getElementById('analyzeButton');
             const loadingIndicator = document.getElementById('loadingIndicator');
-            const resultsDashboard = document.getElementById('resultsDashboard');
+            const resultsContainer = document.getElementById('resultsContainer');
             const initialMessage = document.getElementById('initialMessage');
             const errorMessage = document.getElementById('error-message');
+            
+            // Analyst View Elements
+            const analystView = document.getElementById('analystView');
             const finalSosScore = document.getElementById('finalSosScore');
             const riskLevelText = document.getElementById('riskLevelText');
             const sosScoreCard = document.getElementById('sosScoreCard');
             const metricsContainer = document.getElementById('metricsContainer');
             const recommendationText = document.getElementById('recommendationText');
 
+            // Self-Analysis View Elements
+            const selfAnalysisView = document.getElementById('selfAnalysisView');
+            const selfSosScore = document.getElementById('selfSosScore');
+            const selfRiskText = document.getElementById('selfRiskText');
+            const selfAnalysisMetrics = document.getElementById('selfAnalysisMetrics');
+            
+            const tabAnalyst = document.getElementById('tabAnalyst');
+            const tabSelf = document.getElementById('tabSelf');
+
+
             // --- SIMULATED DATA & LOGIC ---
 
-            // Simulated AI model outputs and behavioral data for different user types (15 users)
+            // Simulated AI model outputs and behavioral data for 10 unique users
             const simulatedUserData = {
-                // Low Risk Category (SOS >= 80)
-                'john_low': { SentimentScore: 0.95, FrequencyScore: 0.90, SpamFlagCount: 0, BotLikelihood: 0.05 }, // SOS 97
-                'jane_low': { SentimentScore: 0.88, FrequencyScore: 0.82, SpamFlagCount: 1, BotLikelihood: 0.10 }, // SOS 89
-                'mike_low': { SentimentScore: 0.85, FrequencyScore: 0.95, SpamFlagCount: 2, BotLikelihood: 0.15 }, // SOS 84
-                'nick_low': { SentimentScore: 0.75, FrequencyScore: 0.90, SpamFlagCount: 1, BotLikelihood: 0.05 }, // SOS 87
-                'jack_low': { SentimentScore: 0.90, FrequencyScore: 0.75, SpamFlagCount: 0, BotLikelihood: 0.10 }, // SOS 93
+                // Low Risk (SOS >= 80)
+                // New factors: PoliticalPolarity (0=Neutral, 1=Extreme), VideoInteractionRate (0=Low, 1=High), SocialMediaFootprint (0=None, 1=High)
+                'user_1': { name: "Aria", SentimentScore: 0.98, FrequencyScore: 0.95, SpamFlagCount: 0, BotLikelihood: 0.02, PoliticalPolarity: 0.05, VideoInteractionRate: 0.98, SocialMediaFootprint: 0.95 },
+                'user_2': { name: "Ben", SentimentScore: 0.85, FrequencyScore: 0.90, SpamFlagCount: 1, BotLikelihood: 0.05, PoliticalPolarity: 0.15, VideoInteractionRate: 0.85, SocialMediaFootprint: 0.80 },
+                'user_3': { name: "Chloe", SentimentScore: 0.70, FrequencyScore: 0.80, SpamFlagCount: 2, BotLikelihood: 0.15, PoliticalPolarity: 0.20, VideoInteractionRate: 0.70, SocialMediaFootprint: 0.75 },
 
-                // Medium Risk Category (50 <= SOS < 80)
-                'john_medium': { SentimentScore: 0.70, FrequencyScore: 0.60, SpamFlagCount: 4, BotLikelihood: 0.30 }, // SOS 65
-                'jane_medium': { SentimentScore: 0.55, FrequencyScore: 0.80, SpamFlagCount: 5, BotLikelihood: 0.20 }, // SOS 61
-                'mike_medium': { SentimentScore: 0.40, FrequencyScore: 0.90, SpamFlagCount: 6, BotLikelihood: 0.10 }, // SOS 55
-                'nick_medium': { SentimentScore: 0.65, FrequencyScore: 0.50, SpamFlagCount: 3, BotLikelihood: 0.50 }, // SOS 63
-                'jack_medium': { SentimentScore: 0.80, FrequencyScore: 0.70, SpamFlagCount: 7, BotLikelihood: 0.10 }, // SOS 61
-
-                // High Risk Category (SOS < 50)
-                'john_high': { SentimentScore: 0.20, FrequencyScore: 0.30, SpamFlagCount: 8, BotLikelihood: 0.70 }, // SOS 23
-                'jane_high': { SentimentScore: 0.10, FrequencyScore: 0.15, SpamFlagCount: 9, BotLikelihood: 0.85 }, // SOS 12
-                'mike_high': { SentimentScore: 0.35, FrequencyScore: 0.50, SpamFlagCount: 7, BotLikelihood: 0.60 }, // SOS 36
-                'nick_high': { SentimentScore: 0.40, FrequencyScore: 0.45, SpamFlagCount: 5, BotLikelihood: 0.55 }, // SOS 46
-                'jack_high': { SentimentScore: 0.15, FrequencyScore: 0.25, SpamFlagCount: 10, BotLikelihood: 0.90 }, // SOS 9
+                // Medium Risk (50 <= SOS < 80)
+                'user_4': { name: "David", SentimentScore: 0.60, FrequencyScore: 0.75, SpamFlagCount: 4, BotLikelihood: 0.30, PoliticalPolarity: 0.35, VideoInteractionRate: 0.55, SocialMediaFootprint: 0.60 },
+                'user_5': { name: "Emily", SentimentScore: 0.55, FrequencyScore: 0.85, SpamFlagCount: 5, BotLikelihood: 0.25, PoliticalPolarity: 0.40, VideoInteractionRate: 0.65, SocialMediaFootprint: 0.50 },
+                'user_6': { name: "Finn", SentimentScore: 0.45, FrequencyScore: 0.65, SpamFlagCount: 6, BotLikelihood: 0.40, PoliticalPolarity: 0.50, VideoInteractionRate: 0.50, SocialMediaFootprint: 0.40 },
                 
-                // Default fallback for an unselected user
-                'default': { SentimentScore: 0.50, FrequencyScore: 0.50, SpamFlagCount: 5, BotLikelihood: 0.50 }
+                // High Risk (SOS < 50)
+                'user_7': { name: "Grace", SentimentScore: 0.35, FrequencyScore: 0.50, SpamFlagCount: 7, BotLikelihood: 0.55, PoliticalPolarity: 0.65, VideoInteractionRate: 0.35, SocialMediaFootprint: 0.30 },
+                'user_8': { name: "Henry", SentimentScore: 0.20, FrequencyScore: 0.40, SpamFlagCount: 8, BotLikelihood: 0.70, PoliticalPolarity: 0.75, VideoInteractionRate: 0.25, SocialMediaFootprint: 0.20 },
+                'user_9': { name: "Ivy", SentimentScore: 0.10, FrequencyScore: 0.30, SpamFlagCount: 9, BotLikelihood: 0.85, PoliticalPolarity: 0.80, VideoInteractionRate: 0.15, SocialMediaFootprint: 0.15 },
+                'user_10': { name: "Jake", SentimentScore: 0.05, FrequencyScore: 0.10, SpamFlagCount: 10, BotLikelihood: 0.95, PoliticalPolarity: 0.90, VideoInteractionRate: 0.10, SocialMediaFootprint: 0.10 },
+                
+                'default': { name: "Default User", SentimentScore: 0.50, FrequencyScore: 0.50, SpamFlagCount: 5, BotLikelihood: 0.50, PoliticalPolarity: 0.50, VideoInteractionRate: 0.50, SocialMediaFootprint: 0.50 }
             };
 
-            // Weights for the Social Operating Score (SOS) calculation
+            // Weights for the Social Operating Score (SOS) calculation (Total 100)
             const SOS_WEIGHTS = {
-                SENTIMENT: 30, // Goodwill, Commenting Word
-                FREQUENCY: 10, // Frequency of Usage
-                SPAM: 40,      // Spamming, Phishing Activities (Inverse: high flags means lower score)
-                BOT: 20        // Bot Detection Likelihood (Inverse: high likelihood means lower score)
+                SENTIMENT: 25,     // Goodwill, Commenting Word
+                FREQUENCY: 5,      // Frequency of Usage
+                SPAM: 30,          // Spamming, Phishing Activities (Inverse: high flags means lower score)
+                BOT: 15,           // Bot Detection Likelihood (Inverse: high likelihood means lower score)
+                POLARITY: 15,      // Political Polarity (Inverse: high polarity means lower score)
+                INTERACTION: 5,    // Video Interaction Rate (Direct: high rate means higher score)
+                FOOTPRINT: 5       // Social Media Footprint (Direct: high footprint means higher score)
             };
 
             /**
              * Calculates the Social Operating Score (SOS) based on simulated metrics.
-             * SOS = (W_S * Sentiment) + (W_F * Frequency) + (W_SP * (1 - SpamCount/10)) + (W_B * (1 - BotLikelihood))
              * @param {object} data - Simulated user metrics.
              * @returns {number} The calculated SOS score (0-100).
              */
             function calculateSOS(data) {
-                const { SentimentScore, FrequencyScore, SpamFlagCount, BotLikelihood } = data;
+                const { SentimentScore, FrequencyScore, SpamFlagCount, BotLikelihood, PoliticalPolarity, VideoInteractionRate, SocialMediaFootprint } = data;
 
-                // Normalize SpamFlagCount (0-10) to a score (1.0 to 0.0)
+                // 1. Core Risk Factors (Inverted: score is 1.0 - factor)
                 const spamScore = 1.0 - (SpamFlagCount / 10.0);
-
-                // Invert BotLikelihood (0.0 to 1.0) to a score (1.0 to 0.0)
                 const botScore = 1.0 - BotLikelihood;
+                const polarityScore = 1.0 - PoliticalPolarity; // Closer to 1.0 means more neutral/better
+
+                // 2. Engagement/Trust Factors (Direct)
+                const sentimentScore = SentimentScore;
+                const frequencyScore = FrequencyScore;
+                const interactionScore = VideoInteractionRate;
+                const footprintScore = SocialMediaFootprint;
 
                 // Weighted sum
-                let sos = (SOS_WEIGHTS.SENTIMENT * SentimentScore) +
-                          (SOS_WEIGHTS.FREQUENCY * FrequencyScore) +
+                let sos = (SOS_WEIGHTS.SENTIMENT * sentimentScore) +
+                          (SOS_WEIGHTS.FREQUENCY * frequencyScore) +
                           (SOS_WEIGHTS.SPAM * spamScore) +
-                          (SOS_WEIGHTS.BOT * botScore);
+                          (SOS_WEIGHTS.BOT * botScore) +
+                          (SOS_WEIGHTS.POLARITY * polarityScore) +
+                          (SOS_WEIGHTS.INTERACTION * interactionScore) +
+                          (SOS_WEIGHTS.FOOTPRINT * footprintScore);
 
                 // Ensure score is between 0 and 100
                 return Math.round(Math.min(100, Math.max(0, sos)));
@@ -220,55 +322,70 @@
                 if (score >= 80) {
                     level = "LOW RISK";
                     colorClass = "risk-color-low";
-                    recommendation = "This individual shows high organic goodwill and low risk signals. Recommended action: Standard user permissions, allow full access, and potentially flag for positive engagement.";
+                    recommendation = "This individual shows high organic goodwill and low risk signals across all digital factors. Recommended action: Standard user permissions, allow full access, and potentially flag for positive engagement.";
                 } else if (score >= 50) {
                     level = "MEDIUM RISK";
                     colorClass = "risk-color-medium";
-                    recommendation = "The profile exhibits mixed signals (e.g., high frequency but moderate spam flags). Recommended action: Monitor closely, implement rate limiting on commenting/posting, and require captcha verification.";
+                    recommendation = "The profile exhibits mixed signals (e.g., high frequency but moderate spam flags or high political polarity). Recommended action: Monitor closely, implement rate limiting on commenting/posting, and require captcha verification.";
                 } else {
                     level = "HIGH RISK";
                     colorClass = "risk-color-high";
-                    recommendation = "Significant risk factors detected (high spam, poor goodwill, high bot likelihood). Recommended action: Immediate account review, temporary lock or shadow-banning, and block automated API access.";
+                    recommendation = "Significant risk factors detected (high spam, poor goodwill, high bot likelihood, and problematic digital factors). Recommended action: Immediate account review, temporary lock or shadow-banning, and block automated API access.";
                 }
 
                 return { level, colorClass, recommendation };
             }
 
+            // --- RENDER FUNCTIONS ---
+            
             /**
-             * Renders the detailed metrics cards.
-             * @param {object} data - The simulated user metrics.
+             * Renders the detailed metrics cards for the Platform Analyst view.
              */
-            function renderMetrics(data) {
+            function renderAnalystMetrics(data) {
                 metricsContainer.innerHTML = ''; // Clear previous metrics
 
                 const metricDefinitions = [
                     {
-                        title: "Goodwill/Sentiment Score",
-                        icon: "smile",
-                        value: `${(data.SentimentScore * 100).toFixed(1)}%`,
-                        description: `NLP analysis of commenting word and interaction history. Score of ${data.SentimentScore} indicates the ratio of positive vs. negative contributions. Weight: ${SOS_WEIGHTS.SENTIMENT}%`,
+                        title: "Goodwill/Sentiment Score", icon: "smile", weight: SOS_WEIGHTS.SENTIMENT,
+                        value: `${(data.SentimentScore * 100).toFixed(0)}%`,
+                        description: `NLP analysis of commenting word and interaction history.`,
                         risk: data.SentimentScore < 0.4 ? 'text-red-600' : data.SentimentScore < 0.7 ? 'text-amber-600' : 'text-emerald-600'
                     },
                     {
-                        title: "Spam/Phishing Activity Flags",
-                        icon: "flag",
+                        title: "Spam/Phishing Activity Flags", icon: "flag", weight: SOS_WEIGHTS.SPAM,
                         value: `${data.SpamFlagCount}/10`,
-                        description: `Count of system-flagged spam, phishing, or TOS-violating activities (per 10 possible flags). This metric has a strong inverse correlation with SOS. Weight: ${SOS_WEIGHTS.SPAM}%`,
+                        description: `Count of system-flagged violations (strongest inverse correlation with SOS).`,
                         risk: data.SpamFlagCount > 6 ? 'text-red-600' : data.SpamFlagCount > 3 ? 'text-amber-600' : 'text-emerald-600'
                     },
                     {
-                        title: "Bot Likelihood Model Output",
-                        icon: "zap",
+                        title: "Bot Likelihood Model Output", icon: "zap", weight: SOS_WEIGHTS.BOT,
                         value: `${(data.BotLikelihood * 100).toFixed(0)}%`,
-                        description: `Probability that the user's behavior is automated, based on mouse movements, API calls, and timing patterns. High likelihood indicates a bot. Weight: ${SOS_WEIGHTS.BOT}%`,
+                        description: `Probability that the user's behavior is automated (timing/API patterns).`,
                         risk: data.BotLikelihood > 0.5 ? 'text-red-600' : data.BotLikelihood > 0.2 ? 'text-amber-600' : 'text-emerald-600'
                     },
                     {
-                        title: "Usage Frequency/Consistency",
-                        icon: "activity",
+                        title: "Political Polarity Index", icon: "gavel", weight: SOS_WEIGHTS.POLARITY,
+                        value: `${(data.PoliticalPolarity * 100).toFixed(0)}%`,
+                        description: `Degree of one-sided or extreme political content in posts/comments (Higher = Worse/More Polarized).`,
+                        risk: data.PoliticalPolarity > 0.6 ? 'text-red-600' : data.PoliticalPolarity > 0.3 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Video Interaction Rate", icon: "youtube", weight: SOS_WEIGHTS.INTERACTION,
+                        value: `${(data.VideoInteractionRate * 100).toFixed(0)}%`,
+                        description: `Ratio of videos commented/reviewed vs. purely viewed (indicates organic engagement).`,
+                        risk: data.VideoInteractionRate < 0.4 ? 'text-red-600' : data.VideoInteractionRate < 0.7 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Social Media Footprint", icon: "users", weight: SOS_WEIGHTS.FOOTPRINT,
+                        value: `${(data.SocialMediaFootprint * 100).toFixed(0)}%`,
+                        description: `Breadth and verification status of linked external social accounts (measure of identity trust).`,
+                        risk: data.SocialMediaFootprint < 0.4 ? 'text-red-600' : data.SocialMediaFootprint < 0.7 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Usage Frequency/Consistency", icon: "activity", weight: SOS_WEIGHTS.FREQUENCY,
                         value: `${(data.FrequencyScore * 100).toFixed(0)}%`,
-                        description: `A measure of consistent, human-like login and usage frequency over time. Weight: ${SOS_WEIGHTS.FREQUENCY}%`,
-                        risk: data.FrequencyScore < 0.4 ? 'text-amber-600' : 'text-emerald-600'
+                        description: `A measure of consistent, human-like login and usage frequency over time.`,
+                        risk: data.FrequencyScore < 0.4 ? 'text-red-600' : data.FrequencyScore < 0.7 ? 'text-amber-600' : 'text-emerald-600'
                     },
                 ];
 
@@ -277,7 +394,7 @@
                         <div class="border-b border-gray-100 pb-4">
                             <div class="flex items-center justify-between">
                                 <span class="font-medium text-gray-700 flex items-center">
-                                    <i data-lucide="${metric.icon}" class="w-4 h-4 mr-2 text-indigo-500"></i> ${metric.title}
+                                    <i data-lucide="${metric.icon}" class="w-4 h-4 mr-2 text-indigo-500"></i> ${metric.title} (Weight: ${metric.weight}%)
                                 </span>
                                 <span class="font-bold text-lg ${metric.risk}">${metric.value}</span>
                             </div>
@@ -289,6 +406,72 @@
                 // Re-init Lucide icons for the new content
                 lucide.createIcons();
             }
+
+            /**
+             * Renders the user-facing self-analysis view.
+             */
+            function renderSelfAnalysis(data, sosScore, assessment) {
+                selfSosScore.textContent = sosScore;
+                selfRiskText.textContent = assessment.level;
+                selfRiskText.className = `text-lg font-semibold uppercase ${assessment.colorClass.replace('background-color', 'text')}`;
+
+                selfAnalysisMetrics.innerHTML = ''; // Clear previous metrics
+
+                const selfMetrics = [
+                    {
+                        title: "Community Goodwill", icon: "smile", value: `${(data.SentimentScore * 100).toFixed(0)}%`,
+                        tip: data.SentimentScore < 0.7 ? 'Focus on constructive and positive contributions.' : 'Excellent work! Your positivity helps the community.',
+                        risk: data.SentimentScore < 0.7 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                    },
+                    {
+                        title: "Identity Trust Score", icon: "users", value: `${(data.SocialMediaFootprint * 100).toFixed(0)}%`,
+                        tip: data.SocialMediaFootprint < 0.5 ? 'Consider linking and verifying more external accounts to build trust.' : 'Your digital footprint is broad and stable, showing strong identity proof.',
+                        risk: data.SocialMediaFootprint < 0.5 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                    },
+                    {
+                        title: "Engagement Quality", icon: "youtube", value: `${(data.VideoInteractionRate * 100).toFixed(0)}%`,
+                        tip: data.VideoInteractionRate < 0.5 ? 'Try leaving more comments or reviews on content you consume.' : 'You are an active and engaged content consumer, which benefits creators.',
+                        risk: data.VideoInteractionRate < 0.5 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                    },
+                    {
+                        title: "Content Neutrality", icon: "gavel", value: `${(100 - (data.PoliticalPolarity * 100)).toFixed(0)}%`, // Show as Neutrality (100 - Polarity)
+                        tip: data.PoliticalPolarity > 0.3 ? 'Your content may be overly polarized. Try seeking common ground to broaden your reach.' : 'Your contributions are well-balanced and appeal to a wide audience.',
+                        risk: data.PoliticalPolarity > 0.3 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                    },
+                ];
+
+                selfMetrics.forEach(metric => {
+                    const html = `
+                        <div class="flex items-start space-x-4 p-4 rounded-lg shadow-sm ${metric.risk}">
+                            <i data-lucide="${metric.icon}" class="w-6 h-6 flex-shrink-0 mt-1"></i>
+                            <div class="flex-grow">
+                                <p class="font-semibold text-base">${metric.title}: ${metric.value}</p>
+                                <p class="text-sm mt-1 font-normal">${metric.tip}</p>
+                            </div>
+                        </div>
+                    `;
+                    selfAnalysisMetrics.insertAdjacentHTML('beforeend', html);
+                });
+                lucide.createIcons();
+            }
+
+            /**
+             * Handles switching between the Analyst and Self-Analysis views.
+             */
+            window.switchView = (viewId) => {
+                tabAnalyst.classList.remove('active');
+                tabSelf.classList.remove('active');
+                analystView.classList.add('hidden');
+                selfAnalysisView.classList.add('hidden');
+
+                if (viewId === 'analyst') {
+                    tabAnalyst.classList.add('active');
+                    analystView.classList.remove('hidden');
+                } else if (viewId === 'self') {
+                    tabSelf.classList.add('active');
+                    selfAnalysisView.classList.remove('hidden');
+                }
+            };
 
             // --- EVENT HANDLER ---
 
@@ -302,7 +485,7 @@
                 }
 
                 initialMessage.classList.add('hidden');
-                resultsDashboard.classList.add('hidden');
+                resultsContainer.classList.add('hidden');
                 loadingIndicator.classList.remove('hidden');
 
                 // Simulate network latency for the "AI Analysis"
@@ -313,20 +496,26 @@
                     const sosScore = calculateSOS(userData);
                     const assessment = getRiskAssessment(sosScore);
 
-                    // 1. Update Score Card
+                    // 1. Update Score Card (Analyst View)
                     finalSosScore.textContent = sosScore;
                     riskLevelText.textContent = assessment.level;
-                    // Note: Update the background color class dynamically
                     sosScoreCard.classList.remove('risk-color-high', 'risk-color-medium', 'risk-color-low');
                     sosScoreCard.classList.add(assessment.colorClass);
 
-                    // 2. Update Recommendation
+                    // 2. Update Recommendation (Analyst View)
                     recommendationText.textContent = assessment.recommendation;
 
-                    // 3. Render Metrics
-                    renderMetrics(userData);
+                    // 3. Render Metrics (Analyst View)
+                    renderAnalystMetrics(userData);
+                    
+                    // 4. Render Self-Analysis View
+                    renderSelfAnalysis(userData, sosScore, assessment);
 
-                    resultsDashboard.classList.remove('hidden');
+                    resultsContainer.classList.remove('hidden');
+                    
+                    // Default to Analyst View after analysis
+                    switchView('analyst');
+                    
                 }, 1500); // 1.5 second delay
             });
         });
