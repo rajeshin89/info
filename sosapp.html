@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Lucide Icons -->
     <script type="module" src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load Font Awesome Icons (Needed for the new footer section) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
         /* Custom styles for a modern, analytical look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
@@ -45,37 +47,31 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- INTEGRATED PLATFORM NAVIGATION HEADER PANE (Unchanged) -->
-    <header class="app-header w-full shadow-lg sticky top-0 z-20">
-        <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
-            <!-- Logo/Branding -->
+    <!-- INTEGRATED PLATFORM NAVIGATION HEADER PANE (MODIFIED FOR BACK NAVIGATION) -->
+    <header class="app-header w-full shadow-lg sticky top-0 z-20 border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 flex justify-between items-center py-3">
+            
+            <!-- Back Navigation Link -->
+            <a 
+                href="https://www.rajeshr2r.com/#about" 
+                class="flex items-center space-x-2 text-indigo-600 hover:text-indigo-800 transition duration-150 font-semibold text-sm sm:text-base p-1 rounded-lg hover:bg-indigo-50"
+                title="Go back to Portfolio">
+                <!-- Lucide Arrow Left icon -->
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:block">Back to Portfolio</span>
+                <span class="block sm:hidden">Back</span>
+            </a>
+
+            <!-- App Title -->
             <div class="flex items-center space-x-2">
-                <span class="bg-teal-600 text-white font-extrabold text-xl p-1 rounded-full w-8 h-8 flex items-center justify-center">RK</span>
-                <span class="text-xl font-bold text-gray-800 hidden sm:block">Rajesh Kandasamy</span>
+                <h1 class="text-xl font-bold text-gray-800">SOS Risk Analyzer</h1>
             </div>
 
-            <!-- Navigation Links (Hidden on small screens for brevity, focus on main content) -->
-            <nav class="hidden lg:flex items-center space-x-6 text-gray-600 font-medium">
-                <a href="#" class="hover:text-teal-600 transition duration-150">About</a>
-                <a href="#" class="hover:text-teal-600 transition duration-150">Experience</a>
-                <a href="#" class="hover:text-teal-600 transition duration-150">Skills</a>
-                <a href="#" class="hover:text-teal-600 transition duration-150">Prototypes</a>
-                <a href="#" class="hover:text-teal-600 transition duration-150">Thoughts & Articles</a>
-            </nav>
-
-            <!-- CTAs/Icons -->
-            <div class="flex items-center space-x-3">
-                <a href="#" title="Twitter" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                <a href="#" title="LinkedIn" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                <a href="#" title="Mail" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="mail" class="w-5 h-5"></i></a>
-                <a href="#" title="GitHub" class="text-gray-500 hover:text-teal-600 hidden sm:block"><i data-lucide="github" class="w-5 h-5"></i></a>
-                <button class="teal-button text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-200 flex items-center">
-                    <i data-lucide="message-square" class="w-4 h-4 mr-1"></i> Let's Talk
-                </button>
-            </div>
+            <!-- Spacer to maintain balance (as other icons/CTAs are removed) -->
+            <div class="w-20"></div> 
         </div>
     </header>
-    <!-- END HEADER PANE -->
+    <!-- END MODIFIED HEADER PANE -->
 
     <div class="max-w-4xl mx-auto p-4 sm:p-8">
         <header class="text-center mb-10 mt-6">
@@ -213,10 +209,35 @@
         </div>
 
     </div>
+    
+    <!-- CONTACT SECTION (Footer Inclusion) -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-8 mt-12">
+        <section id="contact" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md text-center">
+            <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3">
+                <!-- Using Font Awesome icon and existing teal color: #03989e -->
+                <i class="fas fa-headset mr-3" style="color: #03989e;"></i> Get In Touch
+            </h2>
+            <p class="text-base leading-relaxed mb-8 text-gray-600 max-w-2xl mx-auto">I am always open to discussing new product challenges and opportunities. Feel free to connect!</p>
+            <div class="contact-icons flex flex-wrap gap-6 justify-center">
+                <a href="mailto:rajeshr2r@gmail.com" title="Email" class="text-gray-800 hover:text-teal-600 transition duration-200 flex items-center text-base font-medium">
+                    <i class="fas fa-envelope text-xl mr-2"></i> rajeshr2r@gmail.com
+                </a>
+                <a href="tel:+919952156121" title="Phone" class="text-gray-800 hover:text-teal-600 transition duration-200 flex items-center text-base font-medium">
+                    <i class="fas fa-phone text-xl mr-2"></i> +91 9952156121
+                </a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- COPYRIGHT FOOTER (Full width) -->
+    <footer class="text-center py-6 border-t border-gray-200 mt-10 bg-white">
+        <p class="text-xs text-gray-500">&copy; 2025 Rajesh Kumar Kandasamy. All rights reserved.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize Lucide icons
+            // Note: This needs to be called again after new HTML content is injected (metrics, footer)
             lucide.createIcons();
 
             const userIdInput = document.getElementById('userIdInput');
