@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rajesh Kumar Kandasamy | Product Manager Portfolio</title>
-    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter Font --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Load Font Awesome Icons --><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Load Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Load Lucide Icons (Required for SOS App) -->
+    <script type="module" src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         /* Custom styles for the Inter font, smooth scrolling, and main layout */
@@ -15,15 +24,14 @@
             scroll-behavior: smooth;
             background-color: #f9fafb; /* Very light gray background */
             color: #1f2937; /* Dark text for high readability */
-            --primary-accent: #14b8a6; /* NEW: Teal 500 */
+            --primary-accent: #14b8a6; /* Teal 500 */
             --nav-height: 72px; 
         }
         
         .main-content {
+            /* Adjust padding to account for fixed nav bar */
             padding-top: var(--nav-height); 
         }
-        
-        /* Removed cursive-header style definition for the clean theme */
         
         /* NEW: Style for the circular profile frame */
         .modern-frame {
@@ -34,8 +42,6 @@
             padding: 0.25rem; /* Thinner border padding */
             position: relative;
         }
-
-        /* Removed social-sidebar styles */
 
         /* Custom minimalist timeline visualization - updated to use Teal */
         .timeline li {
@@ -78,73 +84,82 @@
         .hero-pattern {
             background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
         }
+
+        /* ------------------------------------- */
+        /* SOS App Custom Styles (INTEGRATED)    */
+        /* ------------------------------------- */
+        .score-display {
+            transition: all 0.5s ease-in-out;
+            background-image: radial-gradient(circle at center, #1e3a8a 0%, #1e3a8a 50%, #172554 100%); /* Indigo gradient */
+        }
+        .score-text {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        .risk-color-high { background-color: #dc2626; } /* Red 600 */
+        .risk-color-medium { background-color: #fbbf24; } /* Amber 400 */
+        .risk-color-low { background-color: #10b981; } /* Emerald 500 */
+        
+        /* Ensure prototype content containers take up min height */
+        .page-content {
+            min-height: calc(100vh - var(--nav-height));
+        }
+
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
 
-    <div class="min-h-screen flex flex-col">
-
-        <!-- Fixed Top Navigation Bar (Clean Theme) -->
-        <nav class="fixed top-0 z-50 w-full bg-white shadow-sm h-[var(--nav-height)] flex items-center border-b border-gray-100">
-            <!-- Increased max-width to max-w-7xl for more expansive feel -->
-            <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-6 lg:px-8">
-                
-                <!-- Logo/Name (Left) -->
-                <div class="flex items-center space-x-3 text-gray-900">
-                    <!-- RK Icon/Logo (Text-based, stylized) - Teal Accent -->
-                    <span class="text-xl font-bold tracking-tight text-white bg-teal-600 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">RK</span>
-                    
-                    <!-- Clean Name -->
-                    <div class="text-2xl font-extrabold tracking-tight text-gray-900">
-                        Rajesh Kandasamy
-                    </div>
-                </div>
-
-                <!-- Navigation Links, Social, and CTA Button (Right) -->
-                <div class="flex items-center space-x-6">
-                    <div class="hidden lg:flex space-x-6 text-sm font-medium tracking-wide text-gray-600">
-                        <a href="#about" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4">About</a>
-                        <a href="#experience" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4">Experience</a>
-                        <a href="#skills" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4">Skills</a>
-                        <a href="#prototypes" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4">Prototypes</a>
-                        <!-- New Navigation Link -->
-                        <a href="#articles" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4">Thoughts & Articles</a>
-                    </div>
-                    
-                    <!-- Social Icons (Updated to include Twitter/X and Instagram) -->
-                    <div class="hidden md:flex space-x-4 text-gray-500">
-                        <a href="https://twitter.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="Twitter/X"><i class="fab fa-twitter text-lg"></i></a>
-                        <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="hover:text-teal-600 transition duration-150" title="LinkedIn"><i class="fab fa-linkedin text-lg"></i></a>
-                        <a href="https://www.instagram.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="Instagram"><i class="fab fa-instagram text-lg"></i></a>
-                        <a href="https://github.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="GitHub"><i class="fab fa-github text-lg"></i></a>
-                    </div>
-
-                    <!-- CTA Button on the right -->
-                    <a href="#contact" class="bg-teal-600 text-white px-5 py-2 rounded-lg font-semibold text-sm shadow-md hover:bg-teal-700 transition duration-300 transform hover:scale-[1.05]">
-                        <i class="fas fa-paper-plane mr-2"></i> Let's Talk
-                    </a>
+    <!-- Fixed Navigation Bar -->
+    <nav class="fixed top-0 z-50 w-full bg-white shadow-sm h-[var(--nav-height)] flex items-center border-b border-gray-100">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-6 lg:px-8">
+            <!-- Logo/Name -->
+            <div class="flex items-center space-x-3 text-gray-900">
+                <span class="text-xl font-bold tracking-tight text-white bg-teal-600 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">RK</span>
+                <div class="text-2xl font-extrabold tracking-tight text-gray-900">
+                    Rajesh Kandasamy
                 </div>
             </div>
-        </nav>
 
-        <!-- Main Content Area -->
-        <main class="main-content flex-1 pt-16 pb-20">
-            
-            <!-- Hero Section (NGAPRO Style Layout) - Expanded max-width -->
-            <section id="about" class="max-w-7xl mx-auto px-6 lg:px-8 pt-12 lg:pt-20">
+            <!-- Main Nav & Social Links -->
+            <div class="flex items-center space-x-6">
+                <div class="hidden lg:flex space-x-6 text-sm font-medium tracking-wide text-gray-600">
+                    <a href="#about" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4" onclick="showPage('portfolio-main-page')">About</a>
+                    <a href="#experience" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4" onclick="showPage('portfolio-main-page')">Experience</a>
+                    <a href="#skills" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4" onclick="showPage('portfolio-main-page')">Skills</a>
+                    <a href="#prototypes" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4" onclick="showPage('portfolio-main-page')">Prototypes</a>
+                    <a href="#articles" class="hover:text-teal-600 transition duration-150 hover:underline underline-offset-4" onclick="showPage('portfolio-main-page')">Thoughts & Articles</a>
+                </div>
                 
-                <!-- Hero Background Gradient/Color (Light Teal) -->
+                <div class="hidden md:flex space-x-4 text-gray-500">
+                    <a href="https://twitter.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="Twitter/X"><i class="fab fa-twitter text-lg"></i></a>
+                    <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="hover:text-teal-600 transition duration-150" title="LinkedIn"><i class="fab fa-linkedin text-lg"></i></a>
+                    <a href="https://www.instagram.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="Instagram"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="https://github.com/rajeshin89" target="_blank" class="hover:text-teal-600 transition duration-150" title="GitHub"><i class="fab fa-github text-lg"></i></a>
+                </div>
+
+                <a href="#contact" class="bg-teal-600 text-white px-5 py-2 rounded-lg font-semibold text-sm shadow-md hover:bg-teal-700 transition duration-300 transform hover:scale-[1.05]" onclick="showPage('portfolio-main-page')">
+                    <i class="fas fa-paper-plane mr-2"></i> Let's Talk
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-1 pt-16 pb-20">
+
+        <!-- --------------------------------------- -->
+        <!-- 1. PORTFOLIO MAIN PAGE (DEFAULT VIEW)   -->
+        <!-- --------------------------------------- -->
+        <div id="portfolio-main-page" class="page-content">
+            
+            <section id="about" class="max-w-7xl mx-auto px-6 lg:px-8 pt-12 lg:pt-20">
                 <div class="bg-white rounded-2xl p-6 md:p-12 shadow-xl relative overflow-hidden hero-pattern">
-                    
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                         
-                        <!-- Left Column: Intro Text and Summary (lg:col-span-7) -->
                         <div class="lg:col-span-7 text-center lg:text-left py-12">
-                            
                             <h1 class="text-xl font-semibold text-teal-600 leading-tight mb-2">
                                 Hey! I am
                             </h1>
-                            <!-- Main Headline - Updated -->
                             <h2 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-none mb-6">
                                 Product Manager
                             </h2>
@@ -152,26 +167,22 @@
                                 SaaS & BI Specialist
                             </p>
 
-                            <!-- Detailed About Text (Summary) -->
                             <p class="text-lg leading-relaxed text-gray-700 max-w-xl lg:mx-0 mb-8">
                                 I am a seasoned Product Manager with 12+ years of experience, specializing in bridging the gap between business needs and technological innovation. I focus on eDiscovery Legal Governance and Risk Compliance Software, SaaS re-architecture, and delivering measurable value.
                             </p>
 
                             <div class="flex justify-center lg:justify-start">
-                                <a href="#experience" class="bg-teal-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:bg-teal-700 transition duration-300">
+                                <a href="#experience" class="bg-teal-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:bg-teal-700 transition duration-300" onclick="document.getElementById('experience').scrollIntoView({ behavior: 'smooth' });">
                                     Learn More
                                 </a>
-                                <!-- Removed "Hire Me" button -->
                             </div>
 
                         </div>
 
-                        <!-- Right Column: Circular Profile Photo (lg:col-span-5) -->
                         <div class="lg:col-span-5 flex justify-center lg:justify-end order-first lg:order-last py-12">
                             <div class="modern-frame w-64 h-64 md:w-80 md:h-80 relative rounded-full border-teal-600 overflow-hidden shadow-2xl">
-                                <!-- Photo positioned inside the stylized frame -->
                                 <img 
-                                    src="profile.jpg" 
+                                    src="images/portrait.jpg" 
                                     alt="Rajesh Kumar Kandasamy Profile Photo" 
                                     class="w-full h-full object-cover rounded-full"
                                     onerror="this.onerror=null; this.src='https://placehold.co/320x320/14b8a6/ffffff?text=RK';"
@@ -183,33 +194,27 @@
                 </div>
             </section>
 
-            <!-- Main Sections Wrapper - Expanded max-width -->
             <div class="max-w-5xl mx-auto px-6 lg:px-8 mt-16">
 
-                <!-- Experience Section (Clean Timeline) -->
                 <section id="experience" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md">
                     <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3"><i class="fas fa-briefcase mr-3" style="color: var(--primary-accent);"></i> Professional Experience</h2>
                     
                     <ul class="timeline">
-                        <!-- Job 1 (with AI/ML details) -->
                         <li>
                             <h3 class="text-lg font-semibold text-gray-900">Product Manager – Exterro</h3>
                             <span class="text-sm text-gray-500 font-medium block mb-1">Nov 2021 - Present</span>
-                            <p class="text-gray-700 text-sm">Leading eDiscovery Software modules, enhancing UX with low-code tech, and utilizing analytics for insight-driven decisions. Drove the implementation of advanced AI/ML features within the Modern Ediscovery Platform to automate data classification and predictive coding. Focused on Legal Governance, Risk Compliance, and SaaS re-architecture.</p>
+                            <p class="text-gray-700 text-sm">Leading eDiscovery Software modules, enhancing UX with low-code tech, and utilizing analytics for insight-driven decisions. **Drove the implementation of advanced AI/ML features** within the Modern Ediscovery Platform to automate data classification and predictive coding. Focused on Legal Governance, Risk Compliance, and SaaS re-architecture.</p>
                         </li>
-                        <!-- Job 2 -->
                         <li>
                             <h3 class="text-lg font-semibold text-gray-900">Business Solutions Consultant – Blazingcoders</h3>
                             <span class="text-sm text-gray-500 font-medium block mb-1">Apr 2021 - Oct 2021</span>
                             <p class="text-gray-700 text-sm">Managed ERP documentation, client relations, and sprint coordination, ensuring timely and effective solution delivery.</p>
                         </li>
-                        <!-- Job 3 -->
                         <li>
                             <h3 class="text-lg font-semibold text-gray-900">Assistant Manager – C.R.I. Group</h3>
                             <span class="text-sm text-gray-500 font-medium block mb-1">Apr 2015 - Mar 2021</span>
                             <p class="text-gray-700 text-sm">Led mobile app/IoT projects and business reporting across markets, driving digital transformation and operational efficiency.</p>
                         </li>
-                        <!-- Job 4 -->
                         <li>
                             <h3 class="text-lg font-semibold text-gray-900">Business Solutions Manager – J-Technologies</h3>
                             <span class="text-sm text-gray-500 font-medium block mb-1">Jun 2011 - Mar 2015</span>
@@ -218,11 +223,9 @@
                     </ul>
                 </section>
 
-                <!-- Skills Section (Minimalist Badges) -->
                 <section id="skills" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md">
                     <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3"><i class="fas fa-sliders-h mr-3" style="color: var(--primary-accent);"></i> Core Skills</h2>
                     <div class="flex flex-wrap justify-center gap-3">
-                        <!-- Using minimalist badges for skills list -->
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Management</span>
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Analytics (MixPanel, Heap, Pendo)</span>
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Client Relations</span>
@@ -233,36 +236,70 @@
                     </div>
                 </section>
 
-                <!-- Prototypes Section -->
                 <section id="prototypes" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md text-center">
                     <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-layer-group mr-3" style="color: var(--primary-accent);"></i> Featured Prototypes</h2>
-                    <div class="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 justify-center">
-                        <!-- Prototype 1: One Stop Shop (Updated) -->
-                        <a href="https://oneproduct-universe-hub.lovable.app/" target="_blank" class="btn w-full md:w-auto bg-teal-600 text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-teal-700 transition duration-300 transform hover:scale-[1.01]">
-                            <i class="fas fa-link mr-2"></i> One Stop Shop
-                        </a>
-                        <!-- Prototype 2: My Subscription Manager App (Keeping this) -->
-                        <a href="https://subsci-sync.lovable.app" target="_blank" class="btn w-full md:w-auto border border-gray-300 text-gray-800 px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-gray-50 transition duration-300 transform hover:scale-[1.01]">
-                            <i class="fas fa-calendar-check mr-2"></i> My Subscription Manager App
-                        </a>
-                        <!-- Removed: Data Visualization Page -->
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
+                        
+                        <!-- Prototype 1: One Stop Shop -->
+                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition duration-300 ease-in-out">
+                            <a href="#" onclick="event.preventDefault(); showPage('onestop-app');" class="block">
+                                <img src="images/prototype-onestopshop.jpg" 
+                                     alt="One Stop Shop Prototype" 
+                                     class="w-full h-auto object-cover rounded-t-lg"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0f2f7/14b8a6?text=One+Stop+Shop';"
+                                />
+                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
+                                    <h3 class="text-lg font-semibold text-teal-600 group-hover:underline">One Stop Shop</h3>
+                                    <p class="text-sm text-gray-500">A comprehensive platform for diverse product needs.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Prototype 2: My Subscription Manager App -->
+                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition duration-300 ease-in-out">
+                            <a href="#" onclick="event.preventDefault(); showPage('subscription-app');" class="block">
+                                <img src="images/prototype-subscription.jpg" 
+                                     alt="My Subscription Manager App Prototype" 
+                                     class="w-full h-auto object-cover rounded-t-lg"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0f2f7/14b8a6?text=Subscription+App';"
+                                />
+                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
+                                    <h3 class="text-lg font-semibold text-teal-600 group-hover:underline">My Subscription Manager App</h3>
+                                    <p class="text-sm text-gray-500">Effortlessly manage all your digital subscriptions in one place.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Prototype 3: Social Score (SOS) -->
+                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition duration-300 ease-in-out">
+                            <a href="#" onclick="event.preventDefault(); showPage('sos-app');" class="block">
+                                <img src="images/prototype-sos.jpg" 
+                                     alt="Social Score (SOS) Prototype" 
+                                     class="w-full h-auto object-cover rounded-t-lg"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0f2f7/14b8a6?text=Social+Score+App';"
+                                />
+                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
+                                    <h3 class="text-lg font-semibold text-teal-600 group-hover:underline">Social Score (SOS)</h3>
+                                    <p class="text-sm text-gray-500">AI-driven risk assessment tool for platform security.</p>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
                 </section>
 
-                <!-- Thoughts & Articles Section (New) -->
                 <section id="articles" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md text-center">
                     <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-lightbulb mr-3" style="color: var(--primary-accent);"></i> Thoughts & Articles</h2>
                     <p class="text-lg leading-relaxed text-gray-700 max-w-xl mx-auto mb-6">
                         Here, I share my insights on Product Management, SaaS architecture, and the future of LegalTech.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        <!-- Placeholder Article 1 -->
                         <div class="p-4 border border-gray-100 rounded-xl hover:shadow-lg transition duration-300">
                             <h3 class="text-lg font-semibold text-teal-600 mb-1">Evolving from Monolith to Microservices in Legal Governance</h3>
                             <p class="text-sm text-gray-500 mb-2">October 15, 2025</p>
                             <a href="#" class="text-sm text-teal-600 hover:text-teal-700 font-medium">Read Article <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
                         </div>
-                        <!-- Placeholder Article 2 -->
                         <div class="p-4 border border-gray-100 rounded-xl hover:shadow-lg transition duration-300">
                             <h3 class="text-lg font-semibold text-teal-600 mb-1">The Product Manager's Guide to Measuring AI/ML Value</h3>
                             <p class="text-sm text-gray-500 mb-2">September 28, 2025</p>
@@ -272,12 +309,10 @@
                     <p class="mt-8 text-gray-500 text-sm">More articles coming soon...</p>
                 </section>
 
-                <!-- Contact Section -->
                 <section id="contact" class="bg-white p-8 md:p-10 rounded-xl mb-12 shadow-md text-center">
                     <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-headset mr-3" style="color: var(--primary-accent);"></i> Get In Touch</h2>
                     <p class="text-base leading-relaxed mb-8 text-gray-600 max-w-2xl mx-auto">I am always open to discussing new product challenges and opportunities. Feel free to connect!</p>
                     <div class="contact-icons flex flex-wrap gap-6 justify-center">
-                        <!-- Contact links -->
                         <a href="mailto:rajeshr2r@gmail.com" title="Email" class="text-gray-800 hover:text-teal-600 transition duration-200 flex items-center text-base font-medium">
                             <i class="fas fa-envelope text-xl mr-2"></i> rajeshr2r@gmail.com
                         </a>
@@ -288,12 +323,417 @@
                 </section>
 
             </div>
-
-            <!-- Footer -->
+            
             <footer class="text-center py-6 border-t border-gray-200 mt-10 bg-white">
                 <p class="text-xs text-gray-500">&copy; 2025 Rajesh Kumar Kandasamy. All rights reserved.</p>
             </footer>
-        </main>
-    </div>
+        </div>
+
+
+        <!-- --------------------------------------- -->
+        <!-- 2. PROTOTYPE APP VIEWS (HIDDEN BY DEFAULT)-->
+        <!-- --------------------------------------- -->
+
+        <!-- Social Score (SOS) App View -->
+        <div id="sos-app" class="page-content hidden bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <button onclick="showPage('portfolio-main-page', true)" class="mb-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+                </button>
+
+                <!-- Start of SOS App Content -->
+                <header class="text-center mb-10">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">SOS Security & Behavior Component (Integrable)</h1>
+                    <p class="text-gray-500">AI-driven risk assessment tool for platform companies, institutions, and social media networks.</p>
+                </header>
+
+                <!-- Input Panel -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i data-lucide="user-search" class="w-5 h-5 mr-2 text-indigo-600"></i> Select User Account for Analysis
+                    </h2>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <!-- Dropdown Selector -->
+                        <select id="userIdInput"
+                                class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                            <option value="" disabled selected>-- Select a User to Analyze --</option>
+                            <optgroup label="High Risk (Potential Bot/Spam)">
+                                <option value="jack_high">Jack - High Risk (SOS 9)</option>
+                                <option value="jane_high">Jane - High Risk (SOS 12)</option>
+                                <option value="john_high">John - High Risk (SOS 23)</option>
+                                <option value="mike_high">Mike - High Risk (SOS 36)</option>
+                                <option value="nick_high">Nick - High Risk (SOS 46)</option>
+                            </optgroup>
+                            <optgroup label="Medium Risk (Mixed Signals)">
+                                <option value="mike_medium">Mike - Medium Risk (SOS 55)</option>
+                                <option value="jane_medium">Jane - Medium Risk (SOS 61)</option>
+                                <option value="jack_medium">Jack - Medium Risk (SOS 61)</option>
+                                <option value="nick_medium">Nick - Medium Risk (SOS 63)</option>
+                                <option value="john_medium">John - Medium Risk (SOS 65)</option>
+                            </optgroup>
+                            <optgroup label="Low Risk (Organic/Safe)">
+                                <option value="mike_low">Mike - Low Risk (SOS 84)</option>
+                                <option value="nick_low">Nick - Low Risk (SOS 87)</option>
+                                <option value="jane_low">Jane - Low Risk (SOS 89)</option>
+                                <option value="jack_low">Jack - Low Risk (SOS 93)</option>
+                                <option value="john_low">John - Low Risk (SOS 97)</option>
+                            </optgroup>
+                        </select>
+                        
+                        <button id="analyzeButton"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition duration-200">
+                            Run SOS Scan
+                        </button>
+                    </div>
+                    <p id="error-message" class="text-red-500 text-sm mt-2 hidden">Please select a user ID from the dropdown.</p>
+                </div>
+
+                <!-- Loading Indicator & Output Section -->
+                <div id="loadingIndicator" class="hidden bg-yellow-500 text-white p-4 rounded-lg shadow-md mb-8 text-center font-semibold">
+                    <div class="flex items-center justify-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Running deep AI analysis... Simulating Social Media and Behavioral Data Ingestion.
+                    </div>
+                </div>
+
+                <!-- Results Dashboard -->
+                <div id="resultsDashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- 1. SOS Score Card -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-600">
+                        <h3 class="text-lg font-bold mb-4 text-indigo-700 flex items-center">
+                            <i data-lucide="shield-check" class="w-5 h-5 mr-2"></i> Social Operating Score (SOS)
+                        </h3>
+                        <div id="sosScoreCard" class="score-display rounded-xl text-center p-8 text-white shadow-xl">
+                            <p class="text-sm font-light mb-1 opacity-75">RISK INDEX (0-100)</p>
+                            <div class="score-text" id="finalSosScore">--</div>
+                            <p class="text-xl font-semibold mt-1" id="riskLevelText">--</p>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">SOS is a composite index. Higher is better (Safer/More Organic).</p>
+                    </div>
+
+                    <!-- 2. Detailed Metrics Panel -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <i data-lucide="layout-list" class="w-5 h-5 mr-2 text-gray-500"></i> AI & Behavior Metrics
+                        </h3>
+
+                        <div class="space-y-4" id="metricsContainer">
+                            <!-- Metric Item Template -->
+                        </div>
+
+                        <div class="mt-6 p-4 rounded-lg bg-indigo-50 border border-indigo-200">
+                            <h4 class="font-semibold text-indigo-800 flex items-center"><i data-lucide="alert-triangle" class="w-4 h-4 mr-2"></i> Platform Action Recommended</h4>
+                            <p id="recommendationText" class="text-sm text-indigo-700 mt-1">...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div id="initialMessage" class="mt-12 text-center text-gray-500 p-8 border-2 border-dashed border-gray-300 rounded-xl">
+                    <i data-lucide="monitor-dot" class="w-8 h-8 mx-auto mb-3"></i>
+                    <p>Select a user from the dropdown and click 'Run SOS Scan' to begin the risk assessment.</p>
+                    <p class="text-sm mt-1">This component helps platforms secure their site and protect organic users by detecting anomalies and bot behavior.</p>
+                </div>
+                <!-- End of SOS App Content -->
+            </div>
+        </div>
+
+        <!-- One Stop Shop Placeholder View -->
+        <div id="onestop-app" class="page-content hidden bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-xl mx-auto bg-white p-10 rounded-xl shadow-2xl">
+                <button onclick="showPage('portfolio-main-page', true)" class="mb-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+                </button>
+                <i class="fas fa-store text-6xl text-teal-600 mb-4"></i>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">One Stop Shop Prototype</h1>
+                <p class="text-gray-600 mb-6">This is the live, embedded view of the **One Stop Shop** prototype. The full design would appear here. </p>
+                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 text-sm text-teal-700">
+                    **Note:** For this environment, the full interactive prototype is simulated. You can provide the complete HTML/JS for this app to make it live!
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription App Placeholder View -->
+        <div id="subscription-app" class="page-content hidden bg-gray-50 py-20 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-xl mx-auto bg-white p-10 rounded-xl shadow-2xl">
+                <button onclick="showPage('portfolio-main-page', true)" class="mb-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+                </button>
+                <i class="fas fa-calendar-check text-6xl text-teal-600 mb-4"></i>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">My Subscription Manager App Prototype</h1>
+                <p class="text-gray-600 mb-6">This is the live, embedded view of the **My Subscription Manager App** prototype. The full dashboard would appear here. </p>
+                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 text-sm text-teal-700">
+                    **Note:** For this environment, the full interactive prototype is simulated. You can provide the complete HTML/JS for this app to make it live!
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- Unified JavaScript for SPA Logic and SOS App -->
+    <script>
+        // --- SPA LOGIC ---
+
+        /**
+         * Switches the visible page content and scrolls to the top.
+         * @param {string} pageId - The ID of the page to show ('portfolio-main-page', 'sos-app', etc.).
+         * @param {boolean} shouldScrollToTop - Whether to scroll to the top of the window (true for internal navigation).
+         */
+        function showPage(pageId, shouldScrollToTop = false) {
+            const pages = ['portfolio-main-page', 'sos-app', 'onestop-app', 'subscription-app'];
+            
+            pages.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (id === pageId) {
+                        element.classList.remove('hidden');
+                        if (shouldScrollToTop) {
+                            window.scrollTo(0, 0);
+                        }
+                        // Specific initialization for the SOS app
+                        if (id === 'sos-app') {
+                            initializeSosApp();
+                        }
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Ensure main nav links work correctly when switching back to the portfolio
+            if (pageId === 'portfolio-main-page') {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.onclick = function(e) {
+                        const href = this.getAttribute('href');
+                        if (href.length > 1) { // Check if it's not just "#"
+                            e.preventDefault();
+                            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
+                });
+            }
+        }
+
+
+        // --- SOS APP LOGIC (INTEGRATED) ---
+
+        /**
+         * Initializes the logic for the Social Score (SOS) application.
+         */
+        function initializeSosApp() {
+            // Re-initialize Lucide icons when the SOS page is shown
+            lucide.createIcons();
+
+            const userIdInput = document.getElementById('userIdInput');
+            const analyzeButton = document.getElementById('analyzeButton');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const resultsDashboard = document.getElementById('resultsDashboard');
+            const initialMessage = document.getElementById('initialMessage');
+            const errorMessage = document.getElementById('error-message');
+            const finalSosScore = document.getElementById('finalSosScore');
+            const riskLevelText = document.getElementById('riskLevelText');
+            const sosScoreCard = document.getElementById('sosScoreCard');
+            const metricsContainer = document.getElementById('metricsContainer');
+            const recommendationText = document.getElementById('recommendationText');
+
+            // --- SIMULATED DATA & LOGIC ---
+
+            // Simulated AI model outputs and behavioral data for different user types (15 users)
+            const simulatedUserData = {
+                // Low Risk Category (SOS >= 80)
+                'john_low': { SentimentScore: 0.95, FrequencyScore: 0.90, SpamFlagCount: 0, BotLikelihood: 0.05 }, // SOS 97
+                'jane_low': { SentimentScore: 0.88, FrequencyScore: 0.82, SpamFlagCount: 1, BotLikelihood: 0.10 }, // SOS 89
+                'mike_low': { SentimentScore: 0.85, FrequencyScore: 0.95, SpamFlagCount: 2, BotLikelihood: 0.15 }, // SOS 84
+                'nick_low': { SentimentScore: 0.75, FrequencyScore: 0.90, SpamFlagCount: 1, BotLikelihood: 0.05 }, // SOS 87
+                'jack_low': { SentimentScore: 0.90, FrequencyScore: 0.75, SpamFlagCount: 0, BotLikelihood: 0.10 }, // SOS 93
+
+                // Medium Risk Category (50 <= SOS < 80)
+                'john_medium': { SentimentScore: 0.70, FrequencyScore: 0.60, SpamFlagCount: 4, BotLikelihood: 0.30 }, // SOS 65
+                'jane_medium': { SentimentScore: 0.55, FrequencyScore: 0.80, SpamFlagCount: 5, BotLikelihood: 0.20 }, // SOS 61
+                'mike_medium': { SentimentScore: 0.40, FrequencyScore: 0.90, SpamFlagCount: 6, BotLikelihood: 0.10 }, // SOS 55
+                'nick_medium': { SentimentScore: 0.65, FrequencyScore: 0.50, SpamFlagCount: 3, BotLikelihood: 0.50 }, // SOS 63
+                'jack_medium': { SentimentScore: 0.80, FrequencyScore: 0.70, SpamFlagCount: 7, BotLikelihood: 0.10 }, // SOS 61
+
+                // High Risk Category (SOS < 50)
+                'john_high': { SentimentScore: 0.20, FrequencyScore: 0.30, SpamFlagCount: 8, BotLikelihood: 0.70 }, // SOS 23
+                'jane_high': { SentimentScore: 0.10, FrequencyScore: 0.15, SpamFlagCount: 9, BotLikelihood: 0.85 }, // SOS 12
+                'mike_high': { SentimentScore: 0.35, FrequencyScore: 0.50, SpamFlagCount: 7, BotLikelihood: 0.60 }, // SOS 36
+                'nick_high': { SentimentScore: 0.40, FrequencyScore: 0.45, SpamFlagCount: 5, BotLikelihood: 0.55 }, // SOS 46
+                'jack_high': { SentimentScore: 0.15, FrequencyScore: 0.25, SpamFlagCount: 10, BotLikelihood: 0.90 }, // SOS 9
+                
+                // Default fallback for an unselected user
+                'default': { SentimentScore: 0.50, FrequencyScore: 0.50, SpamFlagCount: 5, BotLikelihood: 0.50 }
+            };
+
+            // Weights for the Social Operating Score (SOS) calculation
+            const SOS_WEIGHTS = {
+                SENTIMENT: 30, // Goodwill, Commenting Word
+                FREQUENCY: 10, // Frequency of Usage
+                SPAM: 40,      // Spamming, Phishing Activities (Inverse: high flags means lower score)
+                BOT: 20        // Bot Detection Likelihood (Inverse: high likelihood means lower score)
+            };
+
+            /**
+             * Calculates the Social Operating Score (SOS) based on simulated metrics.
+             * @param {object} data - Simulated user metrics.
+             * @returns {number} The calculated SOS score (0-100).
+             */
+            function calculateSOS(data) {
+                const { SentimentScore, FrequencyScore, SpamFlagCount, BotLikelihood } = data;
+
+                // Normalize SpamFlagCount (0-10) to a score (1.0 to 0.0)
+                const spamScore = 1.0 - (SpamFlagCount / 10.0);
+
+                // Invert BotLikelihood (0.0 to 1.0) to a score (1.0 to 0.0)
+                const botScore = 1.0 - BotLikelihood;
+
+                // Weighted sum
+                let sos = (SOS_WEIGHTS.SENTIMENT * SentimentScore) +
+                          (SOS_WEIGHTS.FREQUENCY * FrequencyScore) +
+                          (SOS_WEIGHTS.SPAM * spamScore) +
+                          (SOS_WEIGHTS.BOT * botScore);
+
+                // Ensure score is between 0 and 100
+                return Math.round(Math.min(100, Math.max(0, sos)));
+            }
+
+            /**
+             * Determines the risk level, color, and recommendation text.
+             * @param {number} score - The SOS score.
+             * @returns {{level: string, colorClass: string, recommendation: string}}
+             */
+            function getRiskAssessment(score) {
+                let level, colorClass, recommendation;
+
+                if (score >= 80) {
+                    level = "LOW RISK";
+                    colorClass = "risk-color-low";
+                    recommendation = "This individual shows high organic goodwill and low risk signals. Recommended action: Standard user permissions, allow full access, and potentially flag for positive engagement.";
+                } else if (score >= 50) {
+                    level = "MEDIUM RISK";
+                    colorClass = "risk-color-medium";
+                    recommendation = "The profile exhibits mixed signals (e.g., high frequency but moderate spam flags). Recommended action: Monitor closely, implement rate limiting on commenting/posting, and require captcha verification.";
+                } else {
+                    level = "HIGH RISK";
+                    colorClass = "risk-color-high";
+                    recommendation = "Significant risk factors detected (high spam, poor goodwill, high bot likelihood). Recommended action: Immediate account review, temporary lock or shadow-banning, and block automated API access.";
+                }
+
+                return { level, colorClass, recommendation };
+            }
+
+            /**
+             * Renders the detailed metrics cards.
+             * @param {object} data - The simulated user metrics.
+             */
+            function renderMetrics(data) {
+                metricsContainer.innerHTML = ''; // Clear previous metrics
+
+                const metricDefinitions = [
+                    {
+                        title: "Goodwill/Sentiment Score",
+                        icon: "smile",
+                        value: `${(data.SentimentScore * 100).toFixed(1)}%`,
+                        description: `NLP analysis of commenting word and interaction history. Score of ${data.SentimentScore.toFixed(2)} indicates the ratio of positive vs. negative contributions. Weight: ${SOS_WEIGHTS.SENTIMENT}%`,
+                        risk: data.SentimentScore < 0.4 ? 'text-red-600' : data.SentimentScore < 0.7 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Spam/Phishing Activity Flags",
+                        icon: "flag",
+                        value: `${data.SpamFlagCount}/10`,
+                        description: `Count of system-flagged spam, phishing, or TOS-violating activities (per 10 possible flags). This metric has a strong inverse correlation with SOS. Weight: ${SOS_WEIGHTS.SPAM}%`,
+                        risk: data.SpamFlagCount > 6 ? 'text-red-600' : data.SpamFlagCount > 3 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Bot Likelihood Model Output",
+                        icon: "zap",
+                        value: `${(data.BotLikelihood * 100).toFixed(0)}%`,
+                        description: `Probability that the user's behavior is automated, based on mouse movements, API calls, and timing patterns. High likelihood indicates a bot. Weight: ${SOS_WEIGHTS.BOT}%`,
+                        risk: data.BotLikelihood > 0.5 ? 'text-red-600' : data.BotLikelihood > 0.2 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                    {
+                        title: "Usage Frequency/Consistency",
+                        icon: "activity",
+                        value: `${(data.FrequencyScore * 100).toFixed(0)}%`,
+                        description: `A measure of consistent, human-like login and usage frequency over time. Weight: ${SOS_WEIGHTS.FREQUENCY}%`,
+                        risk: data.FrequencyScore < 0.4 ? 'text-amber-600' : 'text-emerald-600'
+                    },
+                ];
+
+                metricDefinitions.forEach(metric => {
+                    const html = `
+                        <div class="border-b border-gray-100 pb-4">
+                            <div class="flex items-center justify-between">
+                                <span class="font-medium text-gray-700 flex items-center">
+                                    <i data-lucide="${metric.icon}" class="w-4 h-4 mr-2 text-indigo-500"></i> ${metric.title}
+                                </span>
+                                <span class="font-bold text-lg ${metric.risk}">${metric.value}</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">${metric.description}</p>
+                        </div>
+                    `;
+                    metricsContainer.insertAdjacentHTML('beforeend', html);
+                });
+                // Re-init Lucide icons for the new content
+                lucide.createIcons();
+            }
+
+            // --- EVENT HANDLER ---
+
+            // Remove existing listener to prevent duplicates
+            analyzeButton.removeEventListener('click', handleAnalyzeClick);
+            
+            // Add the dedicated listener for the SOS app
+            analyzeButton.addEventListener('click', handleAnalyzeClick);
+
+            function handleAnalyzeClick() {
+                const userId = userIdInput.value;
+
+                errorMessage.classList.add('hidden');
+                if (!userId) {
+                    errorMessage.classList.remove('hidden');
+                    return;
+                }
+
+                initialMessage.classList.add('hidden');
+                resultsDashboard.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
+
+                // Simulate network latency for the "AI Analysis"
+                setTimeout(() => {
+                    loadingIndicator.classList.add('hidden');
+
+                    const userData = simulatedUserData[userId] || simulatedUserData['default'];
+                    const sosScore = calculateSOS(userData);
+                    const assessment = getRiskAssessment(sosScore);
+
+                    // 1. Update Score Card
+                    finalSosScore.textContent = sosScore;
+                    riskLevelText.textContent = assessment.level;
+                    // Note: Update the background color class dynamically
+                    sosScoreCard.classList.remove('risk-color-high', 'risk-color-medium', 'risk-color-low');
+                    sosScoreCard.classList.add(assessment.colorClass);
+
+                    // 2. Update Recommendation
+                    recommendationText.textContent = assessment.recommendation;
+
+                    // 3. Render Metrics
+                    renderMetrics(userData);
+
+                    resultsDashboard.classList.remove('hidden');
+                }, 1500); // 1.5 second delay
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Default view is the main portfolio
+            showPage('portfolio-main-page');
+        });
+    </script>
 </body>
 </html>
