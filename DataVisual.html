@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyzer & Visualizer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+        }
+        /* Custom scrollbar for data table */
+        .data-table-container::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .data-table-container::-webkit-scrollbar-thumb {
+            background-color: #9ca3af;
+            border-radius: 4px;
+        }
+        .data-table-container::-webkit-scrollbar-track {
+            background-color: #e5e7eb;
+        }
+    </style>
+
+    <!-- Load Chart.js and PapaParse -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header & Navigation -->
+        <header class="bg-white shadow-md p-4 sticky top-0 z-10">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="sitename/#prototypes" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-150 flex items-center">
+                    <!-- Lucide Icon for Back Arrow -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                    Back to Prototypes
+                </a>
+                <h1 class="text-2xl font-bold text-gray-800">Data Visualizer</h1>
+                <div class="w-20"></div> <!-- Spacer for alignment -->
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto p-4 md:p-8 flex-grow">
+            <!-- File Uploader Card -->
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">1. Import Data File (CSV)</h2>
+                <div id="drop-area" class="border-2 border-dashed border-indigo-300 rounded-lg p-10 text-center hover:bg-indigo-50 transition duration-300 cursor-pointer">
+                    <input type="file" id="fileInput" accept=".csv" class="hidden" onchange="handleFileSelect(event)">
+                    <p class="text-gray-500">Drag & drop your **CSV file** here, or <span class="text-indigo-600 font-medium">click to browse</span>.</p>
+                    <p class="text-sm mt-2 text-red-500 font-semibold" id="fileError" style="display:none;">
+                      <!-- Placeholder for file error message -->
+                    </p>
+                    <p class="text-xs mt-2 text-gray-400">Note: For Excel (.xls, .xlsx) files, please first convert them to CSV format.</p>
+                </div>
+            </div>
+
+            <!-- Data & Visualization Section -->
+            <div id="data-display-section" class="space-y-8" style="display:none;">
+
+                <!-- Data Table View -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">2. Data Template View (First 10 Rows)</h2>
+                    <div class="data-table-container overflow-x-auto max-h-96 rounded-lg border border-gray-200">
+                        <table id="dataTable" class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50 sticky top-0">
+                                <!-- Table Headers will be injected here -->
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <!-- Table Data will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Visualization & Insights -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Chart Section -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4">3. Data Visualization</h2>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
+                            <!-- New Chart Type Selector -->
+                            <select id="chartType" class="p-2 border rounded-lg w-full md:w-1/4">
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="doughnut">Doughnut Chart</option>
+                            </select>
+                            <select id="xColumn" class="p-2 border rounded-lg w-full md:w-1/4"></select>
+                            <select id="yColumn" class="p-2 border rounded-lg w-full md:w-1/4"></select>
+                            <button onclick="updateChart()" class="bg-indigo-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-600 transition duration-150 w-full md:w-1/4">Update Chart</button>
+                        </div>
+                        <div class="relative h-96">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Insights Section -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                            4. AI Insights & Breakdown
+                            <span class="ml-2 inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">Powered by Gemini</span>
+                        </h2>
+                        <div id="insightsContent">
+                            <button onclick="getInsights()" class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-150">Generate Insights</button>
+                            <div id="insightsLoader" class="text-center mt-4" style="display:none;">
+                                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+                                <p class="text-gray-500 mt-2">Analyzing data...</p>
+                            </div>
+                            <div id="insightsResult" class="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 whitespace-pre-wrap" style="display:none;">
+                                <!-- AI-generated insights will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4 mt-8">
+            <div class="container mx-auto text-center text-sm">
+                &copy; 2025 rajesh kumar kandasamy All rights reserved
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables for data and chart instance
+        let rawData = [];
+        let chartInstance = null;
+        let chartDataSummary = {};
+
+        // API Key (provided by the environment)
+        const apiKey = "";
+
+        // --- Drag and Drop Handling ---
+        const dropArea = document.getElementById('drop-area');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('bg-indigo-100', 'border-indigo-500'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('bg-indigo-100', 'border-indigo-500'), false);
+        });
+
+        dropArea.addEventListener('drop', handleDrop, false);
+        dropArea.addEventListener('click', () => document.getElementById('fileInput').click(), false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                processFile(files[0]);
+            }
+        }
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                processFile(files[0]);
+            }
+        }
+
+        function processFile(file) {
+            document.getElementById('fileError').style.display = 'none';
+
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                const errorElement = document.getElementById('fileError');
+                errorElement.textContent = "Please upload a valid CSV file.";
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                dynamicTyping: true,
+                complete: function(results) {
+                    if (results.data.length === 0) {
+                        const errorElement = document.getElementById('fileError');
+                        errorElement.textContent = "The file is empty or could not be parsed.";
+                        errorElement.style.display = 'block';
+                        document.getElementById('data-display-section').style.display = 'none';
+                        return;
+                    }
+
+                    rawData = results.data;
+                    document.getElementById('data-display-section').style.display = 'block';
+
+                    renderDataTable(rawData);
+                    populateColumnSelectors(results.meta.fields);
+
+                    // Set default chart columns and draw
+                    const fields = results.meta.fields;
+                    document.getElementById('xColumn').value = fields[0] || '';
+                    document.getElementById('yColumn').value = fields[1] || fields[0] || '';
+
+                    updateChart();
+                }
+            });
+        }
+
+        // --- Data Table Rendering ---
+        function renderDataTable(data) {
+            const tableHead = document.querySelector('#dataTable thead');
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableHead.innerHTML = '';
+            tableBody.innerHTML = '';
+
+            if (data.length === 0) return;
+
+            // Headers
+            const headers = Object.keys(data[0]);
+            const headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.className = 'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider';
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            tableHead.appendChild(headerRow);
+
+            // Data (limiting to first 10 rows for template view)
+            data.slice(0, 10).forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50 transition duration-100';
+                headers.forEach(header => {
+                    const td = document.createElement('td');
+                    td.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-800';
+                    td.textContent = row[header];
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // --- Charting ---
+        function populateColumnSelectors(fields) {
+            const xSelect = document.getElementById('xColumn');
+            const ySelect = document.getElementById('yColumn');
+
+            xSelect.innerHTML = '<option value="">Select X-Axis (Label)</option>';
+            ySelect.innerHTML = '<option value="">Select Y-Axis (Value)</option>';
+
+            fields.forEach(field => {
+                const xOption = document.createElement('option');
+                xOption.value = field;
+                xOption.textContent = field;
+                xSelect.appendChild(xOption);
+
+                const yOption = document.createElement('option');
+                yOption.value = field;
+                yOption.textContent = field;
+                ySelect.appendChild(yOption);
+            });
+        }
+
+        function updateChart() {
+            const xCol = document.getElementById('xColumn').value;
+            const yCol = document.getElementById('yColumn').value;
+            const chartType = document.getElementById('chartType').value; // Get chart type
+
+            if (!xCol || !yCol) return;
+
+            // Simple aggregation for chart: Sum Y-values grouped by X-values
+            const aggregatedData = rawData.reduce((acc, row) => {
+                const xValue = row[xCol];
+                const yValue = parseFloat(row[yCol]); // Try to parse as number
+
+                if (xValue !== null && xValue !== undefined && !isNaN(yValue)) {
+                    if (!acc[xValue]) {
+                        acc[xValue] = 0;
+                    }
+                    acc[xValue] += yValue;
+                }
+                return acc;
+            }, {});
+
+            const labels = Object.keys(aggregatedData);
+            const dataValues = Object.values(aggregatedData);
+
+            drawChart(labels, dataValues, xCol, yCol, chartType);
+        }
+
+        function drawChart(labels, dataValues, xCol, yCol, type) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            // Store summary for AI analysis
+            chartDataSummary = {
+                chartType: type,
+                xColumn: xCol,
+                yColumn: yCol,
+                dataPointsCount: labels.length,
+                totalSumY: dataValues.reduce((a, b) => a + b, 0),
+                minY: Math.min(...dataValues),
+                maxY: Math.max(...dataValues)
+            };
+
+            // Define colors for multi-colored charts (Doughnut/Bar)
+            const backgroundColors = [
+                'rgba(79, 70, 229, 0.7)',  // Indigo
+                'rgba(16, 185, 129, 0.7)', // Emerald
+                'rgba(245, 158, 11, 0.7)', // Amber
+                'rgba(239, 68, 68, 0.7)',  // Red
+                'rgba(59, 130, 246, 0.7)', // Blue
+                'rgba(139, 92, 246, 0.7)', // Violet
+            ];
+            const borderColors = backgroundColors.map(color => color.replace('0.7', '1'));
+
+            let dataset = {
+                label: `${yCol} grouped by ${xCol}`,
+                data: dataValues,
+            };
+
+            if (type === 'bar' || type === 'doughnut') {
+                dataset.backgroundColor = backgroundColors.slice(0, dataValues.length);
+                dataset.borderColor = borderColors.slice(0, dataValues.length);
+                if (type === 'bar') {
+                    dataset.borderWidth = 1;
+                    dataset.borderRadius = 4;
+                }
+            } else if (type === 'line') {
+                dataset.backgroundColor = 'rgba(79, 70, 229, 0.5)';
+                dataset.borderColor = 'rgba(79, 70, 229, 1)';
+                dataset.tension = 0.4;
+                dataset.fill = false;
+            }
+
+
+            chartInstance = new Chart(ctx, {
+                type: type, // Use the selected type
+                data: {
+                    labels: labels,
+                    datasets: [dataset]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            display: type !== 'doughnut', // Hide Y-axis for Doughnut
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: yCol
+                            }
+                        },
+                        x: {
+                            display: type !== 'doughnut', // Hide X-axis for Doughnut
+                            title: {
+                                display: true,
+                                text: xCol
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: type === 'doughnut' ? 'right' : 'top', // Move legend for Doughnut
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat().format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- LLM Insight Generation (Simulated API Call) ---
+        async function getInsights() {
+            const xCol = document.getElementById('xColumn').value;
+            const yCol = document.getElementById('yColumn').value;
+
+            if (rawData.length === 0) {
+                document.getElementById('insightsResult').textContent = "Please upload a data file first.";
+                document.getElementById('insightsResult').style.display = 'block';
+                return;
+            }
+
+            if (!xCol || !yCol) {
+                document.getElementById('insightsResult').textContent = "Please select both X-Axis (Label) and Y-Axis (Value) columns before generating insights.";
+                document.getElementById('insightsResult').style.display = 'block';
+                return;
+            }
+
+            const loader = document.getElementById('insightsLoader');
+            const resultDiv = document.getElementById('insightsResult');
+            const insightsButton = document.querySelector('#insightsContent button');
+
+            loader.style.display = 'block';
+            resultDiv.style.display = 'none';
+            insightsButton.disabled = true;
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            // Updated system prompt to enforce a bulleted list format
+            const systemPrompt = "You are a specialized data analysis AI. Based on the provided raw data summary and the generated chart summary, provide a concise analysis structured as a bulleted list. The bullet points must cover: 1. Key Findings/Trends, 2. Potential Outliers/Anomalies, and 3. Suggestions for Next Steps/Drill-Down. Always use markdown bullet points (`*`).";
+
+            // Construct the comprehensive user query
+            const userQuery = `Analyze the following data summary and the chart currently displayed:
+                DATA FIELDS: ${Object.keys(rawData[0]).join(', ')}
+                FIRST 5 ROWS: ${JSON.stringify(rawData.slice(0, 5))}
+                CHART SUMMARY: ${JSON.stringify(chartDataSummary)}
+
+                Please provide key findings and next steps based on this information in the requested bulleted list format.`;
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                // Use Google Search grounding to make analysis more 'aware' if needed
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            let attempts = 0;
+            const maxAttempts = 3;
+            let responseText = "The AI is unable to analyze the data right now. Please check your API key or network connection.";
+
+            while (attempts < maxAttempts) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (text) {
+                            responseText = text;
+                        }
+                        break; // Success
+                    } else {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error("Gemini API call failed (attempt ${attempts + 1}):", error);
+                    // Exponential backoff
+                    const delay = Math.pow(2, attempts) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+                attempts++;
+            }
+
+            // Placeholder for demonstration since API key is empty
+            if (attempts === maxAttempts) {
+                 responseText = `This analysis section is designed to use the Gemini API to provide actionable, bulleted insights. Here is a demonstration based on your selected columns:
+
+* **Key Finding:** The current visualization (${chartDataSummary.chartType}) shows data for **'${yCol}' grouped by '${xCol}'**. The highest aggregated value is ${chartDataSummary.maxY.toFixed(2)}, which is a crucial data point.
+* **Potential Anomaly:** Given the basic aggregation, if this were a Line Chart, any sudden spikes or dips would indicate a **significant trend change** requiring deeper time-series analysis.
+* **Next Steps:** To find out more about your data, try changing the **Chart Type** (e.g., to Line Chart if '${xCol}' is time-related) or select a new categorical column for **X-Axis (Label)** to reveal different segment performance.`;
+            }
+
+            resultDiv.innerHTML = responseText;
+            resultDiv.style.display = 'block';
+            loader.style.display = 'none';
+            insightsButton.disabled = false;
+        }
+
+        // Initialize drag area behavior on window load
+        window.onload = () => {
+             // Attach file input listener
+             document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+
+             // Set default state
+             document.getElementById('data-display-section').style.display = 'none';
+
+             // Add a visual indicator to the drop area
+             const originalContent = dropArea.innerHTML;
+             dropArea.addEventListener('dragover', (e) => {
+                 e.preventDefault();
+                 dropArea.classList.add('border-indigo-500', 'bg-indigo-50');
+                 dropArea.innerHTML = '<p class="text-indigo-600 font-bold">Drop file to upload</p>';
+             });
+
+             dropArea.addEventListener('dragleave', () => {
+                 dropArea.classList.remove('border-indigo-500', 'bg-indigo-50');
+                 dropArea.innerHTML = originalContent;
+             });
+
+             dropArea.addEventListener('drop', (e) => {
+                 e.preventDefault();
+                 dropArea.classList.remove('border-indigo-500', 'bg-indigo-50');
+                 dropArea.innerHTML = originalContent;
+                 handleDrop(e);
+             });
+        };
+
+    </script>
+</body>
+</html>
