@@ -11,37 +11,39 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #fafaf9;
-    --bg-dark: #0c0c0e;
+    /* Mono palette — unified with the rest of the site */
+    --bg: #fafafa;
+    --bg-dark: #0a0a0a;
     --surface: #ffffff;
-    --surface-2: #f5f5f4;
-    --surface-3: #ebeae7;
-    --line: #e7e5e0;
-    --line-2: #d6d3cd;
-    --ink: #18181b;
-    --ink-2: #3f3f46;
-    --ink-3: #71717a;
-    --ink-4: #a1a1aa;
-    --ink-5: #d4d4d8;
+    --surface-2: #f5f5f5;
+    --surface-3: #ebebeb;
+    --line: #e5e5e5;
+    --line-2: #d4d4d4;
+    --ink: #0a0a0a;
+    --ink-2: #262626;
+    --ink-3: #525252;
+    --ink-4: #737373;
+    --ink-5: #a3a3a3;
 
-    --success: #15803d;
-    --success-bg: #f0fdf4;
-    --success-border: #bbf7d0;
-    --warning: #b45309;
-    --warning-bg: #fffbeb;
-    --warning-border: #fde68a;
-    --danger: #b91c1c;
-    --danger-bg: #fef2f2;
-    --danger-border: #fecaca;
-    --info: #1e40af;
-    --info-bg: #eff6ff;
-    --info-border: #bfdbfe;
-    --agent: #6d28d9;
-    --agent-bg: #f5f3ff;
-    --agent-border: #ddd6fe;
-    --action: #c2410c;
-    --action-bg: #fff7ed;
-    --action-border: #fed7aa;
+    /* Semantic — muted greys with subtle hue cues so risk/status remain legible */
+    --success: #14532d;
+    --success-bg: #f6faf7;
+    --success-border: #d6e4d9;
+    --warning: #78350f;
+    --warning-bg: #faf7f1;
+    --warning-border: #e4ddc8;
+    --danger: #7f1d1d;
+    --danger-bg: #faf5f5;
+    --danger-border: #e8d4d4;
+    --info: #0a0a0a;
+    --info-bg: #f5f5f5;
+    --info-border: #e5e5e5;
+    --agent: #0a0a0a;
+    --agent-bg: #f5f5f5;
+    --agent-border: #e5e5e5;
+    --action: #0a0a0a;
+    --action-bg: #f5f5f5;
+    --action-border: #e5e5e5;
 
     --radius: 8px;
     --radius-sm: 4px;
@@ -1640,7 +1642,7 @@
   .ws-alert.warning svg { color: var(--warning); }
   .ws-alert.info { background: var(--info-bg); border-color: var(--info-border); color: #1e3a8a; }
   .ws-alert.info svg { color: var(--info); }
-  .ws-alert.agent { background: var(--agent-bg); border-color: var(--agent-border); color: #4c1d95; }
+  .ws-alert.agent { background: var(--agent-bg); border-color: var(--agent-border); color: var(--ink); }
   .ws-alert.agent svg { color: var(--agent); }
   .ws-alert strong { font-weight: 600; }
 
@@ -2066,21 +2068,19 @@
     .mock-body { grid-template-columns: 1fr; height: auto; }
     .mock-side, .mock-right { display: none; }
   }
-/* ===== Floating back-to-portfolio chip ===== */
+/* ===== Floating back-to-portfolio chip (mono — matches design system) ===== */
 .rk-back-chip{
   position:fixed; top:14px; left:14px; z-index:9999;
   display:inline-flex; align-items:center; gap:6px;
-  padding:8px 14px; border-radius:999px;
-  background:rgba(15,15,17,0.92); color:#fff;
+  padding:7px 13px; border-radius:999px;
+  background:var(--ink); color:#fff;
   font-family:'Inter',system-ui,sans-serif; font-size:12px; font-weight:600;
-  text-decoration:none; letter-spacing:.01em;
-  box-shadow:0 6px 20px rgba(0,0,0,0.25);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.12);
+  text-decoration:none; letter-spacing:-0.005em;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
   transition:transform .15s ease, background .15s ease;
 }
-.rk-back-chip:hover{ transform:translateX(-2px); background:#000; }
-.rk-back-chip svg{ width:14px; height:14px; }
+.rk-back-chip:hover{ transform:translateX(-2px); background:var(--ink-2); }
+.rk-back-chip svg{ width:12px; height:12px; }
 </style>
 </head>
 <body>

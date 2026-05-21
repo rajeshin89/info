@@ -3,679 +3,634 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rajesh Kumar Kandasamy | Product Manager Portfolio</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/lucide@latest"></script>
+    <title>Rajesh Kumar Kandasamy — Product Manager</title>
 
     <link rel="icon" type="image/png" href="favicon.png" />
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f9fafb;
-            color: #1f2937;
-            --primary-accent: #008080;
-            --agentic-accent: #6d28d9;
-            --nav-height: 72px;
-        }
-
-        .main-content { padding-top: var(--nav-height); }
-
-        .modern-frame {
-            border: 4px solid var(--primary-accent);
-            border-radius: 9999px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            padding: 0.25rem;
-            position: relative;
-        }
-
-        .timeline li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .timeline li::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0.35rem;
-            width: 10px; height: 10px;
-            background-color: var(--primary-accent);
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 0 2px #e5e7eb;
-        }
-        .timeline li:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 5px; top: 1rem;
-            height: calc(100% + 1.2rem);
-            width: 1px;
-            background-color: #d1d5db;
-        }
-
-        .minimal-badge {
-            background-color: #e0fafa;
-            color: var(--primary-accent);
-            border: 1px solid #99f6e4;
-        }
-        .hero-pattern {
-            background: linear-gradient(135deg, rgba(0, 128, 128, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-accent);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 0.75rem;
-            font-weight: 700;
-            box-shadow: 0 4px 6px rgba(0, 128, 128, 0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #006666;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 128, 128, 0.4);
-        }
-
-        .page-content { min-height: calc(100vh - var(--nav-height) - 100px); }
-
-        /* ============================================== */
-        /*  MODE TOGGLE                                   */
-        /* ============================================== */
-        .mode-toggle {
-            display: inline-flex;
-            background: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            border-radius: 999px;
-            padding: 4px;
-            gap: 2px;
-            position: relative;
-        }
-        .mode-toggle button {
-            border: none;
-            background: transparent;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #6b7280;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all .2s ease;
-            font-family: inherit;
-        }
-        .mode-toggle button:hover { color: #1f2937; }
-        .mode-toggle button.active {
-            background: white;
-            color: #0f172a;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-        .mode-toggle button.active i.fa-cube { color: var(--primary-accent); }
-        .mode-toggle button.active i.fa-bolt { color: var(--agentic-accent); }
-
-        /* Section visibility based on mode */
-        body.mode-static .agentic-only { display: none !important; }
-        body.mode-agentic .static-only { display: none !important; }
-
-        /* Agentic-mode hero */
-        .agentic-hero {
-            background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%);
-            color: white;
-            border-radius: 1.25rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .agentic-hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-                radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 22px 22px, 36px 36px;
-            background-position: 0 0, 11px 18px;
-            pointer-events: none;
-        }
-        .agentic-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.18);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 999px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        /* Prototype card variants for the two modes */
-        .proto-card {
-            position: relative;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 14px;
-            overflow: hidden;
-            transition: transform .25s ease, box-shadow .25s ease;
-        }
-        .proto-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -12px rgba(0,0,0,0.15); }
-        .proto-card .thumb {
-            aspect-ratio: 4 / 3;
-            background: #f3f4f6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .proto-card .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: transform .35s ease;
-        }
-        .proto-card:hover .thumb img { transform: scale(1.04); }
-        .proto-card .body { padding: 14px 16px 18px; }
-        .proto-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border-radius: 999px;
-        }
-        .proto-tag.web { background: #ede9fe; color: #6d28d9; }
-        .proto-tag.mobile { background: #fef3c7; color: #b45309; }
-        .proto-tag.dashboard { background: #cffafe; color: #0e7490; }
-        .proto-tag.platform { background: #fce7f3; color: #be185d; }
-
-        /* Static-mode prototype teaser (compact list strip) */
-        .static-proto-strip {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 14px;
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all .2s ease;
-        }
-        .static-proto-strip:hover {
-            border-color: var(--primary-accent);
-            transform: translateX(2px);
-        }
-        .static-proto-strip .mini-thumb {
-            width: 56px; height: 56px;
-            border-radius: 10px;
-            background: #f3f4f6;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-        .static-proto-strip .mini-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Mobile nav menu */
-        #mobile-menu { display: none; }
-        #mobile-menu.open { display: block; }
-
-        @media (max-width: 1023px) {
-            .nav-desktop { display: none; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 </head>
-<body class="min-h-screen flex flex-col mode-static">
+<body class="mode-static">
 
-    <!-- ============================ TOP NAV ============================ -->
-    <nav class="fixed top-0 z-50 w-full bg-white shadow-md h-[var(--nav-height)] flex items-center border-b border-gray-100">
-        <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-4 lg:px-8 gap-4">
+    <!-- ============================ NAV ============================ -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#top" class="brand">
+                <span class="brand-mark">RK</span>
+                <span>Rajesh Kandasamy</span>
+            </a>
 
-            <div class="flex items-center space-x-3 text-gray-900">
-                <span class="text-xl font-bold tracking-tight text-white bg-teal-700 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">RK</span>
-                <div class="text-lg md:text-xl font-extrabold tracking-tight text-gray-900">
-                    Rajesh Kandasamy
-                </div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience" class="static-only">Experience</a>
+                <a href="#skills" class="static-only">Skills</a>
+                <a href="#prototypes" class="static-only">Prototypes</a>
+                <a href="#articles" class="static-only">Thoughts</a>
+                <a href="#chat" class="agentic-only">Chat</a>
             </div>
 
-            <div class="nav-desktop flex items-center space-x-5">
-                <div class="flex space-x-5 text-sm font-medium tracking-wide text-gray-600">
-                    <a href="#about" class="hover:text-teal-700 transition duration-150">About</a>
-                    <a href="#experience" class="static-only hover:text-teal-700 transition duration-150">Experience</a>
-                    <a href="#skills" class="static-only hover:text-teal-700 transition duration-150">Skills</a>
-                    <a href="#prototypes" class="hover:text-teal-700 transition duration-150">Prototypes</a>
-                    <a href="#articles" class="static-only hover:text-teal-700 transition duration-150">Thoughts</a>
-                </div>
-
-                <!-- MODE TOGGLE -->
+            <div class="nav-actions">
                 <div class="mode-toggle" role="tablist" aria-label="View mode">
-                    <button id="mode-static-btn" class="active" role="tab" aria-selected="true" data-mode="static" title="Static portfolio view">
-                        <i class="fas fa-cube"></i><span>Static</span>
+                    <button data-mode="static" class="active" aria-selected="true" title="Static portfolio">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                        Static
                     </button>
-                    <button id="mode-agentic-btn" role="tab" aria-selected="false" data-mode="agentic" title="Agentic prototypes view">
-                        <i class="fas fa-bolt"></i><span>Agentic</span>
+                    <button data-mode="agentic" aria-selected="false" title="Agentic chat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        Agentic
                     </button>
                 </div>
-
-                <a href="#contact" class="btn-primary text-sm shadow-md">
-                    <i class="fas fa-paper-plane mr-2"></i> Let's Talk
-                </a>
-            </div>
-
-            <button id="mobile-toggle" class="lg:hidden text-gray-600 hover:text-teal-700 p-2 rounded-md transition duration-200" aria-label="Open menu">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile drawer -->
-        <div id="mobile-menu" class="absolute top-[var(--nav-height)] left-0 right-0 bg-white border-b border-gray-100 shadow-lg lg:hidden">
-            <div class="px-6 py-5 space-y-4">
-                <a href="#about" class="block text-sm font-medium text-gray-700 hover:text-teal-700">About</a>
-                <a href="#experience" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Experience</a>
-                <a href="#skills" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Skills</a>
-                <a href="#prototypes" class="block text-sm font-medium text-gray-700 hover:text-teal-700">Prototypes</a>
-                <a href="#articles" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Thoughts</a>
-                <div class="mode-toggle mt-2" role="tablist" aria-label="View mode">
-                    <button class="active" data-mode="static"><i class="fas fa-cube"></i><span>Static</span></button>
-                    <button data-mode="agentic"><i class="fas fa-bolt"></i><span>Agentic</span></button>
-                </div>
-                <a href="#contact" class="btn-primary text-sm inline-flex"><i class="fas fa-paper-plane mr-2"></i> Let's Talk</a>
+                <a href="#contact" class="btn btn-primary">Let's talk</a>
             </div>
         </div>
     </nav>
 
-    <main class="flex-1 main-content">
-        <div id="portfolio-main-page" class="page-content">
+    <main id="top">
 
-            <!-- ======================= ABOUT / HERO ======================= -->
-            <section id="about" class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 lg:pt-16">
-                <div class="bg-white rounded-2xl p-6 md:p-12 shadow-2xl relative overflow-hidden hero-pattern">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-
-                        <div class="lg:col-span-7 text-center lg:text-left py-8 md:py-12">
-                            <h1 class="text-lg md:text-xl font-semibold text-teal-700 leading-tight mb-2">Hey! I am</h1>
-                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">Product Manager</h2>
-                            <p class="text-xl md:text-2xl font-medium text-gray-700 mb-6 max-w-lg lg:mx-0">SaaS & BI Specialist</p>
-                            <p class="text-base md:text-lg leading-relaxed text-gray-700 max-w-xl lg:mx-0 mb-8">
-                                I am a seasoned Product Manager with 12+ years of experience, specializing in bridging the gap between business needs and technological innovation. I focus on eDiscovery Legal Governance and Risk Compliance Software, SaaS re-architecture, and delivering measurable value.
-                            </p>
-
-                            <!-- Mode-aware CTAs -->
-                            <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
-                                <a href="#experience" class="static-only btn-primary text-base">Learn More</a>
-                                <a href="#prototypes" class="agentic-only btn-primary text-base" style="background-color: var(--agentic-accent); box-shadow: 0 4px 6px rgba(109, 40, 217, 0.3);">
-                                    <i class="fas fa-bolt mr-2"></i> Explore Prototypes
-                                </a>
-                                <a href="resume.pdf" target="_blank" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold text-sm border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 transition">
-                                    <i class="fas fa-file-pdf mr-2"></i> Download Resume
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5 flex justify-center lg:justify-end order-first lg:order-last pb-8 lg:pb-0">
-                            <div class="modern-frame w-56 h-56 md:w-72 md:h-72 relative rounded-full overflow-hidden shadow-2xl">
-                                <img
-                                    src="images/portrait.jpg"
-                                    alt="Rajesh Kumar Kandasamy Profile Photo"
-                                    class="w-full h-full object-cover rounded-full"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/320x320/008080/ffffff?text=RK';"
-                                />
-                            </div>
-                        </div>
+        <!-- ======================= HERO (both modes) ======================= -->
+        <section id="about" class="container">
+            <div class="hero">
+                <div>
+                    <span class="eyebrow">Product Manager</span>
+                    <h1 class="h-display mt-3">Building products that bridge<br/>business and engineering.</h1>
+                    <p class="muted mt-4" style="font-size: 16px; max-width: 540px;">
+                        Twelve years across SaaS, BI, IoT, eCommerce and LegalTech — currently leading eDiscovery modules at Exterro. I focus on Legal Governance, Risk &amp; Compliance, SaaS re-architecture, and AI/ML features that ship measurable value.
+                    </p>
+                    <div class="flex gap-3 mt-6" style="flex-wrap: wrap;">
+                        <a href="#experience" class="static-only btn btn-primary btn-lg">Explore my work</a>
+                        <a href="#chat" class="agentic-only btn btn-primary btn-lg">Start chatting</a>
+                        <a href="resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Download résumé</a>
                     </div>
                 </div>
-            </section>
-
-            <!-- ======================= AGENTIC MODE HERO ======================= -->
-            <section class="agentic-only max-w-7xl mx-auto px-4 lg:px-8 mt-10">
-                <div class="agentic-hero px-6 md:px-12 py-10 md:py-14">
-                    <div class="relative z-10 max-w-3xl">
-                        <span class="agentic-pill"><i class="fas fa-bolt"></i> Agentic Mode</span>
-                        <h2 class="text-3xl md:text-4xl font-extrabold mt-4 leading-tight">Five live prototypes. Click any card to open.</h2>
-                        <p class="text-base md:text-lg opacity-90 mt-3 max-w-2xl">
-                            A curated gallery of AI- and PM-led prototypes — built end-to-end as HTML showcases. Each one walks through a problem space, the product hypothesis, and a working interactive demo.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-5">
-                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-mobile-alt"></i> Mobile</span>
-                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-chart-bar"></i> Dashboards</span>
-                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-globe"></i> Platform</span>
-                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-shield-alt"></i> Risk &amp; Compliance</span>
-                        </div>
-                    </div>
+                <div class="hero-portrait">
+                    <img src="images/portrait.jpg" alt="Rajesh Kumar Kandasamy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/440x440/0a0a0a/ffffff?text=RK';" />
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <div class="max-w-5xl mx-auto px-4 lg:px-8 mt-16">
-
-                <!-- ======================= EXPERIENCE (static only) ======================= -->
-                <section id="experience" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
-                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3">
-                        <i class="fas fa-briefcase mr-3" style="color: var(--primary-accent);"></i> Professional Experience
-                    </h2>
-                    <ul class="timeline">
-                        <li>
-                            <h3 class="text-lg font-semibold text-gray-900">Product Manager – Exterro</h3>
-                            <span class="text-sm text-gray-500 font-medium block mb-1">Nov 2021 - Present</span>
-                            <p class="text-gray-700 text-sm">Leading eDiscovery Software modules, enhancing UX with low-code tech, and utilizing analytics for insight-driven decisions.</p>
-                            <p class="text-gray-700 text-sm">Drove the implementation of advanced AI/ML features within the Modern Ediscovery Platform to automate data classification and predictive coding.</p>
-                            <p class="text-gray-700 text-sm">Focused on Legal Governance, Risk Compliance, and SaaS re-architecture.</p>
-                        </li>
-                        <li>
-                            <h3 class="text-lg font-semibold text-gray-900">Business Solutions Consultant – Blazingcoders</h3>
-                            <span class="text-sm text-gray-500 font-medium block mb-1">Apr 2021 - Oct 2021</span>
-                            <p class="text-gray-700 text-sm">Managed ERP documentation, client relations, and sprint coordination, ensuring timely and effective solution delivery.</p>
-                        </li>
-                        <li>
-                            <h3 class="text-lg font-semibold text-gray-900">Assistant Manager – C.R.I. Group</h3>
-                            <span class="text-sm text-gray-500 font-medium block mb-1">Apr 2015 - Mar 2021</span>
-                            <p class="text-gray-700 text-sm">Led mobile app/IoT projects and business reporting across markets, driving digital transformation and operational efficiency.</p>
-                        </li>
-                        <li>
-                            <h3 class="text-lg font-semibold text-gray-900">Business Solutions Manager – J-Technologies</h3>
-                            <span class="text-sm text-gray-500 font-medium block mb-1">Jun 2011 - Mar 2015</span>
-                            <p class="text-gray-700 text-sm">Handled GPS/ERP product lifecycle and stakeholder engagement from concept through launch and iterative improvement.</p>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- ======================= SKILLS (static only) ======================= -->
-                <section id="skills" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
-                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3">
-                        <i class="fas fa-sliders-h mr-3" style="color: var(--primary-accent);"></i> Core Skills
-                    </h2>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Management</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Analytics (MixPanel, Heap, Pendo)</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Client Relations</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Go-to-Market Strategy</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Digital Transformation</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Road Mapping</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Cross-functional Leadership</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">eDiscovery / LegalTech</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">SaaS Re-architecture</span>
-                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">AI / ML Product Strategy</span>
-                    </div>
-                </section>
-
-                <!-- ======================= PROTOTYPES (agentic-mode primary, also visible in static as teaser) ======================= -->
-
-                <!-- STATIC-MODE compact teaser strip (small) -->
-                <section id="prototypes-teaser" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
-                    <div class="flex items-center justify-between mb-6 border-b pb-3">
-                        <h2 class="text-2xl font-bold text-gray-900">
-                            <i class="fas fa-layer-group mr-3" style="color: var(--primary-accent);"></i> Featured Prototypes
-                        </h2>
-                        <button onclick="setMode('agentic')" class="text-sm font-semibold text-teal-700 hover:text-teal-900 hidden md:inline-flex items-center gap-1">
-                            View all in Agentic Mode <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <a href="OneStopShop.html" class="static-proto-strip">
-                            <div class="mini-thumb"><img src="images/prototype-onestopshop.png" alt="One Stop Shop"
-                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/008080/ffffff?text=OSS';"/></div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-900">One Stop Shop</p>
-                                <p class="text-xs text-gray-500">Unified mobile commerce</p>
-                            </div>
-                            <i class="fas fa-arrow-right text-gray-300"></i>
-                        </a>
-                        <a href="SubscriptionApp.html" class="static-proto-strip">
-                            <div class="mini-thumb"><img src="images/prototype-subscription.png" alt="Subscription Manager"
-                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/14b8a6/ffffff?text=Sub';"/></div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-900">Subscription Manager Pro</p>
-                                <p class="text-xs text-gray-500">Recurring-spend tracker</p>
-                            </div>
-                            <i class="fas fa-arrow-right text-gray-300"></i>
-                        </a>
-                        <a href="SOSAPP.html" class="static-proto-strip">
-                            <div class="mini-thumb"><img src="images/prototype-sos.png" alt="Social Score"
-                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/1e3a8a/ffffff?text=SOS';"/></div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-900">Social Score</p>
-                                <p class="text-xs text-gray-500">AI-driven risk assessment</p>
-                            </div>
-                            <i class="fas fa-arrow-right text-gray-300"></i>
-                        </a>
-                        <a href="DataVisual.html" class="static-proto-strip">
-                            <div class="mini-thumb"><img src="images/prototype-datavisual.png" alt="Data Visualization"
-                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/0e7490/ffffff?text=DV';"/></div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-900">Data Visualization</p>
-                                <p class="text-xs text-gray-500">Interactive dashboards</p>
-                            </div>
-                            <i class="fas fa-arrow-right text-gray-300"></i>
-                        </a>
-                        <a href="rkspace.html" class="static-proto-strip md:col-span-2">
-                            <div class="mini-thumb" style="background: linear-gradient(135deg, #4c1d95, #8b5cf6); display:flex; align-items:center; justify-content:center; color:white; font-weight:800;">R</div>
-                            <div class="flex-1">
-                                <p class="font-semibold text-gray-900">RK Space</p>
-                                <p class="text-xs text-gray-500">Agentic Data Risk Platform — full marketing &amp; product app</p>
-                            </div>
-                            <i class="fas fa-arrow-right text-gray-300"></i>
-                        </a>
-                    </div>
-                </section>
-
-                <!-- AGENTIC-MODE full prototype gallery -->
-                <section id="prototypes" class="agentic-only mb-12">
-                    <div class="text-center mb-8">
-                        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900">
-                            <i class="fas fa-layer-group mr-2" style="color: var(--agentic-accent);"></i>
-                            The Agentic Gallery
-                        </h2>
-                        <p class="text-sm md:text-base text-gray-600 mt-2 max-w-2xl mx-auto">Five clickable prototypes. Each opens in its own page with a working interactive demo and the PM thinking behind it.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                        <a href="rkspace.html" class="proto-card group lg:col-span-2 sm:col-span-2">
-                            <div class="thumb" style="background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%); color:white; position:relative;">
-                                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
-                                    <span class="proto-tag platform" style="background: rgba(255,255,255,0.18); color:white;"><i class="fas fa-star"></i> Featured</span>
-                                    <h3 class="text-3xl font-extrabold mt-3">RK Space</h3>
-                                    <p class="text-sm opacity-90 mt-1">Agentic Data Risk Platform</p>
-                                </div>
-                            </div>
-                            <div class="body">
-                                <div class="flex items-center justify-between gap-2">
-                                    <span class="proto-tag web">Web Platform</span>
-                                    <span class="text-xs text-gray-400">5+ screens</span>
-                                </div>
-                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-purple-700">RK Space — Agentic Data Risk Platform</h3>
-                                <p class="text-sm text-gray-500 mt-1">A full marketing site + product app exploring agentic data-risk workflows: classification, predictive coding, compliance signals.</p>
-                            </div>
-                        </a>
-
-                        <a href="OneStopShop.html" class="proto-card group">
-                            <div class="thumb">
-                                <img src="images/prototype-onestopshop.png" alt="One Stop Shop"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/03989e/ffffff?text=One+Stop+Shop';" />
-                            </div>
-                            <div class="body">
-                                <div class="flex items-center justify-between gap-2">
-                                    <span class="proto-tag mobile">Mobile</span>
-                                    <span class="text-xs text-gray-400">eCommerce</span>
-                                </div>
-                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-teal-700">One Stop Shop</h3>
-                                <p class="text-sm text-gray-500 mt-1">A unified universal-commerce app — one cart, one wallet, all categories.</p>
-                            </div>
-                        </a>
-
-                        <a href="SubscriptionApp.html" class="proto-card group">
-                            <div class="thumb">
-                                <img src="images/prototype-subscription.png" alt="Subscription Manager"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/14b8a6/ffffff?text=Subscription+App';" />
-                            </div>
-                            <div class="body">
-                                <div class="flex items-center justify-between gap-2">
-                                    <span class="proto-tag mobile">Mobile</span>
-                                    <span class="text-xs text-gray-400">FinTech</span>
-                                </div>
-                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-teal-700">Subscription Manager Pro</h3>
-                                <p class="text-sm text-gray-500 mt-1">A recurring-spend tracker that turns passive billing into active financial control.</p>
-                            </div>
-                        </a>
-
-                        <a href="SOSAPP.html" class="proto-card group">
-                            <div class="thumb">
-                                <img src="images/prototype-sos.png" alt="Social Score"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e3a8a/ffffff?text=Social+Score';" />
-                            </div>
-                            <div class="body">
-                                <div class="flex items-center justify-between gap-2">
-                                    <span class="proto-tag dashboard">Dashboard</span>
-                                    <span class="text-xs text-gray-400">Risk / Trust</span>
-                                </div>
-                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-indigo-700">Social Score</h3>
-                                <p class="text-sm text-gray-500 mt-1">AI-driven risk assessment for platform companies to detect bot and malicious behaviour.</p>
-                            </div>
-                        </a>
-
-                        <a href="DataVisual.html" class="proto-card group">
-                            <div class="thumb">
-                                <img src="images/prototype-datavisual.png" alt="Data Visualization"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/0e7490/ffffff?text=Data+Visual';" />
-                            </div>
-                            <div class="body">
-                                <div class="flex items-center justify-between gap-2">
-                                    <span class="proto-tag dashboard">Dashboard</span>
-                                    <span class="text-xs text-gray-400">BI</span>
-                                </div>
-                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-cyan-700">Data Visualization</h3>
-                                <p class="text-sm text-gray-500 mt-1">Drop a CSV; get instant interactive charts and a clean data table view.</p>
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="text-center mt-10">
-                        <button onclick="setMode('static')" class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-gray-200 hover:border-gray-300 rounded-xl font-semibold text-sm text-gray-700 transition">
-                            <i class="fas fa-cube"></i> Switch to Static view
-                        </button>
-                    </div>
-                </section>
-
-                <!-- ======================= ARTICLES (static only) ======================= -->
-                <section id="articles" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3">
-                        <i class="fas fa-lightbulb mr-3" style="color: var(--primary-accent);"></i> Thoughts &amp; Articles
-                    </h2>
-                    <p class="text-base leading-relaxed text-gray-700 max-w-xl mx-auto mb-6">
-                        Insights on Product Management, SaaS architecture, and the future of LegalTech.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        <div class="p-4 border border-gray-100 rounded-xl hover:shadow-lg transition duration-300">
-                            <h3 class="text-lg font-semibold text-teal-700 mb-1">Evolving from Monolith to Microservices in Legal Governance</h3>
-                            <p class="text-sm text-gray-500 mb-2">October 15, 2025</p>
-                            <a href="#" class="text-sm text-teal-700 hover:text-teal-800 font-medium">Read Article <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
-                        </div>
-                        <div class="p-4 border border-gray-100 rounded-xl hover:shadow-lg transition duration-300">
-                            <h3 class="text-lg font-semibold text-teal-700 mb-1">The Product Manager's Guide to Measuring AI/ML Value</h3>
-                            <p class="text-sm text-gray-500 mb-2">September 28, 2025</p>
-                            <a href="#" class="text-sm text-teal-700 hover:text-teal-800 font-medium">Read Article <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
-                        </div>
-                    </div>
-                    <p class="mt-8 text-gray-500 text-sm">More articles coming soon...</p>
-                </section>
-
-                <!-- ======================= CONTACT (both modes) ======================= -->
-                <section id="contact" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3">
-                        <i class="fas fa-headset mr-3" style="color: var(--primary-accent);"></i> Get In Touch
-                    </h2>
-                    <p class="text-base leading-relaxed mb-8 text-gray-600 max-w-2xl mx-auto">
-                        I am always open to discussing new product challenges and opportunities. Feel free to connect!
-                    </p>
-                    <div class="contact-icons flex flex-wrap gap-6 justify-center">
-                        <a href="mailto:rajeshr2r@gmail.com" title="Email" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
-                            <i class="fas fa-envelope text-xl mr-2"></i> rajeshr2r@gmail.com
-                        </a>
-                        <a href="tel:+919952156121" title="Phone" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
-                            <i class="fas fa-phone text-xl mr-2"></i> +91 9952156121
-                        </a>
-                        <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" title="LinkedIn" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
-                            <i class="fab fa-linkedin text-xl mr-2"></i> linkedin.com/in/rajeshr2r
-                        </a>
-                    </div>
-                </section>
+        <!-- ====================== STATIC MODE: EXPERIENCE ====================== -->
+        <section id="experience" class="static-only container section">
+            <div class="flex items-center justify-between gap-3 mt-2" style="margin-bottom: 24px;">
+                <div>
+                    <span class="eyebrow">Experience</span>
+                    <h2 class="h-1 mt-2">Twelve years, four companies, one craft.</h2>
+                </div>
             </div>
 
-            <footer class="text-center py-6 border-t border-gray-200 mt-10 bg-white">
-                <div class="flex justify-center space-x-4 text-gray-500 mb-3">
-                    <a href="https://x.com/r2rrajesh89" target="_blank" class="hover:text-teal-700 transition duration-150" title="Twitter/X"><i class="fab fa-twitter text-lg"></i></a>
-                    <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="hover:text-teal-700 transition duration-150" title="LinkedIn"><i class="fab fa-linkedin text-lg"></i></a>
-                    <a href="https://www.instagram.com/_rajesh_rover_" target="_blank" class="hover:text-teal-700 transition duration-150" title="Instagram"><i class="fab fa-instagram text-lg"></i></a>
-                    <a href="https://github.com/rajeshin89" target="_blank" class="hover:text-teal-700 transition duration-150" title="GitHub"><i class="fab fa-github text-lg"></i></a>
+            <div class="grid" style="grid-template-columns: 1fr; gap: 0;">
+                <ul class="timeline">
+                    <li>
+                        <p class="timeline-role">Product Manager — Exterro</p>
+                        <p class="timeline-meta mono">Nov 2021 — Present  ·  eDiscovery / LegalTech / GRC</p>
+                        <p class="timeline-desc">Leading eDiscovery Software modules; driving UX with low-code tech and analytics for insight-driven decisions.</p>
+                        <p class="timeline-desc">Drove the rollout of AI / ML features in the Modern eDiscovery Platform for automated data classification and predictive coding.</p>
+                        <p class="timeline-desc">Focus: Legal Governance, Risk &amp; Compliance, SaaS re-architecture.</p>
+                    </li>
+                    <li>
+                        <p class="timeline-role">Business Solutions Consultant — Blazingcoders</p>
+                        <p class="timeline-meta mono">Apr 2021 — Oct 2021  ·  ERP / consulting</p>
+                        <p class="timeline-desc">Owned ERP documentation, client relations and sprint coordination — timely, effective delivery.</p>
+                    </li>
+                    <li>
+                        <p class="timeline-role">Assistant Manager — C.R.I. Group</p>
+                        <p class="timeline-meta mono">Apr 2015 — Mar 2021  ·  Mobile / IoT</p>
+                        <p class="timeline-desc">Led mobile app / IoT projects and business reporting across markets; drove digital transformation and operational efficiency.</p>
+                    </li>
+                    <li>
+                        <p class="timeline-role">Business Solutions Manager — J-Technologies</p>
+                        <p class="timeline-meta mono">Jun 2011 — Mar 2015  ·  GPS / ERP</p>
+                        <p class="timeline-desc">Handled GPS / ERP product lifecycle and stakeholder engagement from concept through launch and iterative improvement.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ====================== STATIC MODE: SKILLS ====================== -->
+        <section id="skills" class="static-only container section">
+            <span class="eyebrow">Skills &amp; tools</span>
+            <h2 class="h-1 mt-2" style="margin-bottom: 20px;">What I work with.</h2>
+            <div class="skills">
+                <span class="skill">Product Management</span>
+                <span class="skill">Product Analytics — MixPanel, Heap, Pendo</span>
+                <span class="skill">Go-to-Market Strategy</span>
+                <span class="skill">Digital Transformation</span>
+                <span class="skill">Roadmapping</span>
+                <span class="skill">Cross-functional Leadership</span>
+                <span class="skill">eDiscovery / LegalTech</span>
+                <span class="skill">SaaS Re-architecture</span>
+                <span class="skill">AI / ML Product Strategy</span>
+                <span class="skill">Jira · Confluence · Notion</span>
+                <span class="skill">Figma · Miro · Lucidchart</span>
+                <span class="skill">Client Relations</span>
+            </div>
+        </section>
+
+        <!-- ====================== STATIC MODE: PROTOTYPES TEASER ====================== -->
+        <section id="prototypes" class="static-only container section">
+            <div class="flex items-center justify-between gap-3" style="margin-bottom: 20px;">
+                <div>
+                    <span class="eyebrow">Prototypes</span>
+                    <h2 class="h-1 mt-2">Five live demos.</h2>
                 </div>
-                <p class="text-xs text-gray-500">&copy; 2025 Rajesh Kumar Kandasamy. All rights reserved.</p>
-            </footer>
-        </div>
+                <button onclick="setMode('agentic')" class="btn btn-ghost">Chat with my portfolio →</button>
+            </div>
+
+            <div class="grid-cards">
+                <a href="OneStopShop.html" class="proto-card card-interactive">
+                    <div class="proto-thumb">
+                        <img src="images/prototype-onestopshop.png" alt="One Stop Shop"
+                             onerror="this.onerror=null; this.src='https://placehold.co/640x400/0a0a0a/ffffff?text=One+Stop+Shop';" />
+                    </div>
+                    <div class="proto-body">
+                        <div class="proto-meta">
+                            <span class="pill">Mobile · eCommerce</span>
+                        </div>
+                        <p class="proto-title">One Stop Shop</p>
+                        <p class="proto-desc">A unified universal-commerce app — one cart, one wallet, all categories.</p>
+                    </div>
+                </a>
+
+                <a href="SubscriptionApp.html" class="proto-card card-interactive">
+                    <div class="proto-thumb">
+                        <img src="images/prototype-subscription.png" alt="Subscription Manager"
+                             onerror="this.onerror=null; this.src='https://placehold.co/640x400/0a0a0a/ffffff?text=Subscription';" />
+                    </div>
+                    <div class="proto-body">
+                        <div class="proto-meta">
+                            <span class="pill">Mobile · FinTech</span>
+                        </div>
+                        <p class="proto-title">Subscription Manager Pro</p>
+                        <p class="proto-desc">Recurring-spend tracker that turns passive billing into active financial control.</p>
+                    </div>
+                </a>
+
+                <a href="SOSAPP.html" class="proto-card card-interactive">
+                    <div class="proto-thumb">
+                        <img src="images/prototype-sos.png" alt="Social Score"
+                             onerror="this.onerror=null; this.src='https://placehold.co/640x400/0a0a0a/ffffff?text=Social+Score';" />
+                    </div>
+                    <div class="proto-body">
+                        <div class="proto-meta">
+                            <span class="pill">Dashboard · Risk &amp; Trust</span>
+                        </div>
+                        <p class="proto-title">Social Score</p>
+                        <p class="proto-desc">AI-driven risk assessment for platform companies — detecting bot and malicious behaviour.</p>
+                    </div>
+                </a>
+
+                <a href="DataVisual.html" class="proto-card card-interactive">
+                    <div class="proto-thumb">
+                        <img src="images/prototype-datavisual.png" alt="Data Visualization"
+                             onerror="this.onerror=null; this.src='https://placehold.co/640x400/0a0a0a/ffffff?text=Data+Visual';" />
+                    </div>
+                    <div class="proto-body">
+                        <div class="proto-meta">
+                            <span class="pill">Dashboard · BI</span>
+                        </div>
+                        <p class="proto-title">Data Visualization</p>
+                        <p class="proto-desc">Drop a CSV — get instant interactive charts and a clean data table.</p>
+                    </div>
+                </a>
+
+                <a href="rkspace.html" class="proto-card card-interactive" style="grid-column: span 2;">
+                    <div class="proto-thumb" style="background: var(--ink); color: #fff; aspect-ratio: 16 / 6;">
+                        <div style="text-align:center; padding: 24px;">
+                            <span class="pill pill-outline" style="border-color: rgba(255,255,255,0.3); color: #fff; background: transparent;">Featured · Web Platform</span>
+                            <p style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.025em; margin-top: 10px;">RK Space</p>
+                            <p style="font-size: 13px; opacity: 0.75; margin-top: 4px;">Agentic Data Risk Platform</p>
+                        </div>
+                    </div>
+                    <div class="proto-body">
+                        <div class="proto-meta">
+                            <span class="pill">Web · Platform</span>
+                            <span class="muted" style="font-size: 11.5px;">5+ screens</span>
+                        </div>
+                        <p class="proto-title">RK Space — Agentic Data Risk Platform</p>
+                        <p class="proto-desc">A full marketing site plus product app exploring agentic data-risk workflows: classification, predictive coding, compliance signals.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ====================== STATIC MODE: ARTICLES ====================== -->
+        <section id="articles" class="static-only container section">
+            <span class="eyebrow">Thoughts</span>
+            <h2 class="h-1 mt-2" style="margin-bottom: 12px;">Recent writing.</h2>
+            <div>
+                <a href="#" class="article">
+                    <p class="article-title">Evolving from Monolith to Microservices in Legal Governance</p>
+                    <p class="article-meta"><span>October 15, 2025</span><span>·</span><span>8 min read</span></p>
+                </a>
+                <a href="#" class="article">
+                    <p class="article-title">The Product Manager's Guide to Measuring AI/ML Value</p>
+                    <p class="article-meta"><span>September 28, 2025</span><span>·</span><span>6 min read</span></p>
+                </a>
+                <a href="#" class="article">
+                    <p class="article-title">Why low-code accelerates eDiscovery — and where it breaks</p>
+                    <p class="article-meta"><span>August 12, 2025</span><span>·</span><span>5 min read</span></p>
+                </a>
+            </div>
+            <p class="muted mt-4" style="font-size: 12px;">More articles coming soon.</p>
+        </section>
+
+        <!-- ====================== AGENTIC MODE: CHAT ====================== -->
+        <section id="chat" class="agentic-only container section">
+            <div style="margin-bottom: 16px;">
+                <span class="eyebrow">Agentic mode</span>
+                <h2 class="h-1 mt-2">Chat with my portfolio.</h2>
+                <p class="muted mt-2" style="max-width: 560px;">Pick a prompt, or type a question. Each reply is curated — think of this as my résumé, rebuilt as a conversation.</p>
+            </div>
+
+            <div class="chat-shell">
+                <div class="chat-header">
+                    <div class="chat-avatar">RK</div>
+                    <div class="chat-header-text">
+                        <p class="chat-title">Rajesh's Portfolio Assistant</p>
+                        <p class="chat-subtitle"><span class="status-dot"></span><span>Online</span></p>
+                    </div>
+                    <button class="chat-clear" onclick="resetChat()" title="Start over">Clear</button>
+                </div>
+
+                <div class="chat-stream" id="chat-stream"></div>
+
+                <div class="chat-input-bar">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask anything…" autocomplete="off" />
+                    <button class="chat-send" id="chat-send" title="Send" aria-label="Send">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================== CONTACT (both modes) ====================== -->
+        <section id="contact" class="container section">
+            <span class="eyebrow">Contact</span>
+            <h2 class="h-1 mt-2" style="margin-bottom: 16px;">Get in touch.</h2>
+            <p class="muted" style="max-width: 560px; margin-bottom: 24px;">Open to product roles, advisory engagements and conversations about LegalTech / AI / SaaS architecture.</p>
+            <div class="flex gap-3" style="flex-wrap: wrap;">
+                <a href="mailto:rajeshr2r@gmail.com" class="btn btn-ghost btn-lg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    rajeshr2r@gmail.com
+                </a>
+                <a href="tel:+919952156121" class="btn btn-ghost btn-lg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    +91 9952156121
+                </a>
+                <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+        </section>
     </main>
 
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-text">© 2025 Rajesh Kumar Kandasamy</p>
+            <div class="footer-socials">
+                <a href="https://github.com/rajeshin89" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.86.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .32.22.7.83.58C20.56 21.79 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://x.com/r2rrajesh89" target="_blank" rel="noopener" title="X / Twitter" aria-label="X">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/_rajesh_rover_" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================ CHAT BRAIN ============================ -->
     <script>
-        // ======================== MODE TOGGLE ========================
-        const STORAGE_KEY = 'rk-portfolio-mode';
+    /* ============================================================
+       Static / Agentic mode toggle
+       ============================================================ */
+    const STORAGE_KEY = 'rk-portfolio-mode';
+    function setMode(mode) {
+        if (mode !== 'static' && mode !== 'agentic') mode = 'static';
+        document.body.classList.remove('mode-static', 'mode-agentic');
+        document.body.classList.add('mode-' + mode);
+        document.querySelectorAll('.mode-toggle button').forEach(b => {
+            const active = b.dataset.mode === mode;
+            b.classList.toggle('active', active);
+            b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        try { localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+        if (mode === 'agentic') {
+            setTimeout(() => document.getElementById('chat')?.scrollIntoView({behavior: 'smooth', block: 'start'}), 80);
+        }
+    }
+    window.setMode = setMode;
 
-        function setMode(mode) {
-            if (mode !== 'static' && mode !== 'agentic') mode = 'static';
-            document.body.classList.remove('mode-static', 'mode-agentic');
-            document.body.classList.add('mode-' + mode);
+    /* ============================================================
+       Chat — preset prompts and canned responses
+       ============================================================ */
+    const PROMPTS = [
+        {
+            id: 'about',
+            label: 'About Rajesh',
+            hint: 'Quick intro',
+            icon: 'user',
+            keywords: ['about', 'who', 'bio', 'intro', 'rajesh', 'tell me about you']
+        },
+        {
+            id: 'experience',
+            label: 'Experience',
+            hint: '12 years, four companies',
+            icon: 'briefcase',
+            keywords: ['experience', 'career', 'work history', 'job', 'role', 'employer']
+        },
+        {
+            id: 'skills',
+            label: 'Skills & Tools',
+            hint: 'Stack and craft',
+            icon: 'sliders',
+            keywords: ['skill', 'tool', 'stack', 'tech', 'craft']
+        },
+        {
+            id: 'prototypes',
+            label: 'Featured Prototypes',
+            hint: 'Open the 5 demos',
+            icon: 'layers',
+            keywords: ['proto', 'demo', 'project', 'work sample', 'show']
+        },
+        {
+            id: 'resume',
+            label: 'Résumé / Download CV',
+            hint: 'Get the PDF',
+            icon: 'file',
+            keywords: ['resume', 'cv', 'pdf', 'download']
+        },
+        {
+            id: 'contact',
+            label: 'Contact',
+            hint: 'Email, phone, LinkedIn',
+            icon: 'mail',
+            keywords: ['contact', 'email', 'phone', 'reach', 'hire', 'connect']
+        },
+        {
+            id: 'thoughts',
+            label: 'Recent Thoughts',
+            hint: 'Articles & writing',
+            icon: 'edit',
+            keywords: ['thought', 'article', 'blog', 'writing', 'post']
+        },
+        {
+            id: 'project-walkthrough',
+            label: 'Walk me through a project',
+            hint: 'Deep PM story',
+            icon: 'play',
+            keywords: ['walkthrough', 'walk through', 'deep dive', 'case study', 'story']
+        }
+    ];
 
-            // Update all toggle buttons (desktop + mobile)
-            document.querySelectorAll('.mode-toggle button').forEach(btn => {
-                const isActive = btn.dataset.mode === mode;
-                btn.classList.toggle('active', isActive);
-                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            });
+    const ICONS = {
+        user:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+        briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+        sliders:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>',
+        layers:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+        file:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        mail:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+        edit:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>',
+        play:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+        arrow:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'
+    };
 
-            try { localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+    /* ============================================================
+       Canned responses — each returns HTML for the bot bubble
+       ============================================================ */
+    const RESPONSES = {
+        about: () => `
+            <p>Hi — I'm <strong>Rajesh Kumar Kandasamy</strong>, a Product Manager with <strong>12+ years</strong> of experience.</p>
+            <p>I'm currently at <strong>Exterro</strong> (Nov 2021 onwards), leading eDiscovery Software modules and driving AI/ML features into the Modern eDiscovery Platform — automating data classification and predictive coding.</p>
+            <p>My background spans SaaS, BI, IoT, eCommerce, EdTech, HealthTech and LegalTech — I'm based in Tamil Nadu, India and work globally.</p>
+            <p class="mt-3"><strong>What I care about:</strong> bridging business needs and technological innovation; data-driven product decisions; turning complex compliance and risk problems into clean product experiences.</p>
+        `,
 
-            // If switching while a hidden section is in the URL hash, scroll to about
-            if (mode === 'agentic' && ['#experience', '#skills', '#articles'].includes(location.hash)) {
-                document.getElementById('prototypes')?.scrollIntoView({ behavior: 'smooth' });
+        experience: () => `
+            <p><strong>Four companies, twelve years, one craft.</strong></p>
+            <a class="bubble-card" href="#experience" onclick="setMode('static')">
+                <p class="t">Product Manager — Exterro</p>
+                <p class="s">Nov 2021 — Present · eDiscovery, Legal Governance, GRC, AI/ML, SaaS re-architecture</p>
+            </a>
+            <a class="bubble-card" href="#experience" onclick="setMode('static')">
+                <p class="t">Business Solutions Consultant — Blazingcoders</p>
+                <p class="s">Apr 2021 — Oct 2021 · ERP delivery, client relations, sprint coordination</p>
+            </a>
+            <a class="bubble-card" href="#experience" onclick="setMode('static')">
+                <p class="t">Assistant Manager — C.R.I. Group</p>
+                <p class="s">Apr 2015 — Mar 2021 · Mobile app / IoT projects, business reporting, digital transformation</p>
+            </a>
+            <a class="bubble-card" href="#experience" onclick="setMode('static')">
+                <p class="t">Business Solutions Manager — J-Technologies</p>
+                <p class="s">Jun 2011 — Mar 2015 · GPS / ERP product lifecycle, stakeholder management</p>
+            </a>
+        `,
+
+        skills: () => `
+            <p><strong>Core craft:</strong> Product Management, Roadmapping, GTM strategy, cross-functional leadership.</p>
+            <p><strong>Analytics:</strong> MixPanel, Heap, Pendo.</p>
+            <p><strong>Tools:</strong> Jira, Confluence, Notion, Figma, Miro, Lucidchart, Postman.</p>
+            <p><strong>Domain specialisms:</strong> eDiscovery / LegalTech, SaaS re-architecture, AI / ML product strategy.</p>
+        `,
+
+        prototypes: () => `
+            <p>Five live demos — click any to open in a new page.</p>
+            <div class="bubble-grid">
+                <a class="bubble-card" href="OneStopShop.html"><p class="t">One Stop Shop</p><p class="s">Mobile · unified commerce</p></a>
+                <a class="bubble-card" href="SubscriptionApp.html"><p class="t">Subscription Manager Pro</p><p class="s">Mobile · recurring-spend tracker</p></a>
+                <a class="bubble-card" href="SOSAPP.html"><p class="t">Social Score</p><p class="s">Dashboard · AI risk</p></a>
+                <a class="bubble-card" href="DataVisual.html"><p class="t">Data Visualization</p><p class="s">Dashboard · BI / CSV</p></a>
+                <a class="bubble-card" href="rkspace.html"><p class="t">RK Space ★ featured</p><p class="s">Web · Agentic Data Risk Platform</p></a>
+            </div>
+        `,
+
+        resume: () => `
+            <p>You can download the latest résumé as a PDF.</p>
+            <a class="bubble-card" href="resume.pdf" target="_blank" rel="noopener">
+                <p class="t">📄 K Rajesh Kumar — Product Manager — Résumé</p>
+                <p class="s">PDF · opens in new tab</p>
+            </a>
+        `,
+
+        contact: () => `
+            <p>Reach me on any of these — email is fastest.</p>
+            <a class="bubble-card" href="mailto:rajeshr2r@gmail.com"><p class="t">✉️ rajeshr2r@gmail.com</p><p class="s">Email — best for new conversations</p></a>
+            <a class="bubble-card" href="tel:+919952156121"><p class="t">📞 +91 9952156121</p><p class="s">Phone — IST business hours</p></a>
+            <a class="bubble-card" href="https://www.linkedin.com/in/rajeshr2r" target="_blank" rel="noopener"><p class="t">🔗 linkedin.com/in/rajeshr2r</p><p class="s">LinkedIn — for context &amp; warm intros</p></a>
+        `,
+
+        thoughts: () => `
+            <p>Recent writing on Product Management, SaaS architecture and the future of LegalTech.</p>
+            <a class="bubble-card" href="#articles" onclick="setMode('static')"><p class="t">Evolving from Monolith to Microservices in Legal Governance</p><p class="s">Oct 15, 2025 · 8 min</p></a>
+            <a class="bubble-card" href="#articles" onclick="setMode('static')"><p class="t">The Product Manager's Guide to Measuring AI/ML Value</p><p class="s">Sep 28, 2025 · 6 min</p></a>
+            <a class="bubble-card" href="#articles" onclick="setMode('static')"><p class="t">Why low-code accelerates eDiscovery — and where it breaks</p><p class="s">Aug 12, 2025 · 5 min</p></a>
+        `,
+
+        'project-walkthrough': () => `
+            <p><strong>Case study: AI-driven Predictive Coding in eDiscovery at Exterro.</strong></p>
+            <p><strong>Problem.</strong> Legal review teams were drowning in terabytes of unstructured data per matter. Manual coding ran 6–8 weeks; cost per case ballooned and reviewer fatigue introduced inconsistency.</p>
+            <p><strong>Hypothesis.</strong> A trained classifier — bootstrapped from a small reviewer sample (~2–5%) — could rank the remaining corpus by likely relevance. Reviewers prioritise the top of the queue; the long tail can be sampled and de-prioritised with defensible statistics.</p>
+            <p><strong>What I owned as PM.</strong> Defined success metrics (recall @ 90% with &lt;15% manual review), aligned legal counsel + data science + engineering, drove the UX for confidence scoring, and led the rollout sequencing into the Modern eDiscovery Platform.</p>
+            <p><strong>Outcome (directional).</strong> Cycle time dropped meaningfully; reviewer hours reallocated to substantive analysis; cost per matter trended down. The compliance argument — "documented, statistically defensible" — was the key to legal-team adoption.</p>
+            <p><strong>Lesson.</strong> In LegalTech, the model accuracy is necessary but not sufficient. The product wins when the workflow gives the lawyer a defensible audit trail.</p>
+        `,
+
+        'free-text': (q) => `
+            <p>I don't have live answers yet — but here's what I can show you right now:</p>
+            <p class="muted" style="font-size: 12px;">You asked: <em>"${escapeHtml(q)}"</em></p>
+            <p class="mt-2">Try one of the suggestions below, or reach me directly:</p>
+            <a class="bubble-card" href="mailto:rajeshr2r@gmail.com?subject=From%20your%20portfolio&body=${encodeURIComponent('Hi Rajesh,\n\nFound you via your portfolio. I had a question:\n\n' + q + '\n\n— ')}">
+                <p class="t">✉️ Email me this question</p>
+                <p class="s">Pre-fills the subject &amp; your question</p>
+            </a>
+        `
+    };
+
+    function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    /* ============================================================
+       Chat rendering
+       ============================================================ */
+    const stream = () => document.getElementById('chat-stream');
+    const input  = () => document.getElementById('chat-input');
+
+    function scrollToBottom() {
+        const s = stream();
+        if (s) requestAnimationFrame(() => s.scrollTop = s.scrollHeight);
+    }
+
+    function appendBot(html, withSuggestions = false) {
+        const s = stream(); if (!s) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'msg bot';
+        wrap.innerHTML = `<div class="msg-avatar">RK</div><div class="bubble">${html}${withSuggestions ? renderSuggestions() : ''}</div>`;
+        s.appendChild(wrap);
+        scrollToBottom();
+    }
+
+    function appendUser(text) {
+        const s = stream(); if (!s) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'msg user';
+        wrap.innerHTML = `<div class="msg-avatar">You</div><div class="bubble">${escapeHtml(text)}</div>`;
+        s.appendChild(wrap);
+        scrollToBottom();
+    }
+
+    function appendTyping() {
+        const s = stream(); if (!s) return null;
+        const wrap = document.createElement('div');
+        wrap.className = 'msg bot';
+        wrap.innerHTML = `<div class="msg-avatar">RK</div><div class="bubble"><span class="typing"><span></span><span></span><span></span></span></div>`;
+        s.appendChild(wrap);
+        scrollToBottom();
+        return wrap;
+    }
+
+    function renderSuggestions() {
+        return `<div class="chat-suggestions">` +
+            PROMPTS.slice(0, 4).map(p => `<button class="suggestion" onclick="handlePrompt('${p.id}')">${p.label}</button>`).join('') +
+            `</div>`;
+    }
+
+    function renderPromptGrid() {
+        return `
+            <p>Hi — I'm <strong>Rajesh's portfolio assistant</strong>. Pick a prompt, or type a question in the box below.</p>
+            <div class="chat-prompt-grid">
+                ${PROMPTS.map(p => `
+                    <button class="chat-prompt-tile" onclick="handlePrompt('${p.id}')">
+                        <span class="icon">${ICONS[p.icon] || ICONS.arrow}</span>
+                        <span class="text-block">
+                            <span class="label">${p.label}</span>
+                            <span class="hint">${p.hint}</span>
+                        </span>
+                    </button>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function handlePrompt(id) {
+        const p = PROMPTS.find(x => x.id === id);
+        if (!p) return;
+        appendUser(p.label);
+        const t = appendTyping();
+        setTimeout(() => {
+            t?.remove();
+            const fn = RESPONSES[id];
+            appendBot(fn ? fn() : '<p>Not yet available.</p>');
+        }, 380);
+    }
+    window.handlePrompt = handlePrompt;
+
+    function matchPrompt(text) {
+        const t = text.toLowerCase();
+        for (const p of PROMPTS) {
+            for (const k of p.keywords) {
+                if (t.includes(k)) return p.id;
             }
         }
+        return null;
+    }
 
-        // Restore mode preference
-        document.addEventListener('DOMContentLoaded', () => {
-            let saved = 'static';
-            try { saved = localStorage.getItem(STORAGE_KEY) || 'static'; } catch (e) {}
-            setMode(saved);
+    function handleFreeText() {
+        const el = input();
+        const v = el.value.trim();
+        if (!v) return;
+        el.value = '';
+        appendUser(v);
+        const matched = matchPrompt(v);
+        const t = appendTyping();
+        setTimeout(() => {
+            t?.remove();
+            if (matched && RESPONSES[matched]) {
+                appendBot(RESPONSES[matched]());
+            } else {
+                appendBot(RESPONSES['free-text'](v));
+                setTimeout(() => appendBot('You can also try one of these →', true), 250);
+            }
+        }, 420);
+    }
 
-            // Wire up every toggle button (desktop + mobile)
-            document.querySelectorAll('.mode-toggle button').forEach(btn => {
-                btn.addEventListener('click', () => setMode(btn.dataset.mode));
-            });
+    function resetChat() {
+        const s = stream(); if (!s) return;
+        s.innerHTML = '';
+        appendBot(renderPromptGrid());
+    }
+    window.resetChat = resetChat;
 
-            // Mobile menu
-            const mobBtn = document.getElementById('mobile-toggle');
-            const mobMenu = document.getElementById('mobile-menu');
-            mobBtn?.addEventListener('click', () => mobMenu?.classList.toggle('open'));
+    /* ============================================================
+       Init
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', () => {
+        // Restore mode
+        let saved = 'static';
+        try { saved = localStorage.getItem(STORAGE_KEY) || 'static'; } catch (e) {}
+        setMode(saved);
 
-            // Close mobile menu when a link is tapped
-            mobMenu?.querySelectorAll('a').forEach(a => {
-                a.addEventListener('click', () => mobMenu.classList.remove('open'));
-            });
-
-            if (window.lucide) window.lucide.createIcons();
+        // Wire mode toggles
+        document.querySelectorAll('.mode-toggle button').forEach(b => {
+            b.addEventListener('click', () => setMode(b.dataset.mode));
         });
 
-        window.addEventListener('load', () => {
-            if (window.lucide) window.lucide.createIcons();
-        });
+        // Initialize chat
+        resetChat();
 
-        // expose for inline buttons
-        window.setMode = setMode;
+        // Free-text input
+        const sendBtn = document.getElementById('chat-send');
+        sendBtn?.addEventListener('click', handleFreeText);
+        input()?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleFreeText(); }
+        });
+    });
     </script>
 
 </body>
