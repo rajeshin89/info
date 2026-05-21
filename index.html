@@ -4,210 +4,369 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rajesh Kumar Kandasamy | Product Manager Portfolio</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script type="module" src="https://unpkg.com/lucide@latest"></script>
 
+    <link rel="icon" type="image/png" href="favicon.png" />
+
     <style>
-        /* Custom styles for the Inter font, smooth scrolling, and main layout */
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            background-color: #f9fafb; /* Very light gray background */
-            color: #1f2937; /* Dark text for high readability */
-            --primary-accent: #008080; /* Teal 600, slightly richer */
-            --nav-height: 72px; 
+            background-color: #f9fafb;
+            color: #1f2937;
+            --primary-accent: #008080;
+            --agentic-accent: #6d28d9;
+            --nav-height: 72px;
         }
-        
-        .main-content {
-            /* Adjust padding to account for fixed nav bar */
-            padding-top: var(--nav-height); 
-        }
-        
-        /* NEW: Style for the circular profile frame */
+
+        .main-content { padding-top: var(--nav-height); }
+
         .modern-frame {
-            border: 4px solid var(--primary-accent); /* Teal border */
-            border-radius: 9999px; /* Full circle */
+            border: 4px solid var(--primary-accent);
+            border-radius: 9999px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             background-color: #ffffff;
-            padding: 0.25rem; /* Thinner border padding */
+            padding: 0.25rem;
             position: relative;
         }
 
-        /* Custom minimalist timeline visualization - updated to use Accent */
         .timeline li {
             position: relative;
             padding-left: 1.5rem;
             margin-bottom: 2rem;
         }
-
         .timeline li::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0.35rem; 
-            width: 10px;
-            height: 10px;
-            background-color: var(--primary-accent); 
+            left: 0; top: 0.35rem;
+            width: 10px; height: 10px;
+            background-color: var(--primary-accent);
             border-radius: 50%;
-            border: 2px solid #ffffff; 
-            box-shadow: 0 0 0 2px #e5e7eb; 
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 2px #e5e7eb;
         }
-
         .timeline li:not(:last-child)::after {
             content: '';
             position: absolute;
-            left: 5px; 
-            top: 1rem;
-            height: calc(100% + 1.2rem); 
-            width: 1px; 
-            background-color: #d1d5db; 
+            left: 5px; top: 1rem;
+            height: calc(100% + 1.2rem);
+            width: 1px;
+            background-color: #d1d5db;
         }
 
-        /* Minimalist accent for skills and buttons - updated to use Accent */
         .minimal-badge {
-            background-color: #e0fafa; /* Very light teal */
+            background-color: #e0fafa;
             color: var(--primary-accent);
-            border: 1px solid #99f6e4; /* Teal 200 */
+            border: 1px solid #99f6e4;
         }
-        
-        /* Style for the subtle background pattern in the hero section */
         .hero-pattern {
             background: linear-gradient(135deg, rgba(0, 128, 128, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
         }
 
-        /* NEW: Improved Button Style */
         .btn-primary {
             background-color: var(--primary-accent);
             color: white;
             padding: 0.75rem 2rem;
             border-radius: 0.75rem;
             font-weight: 700;
-            box-shadow: 0 4px 6px rgba(0, 128, 128, 0.3); /* Accent shadow */
+            box-shadow: 0 4px 6px rgba(0, 128, 128, 0.3);
             transition: all 0.3s ease;
         }
-
         .btn-primary:hover {
-            background-color: #006666; /* Darker teal */
+            background-color: #006666;
             transform: translateY(-2px);
             box-shadow: 0 6px 10px rgba(0, 128, 128, 0.4);
         }
 
-        /* ------------------------------------- */
-        /* SOS App Custom Styles (INTEGRATED)    */
-        /* ------------------------------------- */
-        .score-display {
-            transition: all 0.5s ease-in-out;
-            background-image: radial-gradient(circle at center, #1e3a8a 0%, #1e3a8a 50%, #172554 100%); /* Indigo gradient */
+        .page-content { min-height: calc(100vh - var(--nav-height) - 100px); }
+
+        /* ============================================== */
+        /*  MODE TOGGLE                                   */
+        /* ============================================== */
+        .mode-toggle {
+            display: inline-flex;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 999px;
+            padding: 4px;
+            gap: 2px;
+            position: relative;
         }
-        .score-text {
-            font-size: 3rem;
-            font-weight: 800;
+        .mode-toggle button {
+            border: none;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all .2s ease;
+            font-family: inherit;
         }
-        .risk-color-high { background-color: #dc2626; } /* Red 600 */
-        .risk-color-medium { background-color: #fbbf24; } /* Amber 400 */
-        .risk-color-low { background-color: #10b981; } /* Emerald 500 */
-        
-        /* Ensure prototype content containers take up min height */
-        .page-content {
-            min-height: calc(100vh - var(--nav-height) - 100px); /* Adjusted for footer */
+        .mode-toggle button:hover { color: #1f2937; }
+        .mode-toggle button.active {
+            background: white;
+            color: #0f172a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .mode-toggle button.active i.fa-cube { color: var(--primary-accent); }
+        .mode-toggle button.active i.fa-bolt { color: var(--agentic-accent); }
+
+        /* Section visibility based on mode */
+        body.mode-static .agentic-only { display: none !important; }
+        body.mode-agentic .static-only { display: none !important; }
+
+        /* Agentic-mode hero */
+        .agentic-hero {
+            background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%);
+            color: white;
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .agentic-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 22px 22px, 36px 36px;
+            background-position: 0 0, 11px 18px;
+            pointer-events: none;
+        }
+        .agentic-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.18);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
+        /* Prototype card variants for the two modes */
+        .proto-card {
+            position: relative;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .proto-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -12px rgba(0,0,0,0.15); }
+        .proto-card .thumb {
+            aspect-ratio: 4 / 3;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .proto-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .35s ease;
+        }
+        .proto-card:hover .thumb img { transform: scale(1.04); }
+        .proto-card .body { padding: 14px 16px 18px; }
+        .proto-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 999px;
+        }
+        .proto-tag.web { background: #ede9fe; color: #6d28d9; }
+        .proto-tag.mobile { background: #fef3c7; color: #b45309; }
+        .proto-tag.dashboard { background: #cffafe; color: #0e7490; }
+        .proto-tag.platform { background: #fce7f3; color: #be185d; }
+
+        /* Static-mode prototype teaser (compact list strip) */
+        .static-proto-strip {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all .2s ease;
+        }
+        .static-proto-strip:hover {
+            border-color: var(--primary-accent);
+            transform: translateX(2px);
+        }
+        .static-proto-strip .mini-thumb {
+            width: 56px; height: 56px;
+            border-radius: 10px;
+            background: #f3f4f6;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .static-proto-strip .mini-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Mobile nav menu */
+        #mobile-menu { display: none; }
+        #mobile-menu.open { display: block; }
+
+        @media (max-width: 1023px) {
+            .nav-desktop { display: none; }
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col mode-static">
 
+    <!-- ============================ TOP NAV ============================ -->
     <nav class="fixed top-0 z-50 w-full bg-white shadow-md h-[var(--nav-height)] flex items-center border-b border-gray-100">
-        <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-4 lg:px-8 gap-4">
+
             <div class="flex items-center space-x-3 text-gray-900">
                 <span class="text-xl font-bold tracking-tight text-white bg-teal-700 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">RK</span>
-                <div class="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
+                <div class="text-lg md:text-xl font-extrabold tracking-tight text-gray-900">
                     Rajesh Kandasamy
                 </div>
             </div>
 
-            <div class="hidden lg:flex items-center space-x-6">
-                <div class="flex space-x-6 text-sm font-medium tracking-wide text-gray-600">
-                    <a href="#about" class="hover:text-teal-700 transition duration-150 hover:underline underline-offset-4">About</a>
-                    <a href="#experience" class="hover:text-teal-700 transition duration-150 hover:underline underline-offset-4">Experience</a>
-                    <a href="#skills" class="hover:text-teal-700 transition duration-150 hover:underline underline-offset-4">Skills</a>
-                    <a href="#prototypes" class="hover:text-teal-700 transition duration-150 hover:underline underline-offset-4">Prototypes</a>
-                    <a href="#articles" class="hover:text-teal-700 transition duration-150 hover:underline underline-offset-4">Thoughts</a>
+            <div class="nav-desktop flex items-center space-x-5">
+                <div class="flex space-x-5 text-sm font-medium tracking-wide text-gray-600">
+                    <a href="#about" class="hover:text-teal-700 transition duration-150">About</a>
+                    <a href="#experience" class="static-only hover:text-teal-700 transition duration-150">Experience</a>
+                    <a href="#skills" class="static-only hover:text-teal-700 transition duration-150">Skills</a>
+                    <a href="#prototypes" class="hover:text-teal-700 transition duration-150">Prototypes</a>
+                    <a href="#articles" class="static-only hover:text-teal-700 transition duration-150">Thoughts</a>
                 </div>
-                
-                <a href="#contact" class="btn-primary text-sm shadow-md hover:bg-teal-700">
+
+                <!-- MODE TOGGLE -->
+                <div class="mode-toggle" role="tablist" aria-label="View mode">
+                    <button id="mode-static-btn" class="active" role="tab" aria-selected="true" data-mode="static" title="Static portfolio view">
+                        <i class="fas fa-cube"></i><span>Static</span>
+                    </button>
+                    <button id="mode-agentic-btn" role="tab" aria-selected="false" data-mode="agentic" title="Agentic prototypes view">
+                        <i class="fas fa-bolt"></i><span>Agentic</span>
+                    </button>
+                </div>
+
+                <a href="#contact" class="btn-primary text-sm shadow-md">
                     <i class="fas fa-paper-plane mr-2"></i> Let's Talk
                 </a>
             </div>
-            
-            <button class="lg:hidden text-gray-600 hover:text-teal-700 p-2 rounded-md transition duration-200">
+
+            <button id="mobile-toggle" class="lg:hidden text-gray-600 hover:text-teal-700 p-2 rounded-md transition duration-200" aria-label="Open menu">
                 <i class="fas fa-bars text-xl"></i>
             </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div id="mobile-menu" class="absolute top-[var(--nav-height)] left-0 right-0 bg-white border-b border-gray-100 shadow-lg lg:hidden">
+            <div class="px-6 py-5 space-y-4">
+                <a href="#about" class="block text-sm font-medium text-gray-700 hover:text-teal-700">About</a>
+                <a href="#experience" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Experience</a>
+                <a href="#skills" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Skills</a>
+                <a href="#prototypes" class="block text-sm font-medium text-gray-700 hover:text-teal-700">Prototypes</a>
+                <a href="#articles" class="static-only block text-sm font-medium text-gray-700 hover:text-teal-700">Thoughts</a>
+                <div class="mode-toggle mt-2" role="tablist" aria-label="View mode">
+                    <button class="active" data-mode="static"><i class="fas fa-cube"></i><span>Static</span></button>
+                    <button data-mode="agentic"><i class="fas fa-bolt"></i><span>Agentic</span></button>
+                </div>
+                <a href="#contact" class="btn-primary text-sm inline-flex"><i class="fas fa-paper-plane mr-2"></i> Let's Talk</a>
+            </div>
         </div>
     </nav>
 
     <main class="flex-1 main-content">
-
         <div id="portfolio-main-page" class="page-content">
-            
+
+            <!-- ======================= ABOUT / HERO ======================= -->
             <section id="about" class="max-w-7xl mx-auto px-4 lg:px-8 pt-8 lg:pt-16">
                 <div class="bg-white rounded-2xl p-6 md:p-12 shadow-2xl relative overflow-hidden hero-pattern">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                        
-                        <div class="lg:col-span-7 text-center lg:text-left py-8 md:py-12">
-                            <h1 class="text-lg md:text-xl font-semibold text-teal-700 leading-tight mb-2">
-                                Hey! I am
-                            </h1>
-                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                                Product Manager
-                            </h2>
-                            <p class="text-xl md:text-2xl font-medium text-gray-700 mb-6 max-w-lg lg:mx-0">
-                                SaaS & BI Specialist
-                            </p>
 
+                        <div class="lg:col-span-7 text-center lg:text-left py-8 md:py-12">
+                            <h1 class="text-lg md:text-xl font-semibold text-teal-700 leading-tight mb-2">Hey! I am</h1>
+                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">Product Manager</h2>
+                            <p class="text-xl md:text-2xl font-medium text-gray-700 mb-6 max-w-lg lg:mx-0">SaaS & BI Specialist</p>
                             <p class="text-base md:text-lg leading-relaxed text-gray-700 max-w-xl lg:mx-0 mb-8">
                                 I am a seasoned Product Manager with 12+ years of experience, specializing in bridging the gap between business needs and technological innovation. I focus on eDiscovery Legal Governance and Risk Compliance Software, SaaS re-architecture, and delivering measurable value.
                             </p>
 
-                            <div class="flex justify-center lg:justify-start">
-                                <a href="#experience" class="btn-primary text-lg">
-                                    Learn More
+                            <!-- Mode-aware CTAs -->
+                            <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                                <a href="#experience" class="static-only btn-primary text-base">Learn More</a>
+                                <a href="#prototypes" class="agentic-only btn-primary text-base" style="background-color: var(--agentic-accent); box-shadow: 0 4px 6px rgba(109, 40, 217, 0.3);">
+                                    <i class="fas fa-bolt mr-2"></i> Explore Prototypes
+                                </a>
+                                <a href="resume.pdf" target="_blank" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold text-sm border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 transition">
+                                    <i class="fas fa-file-pdf mr-2"></i> Download Resume
                                 </a>
                             </div>
-
                         </div>
 
                         <div class="lg:col-span-5 flex justify-center lg:justify-end order-first lg:order-last pb-8 lg:pb-0">
                             <div class="modern-frame w-56 h-56 md:w-72 md:h-72 relative rounded-full overflow-hidden shadow-2xl">
-                                <img 
-                                    src="images/portrait.jpg" 
-                                    alt="Rajesh Kumar Kandasamy Profile Photo" 
+                                <img
+                                    src="images/portrait.jpg"
+                                    alt="Rajesh Kumar Kandasamy Profile Photo"
                                     class="w-full h-full object-cover rounded-full"
                                     onerror="this.onerror=null; this.src='https://placehold.co/320x320/008080/ffffff?text=RK';"
                                 />
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
 
+            <!-- ======================= AGENTIC MODE HERO ======================= -->
+            <section class="agentic-only max-w-7xl mx-auto px-4 lg:px-8 mt-10">
+                <div class="agentic-hero px-6 md:px-12 py-10 md:py-14">
+                    <div class="relative z-10 max-w-3xl">
+                        <span class="agentic-pill"><i class="fas fa-bolt"></i> Agentic Mode</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold mt-4 leading-tight">Five live prototypes. Click any card to open.</h2>
+                        <p class="text-base md:text-lg opacity-90 mt-3 max-w-2xl">
+                            A curated gallery of AI- and PM-led prototypes — built end-to-end as HTML showcases. Each one walks through a problem space, the product hypothesis, and a working interactive demo.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-5">
+                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-mobile-alt"></i> Mobile</span>
+                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-chart-bar"></i> Dashboards</span>
+                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-globe"></i> Platform</span>
+                            <span class="agentic-pill" style="background: rgba(255,255,255,0.12);"><i class="fas fa-shield-alt"></i> Risk &amp; Compliance</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <div class="max-w-5xl mx-auto px-4 lg:px-8 mt-16">
 
-                <section id="experience" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
-                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3"><i class="fas fa-briefcase mr-3" style="color: var(--primary-accent);"></i> Professional Experience</h2>
-                    
+                <!-- ======================= EXPERIENCE (static only) ======================= -->
+                <section id="experience" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
+                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3">
+                        <i class="fas fa-briefcase mr-3" style="color: var(--primary-accent);"></i> Professional Experience
+                    </h2>
                     <ul class="timeline">
                         <li>
                             <h3 class="text-lg font-semibold text-gray-900">Product Manager – Exterro</h3>
                             <span class="text-sm text-gray-500 font-medium block mb-1">Nov 2021 - Present</span>
-                            <p class="text-gray-700 text-sm">Leading eDiscovery Software modules, enhancing UX with low-code tech, and utilizing analytics for insight-driven decisions.</p> 
-                            <p class="text-gray-700 text-sm">Drove the implementation of advanced AI/ML features within the Modern Ediscovery Platform to automate data classification and predictive coding. </p> 
+                            <p class="text-gray-700 text-sm">Leading eDiscovery Software modules, enhancing UX with low-code tech, and utilizing analytics for insight-driven decisions.</p>
+                            <p class="text-gray-700 text-sm">Drove the implementation of advanced AI/ML features within the Modern Ediscovery Platform to automate data classification and predictive coding.</p>
                             <p class="text-gray-700 text-sm">Focused on Legal Governance, Risk Compliance, and SaaS re-architecture.</p>
                         </li>
                         <li>
@@ -228,8 +387,11 @@
                     </ul>
                 </section>
 
-                <section id="skills" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
-                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3"><i class="fas fa-sliders-h mr-3" style="color: var(--primary-accent);"></i> Core Skills</h2>
+                <!-- ======================= SKILLS (static only) ======================= -->
+                <section id="skills" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
+                    <h2 class="text-2xl font-bold mb-8 text-center text-gray-900 border-b pb-3">
+                        <i class="fas fa-sliders-h mr-3" style="color: var(--primary-accent);"></i> Core Skills
+                    </h2>
                     <div class="flex flex-wrap justify-center gap-3">
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Management</span>
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Product Analytics (MixPanel, Heap, Pendo)</span>
@@ -238,77 +400,178 @@
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Digital Transformation</span>
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Road Mapping</span>
                         <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">Cross-functional Leadership</span>
+                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">eDiscovery / LegalTech</span>
+                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">SaaS Re-architecture</span>
+                        <span class="minimal-badge px-4 py-2 rounded-lg font-medium text-sm transition hover:shadow-lg">AI / ML Product Strategy</span>
                     </div>
                 </section>
 
-                <section id="prototypes" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-layer-group mr-3" style="color: var(--primary-accent);"></i> Featured Prototypes</h2>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-                        
-                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                            <a href="#" onclick="event.preventDefault(); showPage('onestop-app');" class="block">
-                                <img src="images/prototype-onestopshop.png" 
-                                    alt="One Stop Shop Prototype" 
-                                    class="w-full h-auto object-cover rounded-t-lg"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0fafa/008080?text=One+Stop+Shop';"
-                                />
-                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
-                                    <h3 class="text-lg font-semibold text-teal-700 group-hover:underline">One Stop Shop</h3>
-                                    <p class="text-sm text-gray-500">A comprehensive platform for diverse product needs.</p>
-                                </div>
-                            </a>
-                        </div>
+                <!-- ======================= PROTOTYPES (agentic-mode primary, also visible in static as teaser) ======================= -->
 
-                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                            <a href="#" onclick="event.preventDefault(); showPage('subscription-app');" class="block">
-                                <img src="images/prototype-subscription.png" 
-                                    alt="My Subscription Manager App Prototype" 
-                                    class="w-full h-auto object-cover rounded-t-lg"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0fafa/008080?text=Subscription+App';"
-                                />
-                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
-                                    <h3 class="text-lg font-semibold text-teal-700 group-hover:underline">My Subscription Manager App</h3>
-                                    <p class="text-sm text-gray-500">Effortlessly manage all your digital subscriptions in one place.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                            <a href="SOSAPP.html" class="block">
-                                <img src="images/prototype-sos.png" 
-                                    alt="Social Score Prototype" 
-                                    class="w-full h-auto object-cover rounded-t-lg"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0fafa/008080?text=Social+Score';"
-                                />
-                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
-                                    <h3 class="text-lg font-semibold text-teal-700 group-hover:underline">Social Score</h3>
-                                    <p class="text-sm text-gray-500">AI-driven risk assessment tool for platform security.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                            <a href="DataVisual.html" class="block">
-                                <img src="images/prototype-datavisual.png" 
-                                    alt="Data Visualization Prototype" 
-                                    class="w-full h-auto object-cover rounded-t-lg"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/400x250/e0fafa/008080?text=Data+Visual';"
-                                />
-                                <div class="p-4 bg-white text-gray-800 rounded-b-lg">
-                                    <h3 class="text-lg font-semibold text-teal-700 group-hover:underline">Data Visualization</h3>
-                                    <p class="text-sm text-gray-500">Interactive dashboards for insight-driven product decisions.</p>
-                                </div>
-                            </a>
-                        </div>
-
+                <!-- STATIC-MODE compact teaser strip (small) -->
+                <section id="prototypes-teaser" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md">
+                    <div class="flex items-center justify-between mb-6 border-b pb-3">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            <i class="fas fa-layer-group mr-3" style="color: var(--primary-accent);"></i> Featured Prototypes
+                        </h2>
+                        <button onclick="setMode('agentic')" class="text-sm font-semibold text-teal-700 hover:text-teal-900 hidden md:inline-flex items-center gap-1">
+                            View all in Agentic Mode <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="OneStopShop.html" class="static-proto-strip">
+                            <div class="mini-thumb"><img src="images/prototype-onestopshop.png" alt="One Stop Shop"
+                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/008080/ffffff?text=OSS';"/></div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">One Stop Shop</p>
+                                <p class="text-xs text-gray-500">Unified mobile commerce</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-300"></i>
+                        </a>
+                        <a href="SubscriptionApp.html" class="static-proto-strip">
+                            <div class="mini-thumb"><img src="images/prototype-subscription.png" alt="Subscription Manager"
+                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/14b8a6/ffffff?text=Sub';"/></div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">Subscription Manager Pro</p>
+                                <p class="text-xs text-gray-500">Recurring-spend tracker</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-300"></i>
+                        </a>
+                        <a href="SOSAPP.html" class="static-proto-strip">
+                            <div class="mini-thumb"><img src="images/prototype-sos.png" alt="Social Score"
+                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/1e3a8a/ffffff?text=SOS';"/></div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">Social Score</p>
+                                <p class="text-xs text-gray-500">AI-driven risk assessment</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-300"></i>
+                        </a>
+                        <a href="DataVisual.html" class="static-proto-strip">
+                            <div class="mini-thumb"><img src="images/prototype-datavisual.png" alt="Data Visualization"
+                                onerror="this.onerror=null; this.src='https://placehold.co/120x120/0e7490/ffffff?text=DV';"/></div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">Data Visualization</p>
+                                <p class="text-xs text-gray-500">Interactive dashboards</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-300"></i>
+                        </a>
+                        <a href="rkspace.html" class="static-proto-strip md:col-span-2">
+                            <div class="mini-thumb" style="background: linear-gradient(135deg, #4c1d95, #8b5cf6); display:flex; align-items:center; justify-content:center; color:white; font-weight:800;">R</div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">RK Space</p>
+                                <p class="text-xs text-gray-500">Agentic Data Risk Platform — full marketing &amp; product app</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-gray-300"></i>
+                        </a>
                     </div>
                 </section>
 
-                <section id="articles" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-lightbulb mr-3" style="color: var(--primary-accent);"></i> Thoughts & Articles</h2>
+                <!-- AGENTIC-MODE full prototype gallery -->
+                <section id="prototypes" class="agentic-only mb-12">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900">
+                            <i class="fas fa-layer-group mr-2" style="color: var(--agentic-accent);"></i>
+                            The Agentic Gallery
+                        </h2>
+                        <p class="text-sm md:text-base text-gray-600 mt-2 max-w-2xl mx-auto">Five clickable prototypes. Each opens in its own page with a working interactive demo and the PM thinking behind it.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                        <a href="rkspace.html" class="proto-card group lg:col-span-2 sm:col-span-2">
+                            <div class="thumb" style="background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%); color:white; position:relative;">
+                                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; text-align:center;">
+                                    <span class="proto-tag platform" style="background: rgba(255,255,255,0.18); color:white;"><i class="fas fa-star"></i> Featured</span>
+                                    <h3 class="text-3xl font-extrabold mt-3">RK Space</h3>
+                                    <p class="text-sm opacity-90 mt-1">Agentic Data Risk Platform</p>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="proto-tag web">Web Platform</span>
+                                    <span class="text-xs text-gray-400">5+ screens</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-purple-700">RK Space — Agentic Data Risk Platform</h3>
+                                <p class="text-sm text-gray-500 mt-1">A full marketing site + product app exploring agentic data-risk workflows: classification, predictive coding, compliance signals.</p>
+                            </div>
+                        </a>
+
+                        <a href="OneStopShop.html" class="proto-card group">
+                            <div class="thumb">
+                                <img src="images/prototype-onestopshop.png" alt="One Stop Shop"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/03989e/ffffff?text=One+Stop+Shop';" />
+                            </div>
+                            <div class="body">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="proto-tag mobile">Mobile</span>
+                                    <span class="text-xs text-gray-400">eCommerce</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-teal-700">One Stop Shop</h3>
+                                <p class="text-sm text-gray-500 mt-1">A unified universal-commerce app — one cart, one wallet, all categories.</p>
+                            </div>
+                        </a>
+
+                        <a href="SubscriptionApp.html" class="proto-card group">
+                            <div class="thumb">
+                                <img src="images/prototype-subscription.png" alt="Subscription Manager"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/14b8a6/ffffff?text=Subscription+App';" />
+                            </div>
+                            <div class="body">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="proto-tag mobile">Mobile</span>
+                                    <span class="text-xs text-gray-400">FinTech</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-teal-700">Subscription Manager Pro</h3>
+                                <p class="text-sm text-gray-500 mt-1">A recurring-spend tracker that turns passive billing into active financial control.</p>
+                            </div>
+                        </a>
+
+                        <a href="SOSAPP.html" class="proto-card group">
+                            <div class="thumb">
+                                <img src="images/prototype-sos.png" alt="Social Score"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e3a8a/ffffff?text=Social+Score';" />
+                            </div>
+                            <div class="body">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="proto-tag dashboard">Dashboard</span>
+                                    <span class="text-xs text-gray-400">Risk / Trust</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-indigo-700">Social Score</h3>
+                                <p class="text-sm text-gray-500 mt-1">AI-driven risk assessment for platform companies to detect bot and malicious behaviour.</p>
+                            </div>
+                        </a>
+
+                        <a href="DataVisual.html" class="proto-card group">
+                            <div class="thumb">
+                                <img src="images/prototype-datavisual.png" alt="Data Visualization"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x300/0e7490/ffffff?text=Data+Visual';" />
+                            </div>
+                            <div class="body">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="proto-tag dashboard">Dashboard</span>
+                                    <span class="text-xs text-gray-400">BI</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mt-2 group-hover:text-cyan-700">Data Visualization</h3>
+                                <p class="text-sm text-gray-500 mt-1">Drop a CSV; get instant interactive charts and a clean data table view.</p>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div class="text-center mt-10">
+                        <button onclick="setMode('static')" class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-gray-200 hover:border-gray-300 rounded-xl font-semibold text-sm text-gray-700 transition">
+                            <i class="fas fa-cube"></i> Switch to Static view
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ======================= ARTICLES (static only) ======================= -->
+                <section id="articles" class="static-only bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
+                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3">
+                        <i class="fas fa-lightbulb mr-3" style="color: var(--primary-accent);"></i> Thoughts &amp; Articles
+                    </h2>
                     <p class="text-base leading-relaxed text-gray-700 max-w-xl mx-auto mb-6">
-                        Here, I share my insights on Product Management, SaaS architecture, and the future of LegalTech.
+                        Insights on Product Management, SaaS architecture, and the future of LegalTech.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                         <div class="p-4 border border-gray-100 rounded-xl hover:shadow-lg transition duration-300">
@@ -325,9 +588,14 @@
                     <p class="mt-8 text-gray-500 text-sm">More articles coming soon...</p>
                 </section>
 
+                <!-- ======================= CONTACT (both modes) ======================= -->
                 <section id="contact" class="bg-white p-6 md:p-10 rounded-xl mb-12 shadow-md text-center">
-                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3"><i class="fas fa-headset mr-3" style="color: var(--primary-accent);"></i> Get In Touch</h2>
-                    <p class="text-base leading-relaxed mb-8 text-gray-600 max-w-2xl mx-auto">I am always open to discussing new product challenges and opportunities. Feel free to connect!</p>
+                    <h2 class="text-2xl font-bold mb-8 text-gray-900 border-b pb-3">
+                        <i class="fas fa-headset mr-3" style="color: var(--primary-accent);"></i> Get In Touch
+                    </h2>
+                    <p class="text-base leading-relaxed mb-8 text-gray-600 max-w-2xl mx-auto">
+                        I am always open to discussing new product challenges and opportunities. Feel free to connect!
+                    </p>
                     <div class="contact-icons flex flex-wrap gap-6 justify-center">
                         <a href="mailto:rajeshr2r@gmail.com" title="Email" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
                             <i class="fas fa-envelope text-xl mr-2"></i> rajeshr2r@gmail.com
@@ -335,13 +603,15 @@
                         <a href="tel:+919952156121" title="Phone" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
                             <i class="fas fa-phone text-xl mr-2"></i> +91 9952156121
                         </a>
+                        <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" title="LinkedIn" class="text-gray-800 hover:text-teal-700 transition duration-200 flex items-center text-base font-medium">
+                            <i class="fab fa-linkedin text-xl mr-2"></i> linkedin.com/in/rajeshr2r
+                        </a>
                     </div>
                 </section>
-
             </div>
-            
+
             <footer class="text-center py-6 border-t border-gray-200 mt-10 bg-white">
-                <div class="flex justify-center space-x-4 text-gray-500 mb-3 lg:hidden">
+                <div class="flex justify-center space-x-4 text-gray-500 mb-3">
                     <a href="https://x.com/r2rrajesh89" target="_blank" class="hover:text-teal-700 transition duration-150" title="Twitter/X"><i class="fab fa-twitter text-lg"></i></a>
                     <a href="https://www.linkedin.com/in/rajeshr2r" target="_blank" class="hover:text-teal-700 transition duration-150" title="LinkedIn"><i class="fab fa-linkedin text-lg"></i></a>
                     <a href="https://www.instagram.com/_rajesh_rover_" target="_blank" class="hover:text-teal-700 transition duration-150" title="Instagram"><i class="fab fa-instagram text-lg"></i></a>
@@ -350,21 +620,62 @@
                 <p class="text-xs text-gray-500">&copy; 2025 Rajesh Kumar Kandasamy. All rights reserved.</p>
             </footer>
         </div>
-
     </main>
 
     <script>
-        // Note: The original index.html only showed one page. 
-        // A full implementation would need to show/hide pages.
-        function showPage(pageId) {
-            // For this single-page file, we'll just scroll to the top of the main page content.
-            if (pageId === 'portfolio-main-page') {
-                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-            } 
-            // In a real multi-page prototype, you'd hide all pages and show the one requested.
-            // Example: location.href = "onestop-app.html"
-            // Since this is a portfolio, external links (SOSAPP.html, DataVisual.html) are better.
+        // ======================== MODE TOGGLE ========================
+        const STORAGE_KEY = 'rk-portfolio-mode';
+
+        function setMode(mode) {
+            if (mode !== 'static' && mode !== 'agentic') mode = 'static';
+            document.body.classList.remove('mode-static', 'mode-agentic');
+            document.body.classList.add('mode-' + mode);
+
+            // Update all toggle buttons (desktop + mobile)
+            document.querySelectorAll('.mode-toggle button').forEach(btn => {
+                const isActive = btn.dataset.mode === mode;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            try { localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+
+            // If switching while a hidden section is in the URL hash, scroll to about
+            if (mode === 'agentic' && ['#experience', '#skills', '#articles'].includes(location.hash)) {
+                document.getElementById('prototypes')?.scrollIntoView({ behavior: 'smooth' });
+            }
         }
+
+        // Restore mode preference
+        document.addEventListener('DOMContentLoaded', () => {
+            let saved = 'static';
+            try { saved = localStorage.getItem(STORAGE_KEY) || 'static'; } catch (e) {}
+            setMode(saved);
+
+            // Wire up every toggle button (desktop + mobile)
+            document.querySelectorAll('.mode-toggle button').forEach(btn => {
+                btn.addEventListener('click', () => setMode(btn.dataset.mode));
+            });
+
+            // Mobile menu
+            const mobBtn = document.getElementById('mobile-toggle');
+            const mobMenu = document.getElementById('mobile-menu');
+            mobBtn?.addEventListener('click', () => mobMenu?.classList.toggle('open'));
+
+            // Close mobile menu when a link is tapped
+            mobMenu?.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => mobMenu.classList.remove('open'));
+            });
+
+            if (window.lucide) window.lucide.createIcons();
+        });
+
+        window.addEventListener('load', () => {
+            if (window.lucide) window.lucide.createIcons();
+        });
+
+        // expose for inline buttons
+        window.setMode = setMode;
     </script>
 
 </body>

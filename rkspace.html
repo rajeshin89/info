@@ -1,0 +1,3602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RK Space — Agentic Data Risk Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #fafaf9;
+    --bg-dark: #0c0c0e;
+    --surface: #ffffff;
+    --surface-2: #f5f5f4;
+    --surface-3: #ebeae7;
+    --line: #e7e5e0;
+    --line-2: #d6d3cd;
+    --ink: #18181b;
+    --ink-2: #3f3f46;
+    --ink-3: #71717a;
+    --ink-4: #a1a1aa;
+    --ink-5: #d4d4d8;
+
+    --success: #15803d;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --warning: #b45309;
+    --warning-bg: #fffbeb;
+    --warning-border: #fde68a;
+    --danger: #b91c1c;
+    --danger-bg: #fef2f2;
+    --danger-border: #fecaca;
+    --info: #1e40af;
+    --info-bg: #eff6ff;
+    --info-border: #bfdbfe;
+    --agent: #6d28d9;
+    --agent-bg: #f5f3ff;
+    --agent-border: #ddd6fe;
+    --action: #c2410c;
+    --action-bg: #fff7ed;
+    --action-border: #fed7aa;
+
+    --radius: 8px;
+    --radius-sm: 4px;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body { letter-spacing: -0.005em; }
+  button { font-family: inherit; }
+  a { color: inherit; text-decoration: none; cursor: pointer; }
+
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: block; }
+
+  /* ============ MARKETING NAV ============ */
+  .marketing-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(250, 250, 249, 0.85);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 32px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .logo-mark {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    background: var(--ink);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+  .logo-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .nav-links a {
+    padding: 7px 12px;
+    color: var(--ink-2);
+    font-size: 13.5px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background 0.15s;
+  }
+  .nav-links a:hover { background: var(--surface-2); }
+  .nav-links a.has-arrow::after { content: ' ▾'; font-size: 9px; color: var(--ink-4); margin-left: 2px; }
+
+  .nav-cta {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    color: var(--ink-2);
+    cursor: pointer;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--surface-2); color: var(--ink); border-color: var(--ink-4); }
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: var(--ink-2); color: white; border-color: var(--ink-2); }
+  .btn-action {
+    background: var(--action);
+    color: white;
+    border-color: var(--action);
+  }
+  .btn-action:hover { background: #9a3412; color: white; border-color: #9a3412; }
+  .btn-ghost { background: transparent; border-color: transparent; }
+  .btn-ghost:hover { background: var(--surface-2); }
+  .btn-lg { padding: 11px 20px; font-size: 14px; }
+  .btn-xl { padding: 13px 24px; font-size: 15px; }
+
+  /* ============ HERO ============ */
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    font-size: 12px;
+    color: var(--ink-2);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow .agent-glyph {
+    color: var(--agent);
+    font-size: 13px;
+  }
+  .hero-eyebrow .pulse {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 0 rgba(21,128,61,0.5);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(21,128,61,0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(21,128,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(21,128,61,0); }
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 78px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--ink-3);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .hero-trust {
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-4);
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .hero-trust .check {
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* ============ HERO PRODUCT MOCK ============ */
+  .hero-mock {
+    margin-top: 64px;
+    position: relative;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  }
+  .mock-topbar {
+    height: 38px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .mock-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+  .mock-url {
+    margin-left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-4);
+    background: var(--surface);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+  .mock-body {
+    display: grid;
+    grid-template-columns: 200px 1fr 280px;
+    height: 460px;
+  }
+  .mock-side {
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    padding: 16px 12px;
+  }
+  .mock-side-label {
+    font-size: 10px;
+    color: var(--ink-4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 8px 8px;
+  }
+  .mock-side-item {
+    padding: 7px 10px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mock-side-item.active {
+    background: var(--surface-2);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .mock-side-item .ico {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+  }
+  .mock-main {
+    padding: 22px 24px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .mock-h {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .mock-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .mock-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .mock-card-label {
+    font-size: 10.5px;
+    color: var(--ink-4);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .mock-card-val {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .mock-card-trend {
+    font-size: 10px;
+    color: var(--success);
+    margin-top: 2px;
+  }
+
+  .mock-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    margin-bottom: 5px;
+    font-size: 11.5px;
+  }
+  .mock-row .badge-mini {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .mock-row .badge-mini.success { background: var(--success-bg); color: var(--success); }
+  .mock-row .badge-mini.warning { background: var(--warning-bg); color: var(--warning); }
+  .mock-row .badge-mini.agent { background: var(--agent-bg); color: var(--agent); }
+
+  .mock-agent {
+    background: var(--agent-bg);
+    border: 1px solid var(--agent-border);
+    border-left: 3px solid var(--agent);
+    border-radius: 4px;
+    padding: 9px 11px;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .mock-agent-avatar {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--agent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mock-agent-text {
+    font-size: 11px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  .mock-right {
+    background: var(--surface);
+    border-left: 1px solid var(--line);
+    padding: 18px 18px;
+  }
+  .mock-right-h {
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .mock-event {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--ink-2);
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 10px;
+  }
+  .mock-event:last-child { border-bottom: none; }
+  .mock-event-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-top: 5px;
+  }
+  .mock-event-dot.success { background: var(--success); }
+  .mock-event-dot.warning { background: var(--warning); }
+  .mock-event-dot.agent { background: var(--agent); }
+  .mock-event-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--ink-4);
+    margin-top: 1px;
+  }
+
+  /* ============ LOGOS ROW ============ */
+  .logos-section {
+    padding: 50px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .logos-label {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-4);
+    margin-bottom: 24px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .logos-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .logo-item {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink-4);
+    font-weight: 400;
+    transition: color 0.15s;
+  }
+  .logo-item:hover { color: var(--ink); }
+
+  /* ============ SECTIONS ============ */
+  .section {
+    padding: 96px 0;
+  }
+  .section-tight {
+    padding: 64px 0;
+  }
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+    justify-content: center;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--line-2);
+  }
+  .section-h {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-h em { font-style: italic; color: var(--ink-3); }
+  .section-sub {
+    font-size: 17px;
+    color: var(--ink-3);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+    line-height: 1.6;
+  }
+
+  /* ============ EDRM PIPELINE ============ */
+  .edrm-pipeline {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 36px 28px;
+    overflow-x: auto;
+    background-image: radial-gradient(circle at 1px 1px, var(--line-2) 1px, transparent 0);
+    background-size: 16px 16px;
+  }
+  .pipeline-row {
+    display: flex;
+    align-items: center;
+    min-width: max-content;
+    gap: 4px;
+  }
+  .pipeline-stage {
+    background: var(--surface);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    padding: 14px 16px;
+    width: 158px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.15s;
+  }
+  .pipeline-stage:hover { transform: translateY(-2px); }
+  .pipeline-stage.agent { border-color: var(--agent); background: var(--agent-bg); }
+  .pipeline-stage.action { border-color: var(--action); background: var(--action-bg); }
+  .pipeline-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-4);
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pipeline-stage.agent .pipeline-num { color: var(--agent); }
+  .pipeline-stage.action .pipeline-num { color: var(--action); }
+  .pipeline-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+    letter-spacing: -0.005em;
+  }
+  .pipeline-meta {
+    font-size: 11px;
+    color: var(--ink-3);
+    line-height: 1.4;
+  }
+  .pipeline-arrow {
+    width: 20px;
+    height: 1.5px;
+    background: var(--ink);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .pipeline-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid var(--ink);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  /* ============ FEATURES GRID ============ */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 26px;
+    transition: all 0.15s;
+  }
+  .feature-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .feature-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .feature-icon.agent { background: var(--agent-bg); color: var(--agent); }
+  .feature-icon.action { background: var(--action-bg); color: var(--action); }
+  .feature-icon.success { background: var(--success-bg); color: var(--success); }
+  .feature-icon.info { background: var(--info-bg); color: var(--info); }
+  .feature-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .feature-card p {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .feature-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .feature-link:hover { color: var(--ink-2); }
+  .feature-link::after { content: '→'; transition: transform 0.15s; }
+  .feature-card:hover .feature-link::after { transform: translateX(3px); }
+
+  /* ============ STATS ============ */
+  .stats-section {
+    background: var(--ink);
+    color: white;
+    padding: 80px 0;
+  }
+  .stats-section .section-h {
+    color: white;
+  }
+  .stats-section .section-h em {
+    color: rgba(255,255,255,0.5);
+  }
+  .stats-section .section-sub {
+    color: rgba(255,255,255,0.7);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat {
+    padding: 36px 28px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .stat-num em { color: rgba(255,255,255,0.6); font-style: italic; font-size: 28px; }
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ============ HOW IT WORKS ============ */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .how-text h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .how-text p {
+    font-size: 15px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .how-features {
+    margin-top: 20px;
+  }
+  .how-feat {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .how-feat:last-child { border-bottom: none; }
+  .how-feat-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+  .how-feat-text strong {
+    display: block;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .how-feat-text span {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  .how-visual {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+  }
+
+  /* ============ ROLES SECTION ============ */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .role-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    transition: all 0.15s;
+  }
+  .role-card:hover {
+    border-color: var(--ink);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .role-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .role-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .role-dot.admin { background: var(--danger); }
+  .role-dot.counsel { background: var(--info); }
+  .role-dot.ipp { background: var(--action); }
+  .role-dot.custodian { background: var(--success); }
+
+  .role-tag {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .role-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.015em;
+  }
+  .role-card p {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .role-features {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .role-features li {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .role-features li::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* ============ CTA SECTION ============ */
+  .cta-section {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 96px 0;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--ink-3); }
+  .cta-section p {
+    font-size: 17px;
+    color: var(--ink-3);
+    max-width: 540px;
+    margin: 0 auto 32px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--bg);
+    padding: 56px 0 36px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
+  }
+  .footer-brand {
+    max-width: 320px;
+  }
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .footer-col h5 {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .footer-col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .footer-col li {
+    padding: 5px 0;
+  }
+  .footer-col a {
+    font-size: 13px;
+    color: var(--ink-2);
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: var(--ink); }
+
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-4);
+  }
+  .footer-legal {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* ============ LOGIN SCREEN ============ */
+  .login-wrap {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .login-side {
+    background: var(--ink);
+    color: white;
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .login-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+  .login-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .login-brand .logo-mark {
+    background: white;
+    color: var(--ink);
+  }
+  .login-brand .logo-name { color: white; }
+
+  .login-side-content {
+    margin-top: auto;
+    z-index: 1;
+  }
+  .login-side h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    margin-bottom: 18px;
+  }
+  .login-side h2 em { color: rgba(255,255,255,0.6); font-style: italic; }
+  .login-side p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 440px;
+    margin-bottom: 32px;
+  }
+  .login-quote {
+    border-left: 2px solid rgba(255,255,255,0.3);
+    padding-left: 18px;
+    margin-bottom: 18px;
+  }
+  .login-quote p {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .login-quote-author {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+  }
+  .login-quote-author strong { color: white; font-weight: 600; }
+
+  .login-form-wrap {
+    background: var(--bg);
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-form {
+    width: 100%;
+    max-width: 380px;
+  }
+  .login-form-h {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .login-form-sub {
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-bottom: 32px;
+  }
+
+  /* Role selector cards in login */
+  .role-select-h {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .role-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .role-option {
+    padding: 14px 14px;
+    border: 1.5px solid var(--line-2);
+    border-radius: 8px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+  .role-option:hover { border-color: var(--ink-4); background: var(--surface-2); }
+  .role-option.selected {
+    border-color: var(--ink);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--surface-2);
+  }
+  .role-option-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .role-option-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+  .role-option-desc {
+    font-size: 11.5px;
+    color: var(--ink-4);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--ink);
+    outline: none;
+    transition: all 0.15s;
+  }
+  .field input:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px var(--surface-2);
+  }
+  .field-error { font-size: 11.5px; color: var(--danger); margin-top: 4px; }
+
+  .form-row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    margin-bottom: 18px;
+  }
+  .checkbox-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .checkbox-inline input { accent-color: var(--ink); }
+  .forgot-link { color: var(--ink-2); font-weight: 500; }
+  .forgot-link:hover { color: var(--ink); }
+
+  .login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 16px;
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .login-divider::before, .login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .sso-btn {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 8px;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .sso-btn:hover { border-color: var(--ink-4); background: var(--surface-2); }
+  .sso-btn .sso-ico {
+    width: 16px; height: 16px;
+  }
+
+  .login-foot {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .login-foot a { color: var(--ink); font-weight: 600; }
+
+  .login-error {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    color: var(--danger);
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-size: 12.5px;
+    display: none;
+  }
+  .login-error.show { display: block; }
+
+  /* Loading state */
+  .login-btn-full {
+    width: 100%;
+    padding: 11px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+  .login-btn-full:hover { background: var(--ink-2); }
+  .login-btn-full:disabled { opacity: 0.6; cursor: wait; }
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ============ PORTAL — minimal landing after login ============ */
+  .portal-shell {
+    min-height: 100vh;
+    background: var(--bg);
+  }
+  .portal-topbar {
+    height: 52px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 24px;
+  }
+  .portal-topbar .logo { gap: 8px; }
+  .portal-topbar .logo-mark { width: 24px; height: 24px; font-size: 13px; }
+  .portal-topbar .logo-name { font-size: 16px; }
+  .portal-topbar .breadcrumb {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .portal-user-menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .portal-user-info {
+    text-align: right;
+    line-height: 1.1;
+  }
+  .portal-user-info .n { font-size: 12.5px; font-weight: 600; }
+  .portal-user-info .r { font-size: 10.5px; color: var(--ink-4); }
+  .portal-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .portal-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  .portal-h {
+    font-family: 'Instrument Serif', serif;
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .portal-h em { color: var(--ink-3); font-style: italic; }
+  .portal-sub {
+    font-size: 15px;
+    color: var(--ink-3);
+    margin-bottom: 36px;
+  }
+
+  .portal-info {
+    background: var(--info-bg);
+    border: 1px solid var(--info-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: #1e3a8a;
+  }
+  .portal-info .ico {
+    width: 18px; height: 18px;
+    color: var(--info);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .portal-info strong { font-weight: 600; }
+
+  .portal-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .portal-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .portal-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .portal-card-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .portal-card-tag .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+  .portal-card-tag .dot.admin { background: var(--danger); }
+  .portal-card-tag .dot.user { background: var(--info); }
+  .portal-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  .portal-card p {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .portal-card-cta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 13.5px;
+  }
+  .portal-card-cta::after { content: '→'; transition: transform 0.15s; }
+  .portal-card:hover .portal-card-cta::after { transform: translateX(3px); }
+
+  .portal-recent {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .portal-recent-h {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--surface-2);
+  }
+  .portal-recent-list {
+    padding: 8px 0;
+  }
+  .portal-recent-item {
+    padding: 10px 18px;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+  }
+  .portal-recent-item:last-child { border-bottom: none; }
+  .portal-recent-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-4);
+  }
+  .portal-recent-text strong { color: var(--ink); }
+  .portal-recent-text {
+    color: var(--ink-2);
+  }
+
+  /* ============ WORKSPACE SCREENS (admin + user) ============ */
+  .ws-shell { min-height: 100vh; background: var(--bg); }
+  .ws-topbar {
+    height: 52px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .ws-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .ws-brand .logo-mark { width: 26px; height: 26px; font-size: 14px; }
+  .ws-brand .logo-name { font-size: 16px; }
+  .ws-env-pill {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ws-env-admin {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger-border);
+  }
+  .ws-env-user {
+    background: var(--info-bg);
+    color: var(--info);
+    border: 1px solid var(--info-border);
+  }
+  .ws-env-prod {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid var(--success-border);
+    font-weight: 600;
+  }
+
+  .ws-topnav { display: flex; gap: 2px; }
+  .ws-tab {
+    color: var(--ink-3);
+    font-size: 13px;
+    padding: 6px 11px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .ws-tab:hover { color: var(--ink); background: var(--surface-2); }
+  .ws-tab.active {
+    color: var(--ink);
+    font-weight: 600;
+    background: var(--surface-2);
+  }
+
+  .ws-user-menu {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ws-role-switcher {
+    display: flex;
+    gap: 1px;
+    background: var(--surface-2);
+    border-radius: 5px;
+    padding: 3px;
+  }
+  .ws-role-btn {
+    padding: 4px 10px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: inherit;
+  }
+  .ws-role-btn:hover { color: var(--ink); }
+  .ws-role-btn.active {
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  .ws-body {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px 28px 48px;
+  }
+
+  .ws-tab-content { display: none; }
+  .ws-tab-content.active { display: block; }
+
+  .ws-page-head {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+  .ws-crumbs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+  .ws-crumbs .current { color: var(--ink-2); font-weight: 500; }
+  .ws-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .ws-title em { font-style: italic; color: var(--ink-3); }
+  .ws-desc {
+    margin-top: 6px;
+    font-size: 13.5px;
+    color: var(--ink-3);
+    max-width: 620px;
+  }
+
+  .ws-status-legend {
+    display: flex;
+    gap: 14px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    font-size: 11.5px;
+    align-items: center;
+  }
+  .ws-legend-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .ws-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--ink-2);
+  }
+  .ws-legend-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+
+  .ws-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .ws-kpi {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .ws-kpi-label {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .ws-kpi-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .ws-kpi-trend {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .ws-kpi-trend.up { color: var(--success); }
+  .ws-kpi-trend.warn { color: var(--warning); }
+
+  .ws-alert {
+    padding: 11px 14px;
+    border-radius: 5px;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12.5px;
+    line-height: 1.55;
+    border: 1px solid;
+  }
+  .ws-alert svg { flex-shrink: 0; margin-top: 2px; }
+  .ws-alert.warning { background: var(--warning-bg); border-color: var(--warning-border); color: #713f12; }
+  .ws-alert.warning svg { color: var(--warning); }
+  .ws-alert.info { background: var(--info-bg); border-color: var(--info-border); color: #1e3a8a; }
+  .ws-alert.info svg { color: var(--info); }
+  .ws-alert.agent { background: var(--agent-bg); border-color: var(--agent-border); color: #4c1d95; }
+  .ws-alert.agent svg { color: var(--agent); }
+  .ws-alert strong { font-weight: 600; }
+
+  .ws-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .ws-panel-head {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .ws-panel-title {
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+
+  .ws-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .ws-table th {
+    text-align: left;
+    padding: 9px 14px;
+    font-weight: 600;
+    color: var(--ink-3);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .ws-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+    vertical-align: middle;
+  }
+  .ws-table tr:last-child td { border-bottom: none; }
+  .ws-table tr.clickable:hover td { background: var(--surface-2); cursor: pointer; }
+  .ws-table strong { color: var(--ink); font-weight: 600; }
+  .ws-table code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+  }
+
+  .ws-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .ws-badge.success { background: var(--success-bg); color: var(--success); border-color: var(--success-border); }
+  .ws-badge.warning { background: var(--warning-bg); color: var(--warning); border-color: var(--warning-border); }
+  .ws-badge.danger { background: var(--danger-bg); color: var(--danger); border-color: var(--danger-border); }
+  .ws-badge.info { background: var(--info-bg); color: var(--info); border-color: var(--info-border); }
+  .ws-badge.agent { background: var(--agent-bg); color: var(--agent); border-color: var(--agent-border); }
+  .ws-badge.action { background: var(--action-bg); color: var(--action); border-color: var(--action-border); }
+  .ws-badge.muted { background: var(--surface-2); color: var(--ink-3); border-color: var(--line); }
+
+  /* Workflow blocks */
+  .ws-wf-block {
+    width: 152px;
+    padding: 11px 13px;
+    border: 1.5px solid var(--ink);
+    border-radius: 6px;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+  .ws-wf-block.live {
+    border-color: var(--action);
+    box-shadow: 0 0 0 2px rgba(194,65,12,0.1);
+  }
+  .ws-wf-block.done { border-color: var(--success); }
+  .ws-wf-block.ws-disabled {
+    border-style: dashed;
+    border-color: var(--line-2);
+    opacity: 0.6;
+  }
+  .ws-wf-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .ws-wf-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .ws-wf-meta {
+    font-size: 10.5px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .ws-wf-arrow {
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .ws-wf-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid var(--ink);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    width: 0; height: 0;
+  }
+  .ws-wf-arrow.ws-disabled { background: var(--line-2); }
+  .ws-wf-arrow.ws-disabled::after { border-left-color: var(--line-2); }
+
+  /* Action cards in user home */
+  .ws-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .ws-action-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ws-action-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .ws-action-card.featured {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .ws-action-card.featured .ws-ac-num { color: rgba(255,255,255,0.6); }
+  .ws-action-card.featured .ws-ac-desc { color: rgba(255,255,255,0.75); }
+  .ws-action-card.featured .ws-ac-foot { border-top-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+  .ws-ac-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-4);
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ws-ac-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .ws-ac-desc {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .ws-ac-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--ink-4);
+  }
+
+  /* Timeline */
+  .ws-tl-item {
+    display: grid;
+    grid-template-columns: 60px 14px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+  .ws-tl-item:last-child { border-bottom: none; }
+  .ws-tl-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-4);
+  }
+  .ws-tl-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin: 5px auto 0;
+    background: var(--ink-5);
+  }
+  .ws-tl-dot.agent { background: var(--agent); }
+  .ws-tl-dot.user { background: var(--info); }
+  .ws-tl-dot.system { background: var(--success); }
+
+  /* Rule cards */
+  .ws-rule-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .ws-rule-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .ws-rule-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ws-rule-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-4);
+    font-weight: 500;
+  }
+  .ws-rule-flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border-radius: 5px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    flex-wrap: wrap;
+  }
+  .ws-rule-flow strong { color: var(--ink); font-weight: 600; }
+  .ws-rule-flow code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--surface);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+  }
+  .ws-rule-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .ws-rule-label.when { background: var(--info-bg); color: var(--info); }
+  .ws-rule-label.then { background: var(--action-bg); color: var(--action); }
+  .ws-rule-label.agent { background: var(--agent-bg); color: var(--agent); }
+
+  /* Analytics */
+  .ws-analytics-prompt {
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+  .ws-analytics-prompt input {
+    flex: 1;
+    padding: 9px 12px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13.5px;
+    color: var(--ink);
+    outline: none;
+  }
+  .ws-analytics-prompt button {
+    padding: 7px 14px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: inherit;
+  }
+  .ws-suggest-chip {
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    font-size: 12px;
+    color: var(--ink-2);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ws-suggest-chip:hover { border-color: var(--ink); }
+  .ws-suggest-chip::before {
+    content: '✦';
+    color: var(--agent);
+    margin-right: 5px;
+    font-weight: 700;
+  }
+  .ws-analytics-result {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .ws-ar-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--agent-border);
+    background: var(--agent-bg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ws-ar-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--agent);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .ws-ar-query {
+    font-size: 13.5px;
+    color: var(--agent);
+    font-weight: 600;
+    flex: 1;
+  }
+  .ws-ar-meta {
+    font-size: 10.5px;
+    color: var(--ink-4);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ws-ar-body { padding: 18px; }
+  .ws-ar-summary {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .ws-chart-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 60px;
+    gap: 12px;
+    align-items: center;
+    padding: 7px 0;
+    font-size: 12.5px;
+  }
+  .ws-chart-track {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ws-chart-fill {
+    height: 100%;
+    background: var(--ink);
+    border-radius: 4px;
+  }
+  .ws-chart-fill.success { background: var(--success); }
+  .ws-chart-fill.warning { background: var(--warning); }
+  .ws-chart-fill.action { background: var(--action); }
+  .ws-chart-fill.agent { background: var(--agent); }
+  .ws-chart-value {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+  svg { display: block; }
+
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 48px; }
+    .section-h, .cta-section h2 { font-size: 36px; }
+    .feature-grid, .roles-grid, .portal-cards { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .how-grid { grid-template-columns: 1fr; gap: 32px; }
+    .login-wrap { grid-template-columns: 1fr; }
+    .login-side { padding: 32px 24px; min-height: 0; }
+    .login-side h2 { font-size: 28px; }
+    .login-form-wrap { padding: 32px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .mock-body { grid-template-columns: 1fr; height: auto; }
+    .mock-side, .mock-right { display: none; }
+  }
+/* ===== Floating back-to-portfolio chip ===== */
+.rk-back-chip{
+  position:fixed; top:14px; left:14px; z-index:9999;
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 14px; border-radius:999px;
+  background:rgba(15,15,17,0.92); color:#fff;
+  font-family:'Inter',system-ui,sans-serif; font-size:12px; font-weight:600;
+  text-decoration:none; letter-spacing:.01em;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.12);
+  transition:transform .15s ease, background .15s ease;
+}
+.rk-back-chip:hover{ transform:translateX(-2px); background:#000; }
+.rk-back-chip svg{ width:14px; height:14px; }
+</style>
+</head>
+<body>
+
+<a href="index.html#prototypes" class="rk-back-chip" title="Back to portfolio">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  Back to Portfolio
+</a>
+
+<!-- ============================================================ -->
+<!-- SCREEN 1: MARKETING LANDING                                  -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-landing">
+
+  <nav class="marketing-nav">
+    <div class="nav-inner">
+      <div class="logo" data-goto="landing">
+        <div class="logo-mark">R</div>
+        <span class="logo-name">RK Space</span>
+      </div>
+      <div class="nav-links">
+        <a class="has-arrow">Platform</a>
+        <a class="has-arrow">Solutions</a>
+        <a>Customers</a>
+        <a>Pricing</a>
+        <a>Resources</a>
+      </div>
+      <div class="nav-cta">
+        <button class="btn btn-ghost" data-goto="login">Sign in</button>
+        <button class="btn btn-primary" data-goto="login">Get started — free trial</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="pulse"></span>
+          <span class="agent-glyph">✦</span>
+          <span>Agentic AI for the entire EDRM lifecycle</span>
+        </div>
+        <h1>Data risk,<br><em>resolved by agents.</em></h1>
+        <p class="hero-sub">RK Space is the first <strong>agentic eDiscovery and data risk management platform</strong>. Our AI agents handle hold tracking, document review, privilege classification, and production — so your team focuses on judgment, not busywork.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-xl" data-goto="login">Start free trial →</button>
+          <button class="btn btn-xl">Watch 2-min demo</button>
+        </div>
+        <div class="hero-trust">
+          <span><span class="check">✓</span> SOC 2 Type II</span>
+          <span><span class="check">✓</span> FRCP 37(e) defensible</span>
+          <span><span class="check">✓</span> Deploy in 14 days</span>
+          <span><span class="check">✓</span> No credit card required</span>
+        </div>
+
+        <!-- Hero product mock -->
+        <div class="hero-mock">
+          <div class="mock-topbar">
+            <div class="mock-dot"></div>
+            <div class="mock-dot"></div>
+            <div class="mock-dot"></div>
+            <div class="mock-url">app.rkspace.com/wingate-v-meridian</div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-side">
+              <div class="mock-side-label">Workspace</div>
+              <div class="mock-side-item active"><span class="ico"></span>Home</div>
+              <div class="mock-side-item"><span class="ico"></span>Matters · 14</div>
+              <div class="mock-side-item"><span class="ico"></span>Legal Holds · 42</div>
+              <div class="mock-side-item"><span class="ico"></span>Review</div>
+              <div class="mock-side-item"><span class="ico"></span>Production</div>
+              <div class="mock-side-label" style="margin-top: 14px;">Insights</div>
+              <div class="mock-side-item"><span class="ico"></span>Analytics</div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-h">Good morning, Sarah</div>
+              <div class="mock-agent">
+                <div class="mock-agent-avatar">L</div>
+                <div class="mock-agent-text"><strong>Lex AI</strong> · I detected 2 custodians overdue on hold acknowledgment. Auto-reminders sent. <strong>Zero spoliation risk.</strong></div>
+              </div>
+              <div class="mock-cards">
+                <div class="mock-card">
+                  <div class="mock-card-label">Active matters</div>
+                  <div class="mock-card-val">14</div>
+                  <div class="mock-card-trend">↑ 2 this month</div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card-label">AI work today</div>
+                  <div class="mock-card-val">9,201</div>
+                  <div class="mock-card-trend">Auto-redactions</div>
+                </div>
+              </div>
+              <div class="mock-row">
+                <strong>Wingate v. Meridian</strong> · Production
+                <span class="badge-mini success">Live</span>
+              </div>
+              <div class="mock-row">
+                <strong>SEC Investigation 2025-04</strong>
+                <span class="badge-mini warning">Expires 2d</span>
+              </div>
+              <div class="mock-row">
+                <strong>Trinity Corp DD</strong>
+                <span class="badge-mini agent">AI working</span>
+              </div>
+            </div>
+            <div class="mock-right">
+              <div class="mock-right-h">Activity</div>
+              <div class="mock-event">
+                <div class="mock-event-dot agent"></div>
+                <div>
+                  <div class="mock-event-time">14:42</div>
+                  <strong>Hold Tracker</strong> sent reminder to K. Nguyen
+                </div>
+              </div>
+              <div class="mock-event">
+                <div class="mock-event-dot success"></div>
+                <div>
+                  <div class="mock-event-time">11:30</div>
+                  Reviewed 240 docs · 98% concur with AI
+                </div>
+              </div>
+              <div class="mock-event">
+                <div class="mock-event-dot warning"></div>
+                <div>
+                  <div class="mock-event-time">09:42</div>
+                  SEC hold expiring — renewal needed
+                </div>
+              </div>
+              <div class="mock-event">
+                <div class="mock-event-dot agent"></div>
+                <div>
+                  <div class="mock-event-time">09:00</div>
+                  <strong>Triage agent</strong> resumed at 312 docs/min
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <section class="logos-section">
+    <div class="container">
+      <div class="logos-label">Trusted by legal &amp; compliance teams at</div>
+      <div class="logos-grid">
+        <span class="logo-item">Halverson Law</span>
+        <span class="logo-item">Wingate Capital</span>
+        <span class="logo-item">Meridian Holdings</span>
+        <span class="logo-item">Trinity Corp</span>
+        <span class="logo-item">Phoenix Legal</span>
+        <span class="logo-item">Hartley &amp; Co.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDRM PIPELINE -->
+  <section class="section">
+    <div class="container">
+      <div class="section-eyebrow">EDRM lifecycle, automated</div>
+      <h2 class="section-h">From identification to production,<br><em>agents handle the work in between.</em></h2>
+      <p class="section-sub">14 modular playbooks covering every stage of the EDRM lifecycle. Each one configurable. Each one connected. Each one watched by a specialized AI agent.</p>
+
+      <div class="edrm-pipeline">
+        <div class="pipeline-row">
+          <div class="pipeline-stage">
+            <div class="pipeline-num">PB-01</div>
+            <div class="pipeline-name">Governance</div>
+            <div class="pipeline-meta">Pre-litigation posture</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage agent">
+            <div class="pipeline-num">PB-02 ✦ AI</div>
+            <div class="pipeline-name">Identification</div>
+            <div class="pipeline-meta">Triage agent</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage agent">
+            <div class="pipeline-num">PB-03 ✦ AI</div>
+            <div class="pipeline-name">Legal Hold</div>
+            <div class="pipeline-meta">Hold Tracker</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage">
+            <div class="pipeline-num">PB-05</div>
+            <div class="pipeline-name">Collection</div>
+            <div class="pipeline-meta">Hash-verified</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage action">
+            <div class="pipeline-num">PB-06 LIVE</div>
+            <div class="pipeline-name">Processing</div>
+            <div class="pipeline-meta">OCR + Triage</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage agent">
+            <div class="pipeline-num">PB-08 ✦ AI</div>
+            <div class="pipeline-name">Review</div>
+            <div class="pipeline-meta">Privilege agent</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage agent">
+            <div class="pipeline-num">PB-11 ✦ AI</div>
+            <div class="pipeline-name">Analysis</div>
+            <div class="pipeline-meta">Investigator</div>
+          </div>
+          <div class="pipeline-arrow"></div>
+          <div class="pipeline-stage agent">
+            <div class="pipeline-num">PB-12 ✦ AI</div>
+            <div class="pipeline-name">Production</div>
+            <div class="pipeline-meta">Bates · TIFF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-eyebrow">Built for modern legal ops</div>
+      <h2 class="section-h">Everything you need.<br><em>Nothing you don't.</em></h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon agent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>8 specialized AI agents</h3>
+          <p>Triage, Privilege, Redaction, OCR, Hold Tracker, Investigator, Production, and Auditor — each tuned for one job and held to a confidence floor.</p>
+          <a class="feature-link">See agents</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>14 configurable playbooks</h3>
+          <p>One playbook per EDRM stage. Drag-and-drop form builder, WHEN/THEN automation rules, and per-role permissions — fully configurable by your admin.</p>
+          <a class="feature-link">View playbooks</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon action">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v9a3 3 0 003 3h6"/></svg>
+          </div>
+          <h3>Master workflow orchestration</h3>
+          <p>Stitch playbooks together with hand-off rules. Approved custodians auto-trigger holds. Acknowledged holds auto-trigger collection. Hot docs auto-route to investigation.</p>
+          <a class="feature-link">See workflow</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon success">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>In-Place Preservation</h3>
+          <p>Suspend retention rules across M365, Slack, SharePoint, NetSuite, Box, and 4 more — without copying data. Faster, cheaper, defensible.</p>
+          <a class="feature-link">How IPP works</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon info">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Prompt-based analytics</h3>
+          <p>Ask any question. <em>"Show me hold ack rates by matter"</em> · <em>"Which custodians are at spoliation risk?"</em> · <em>"Cost saved by AI YTD?"</em> — Lex generates the chart.</p>
+          <a class="feature-link">Try analytics</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Audit-grade by default</h3>
+          <p>Every config change, every AI action, every user click is logged to an immutable WORM-protected audit trail. FRCP 37(e) defensible out of the box.</p>
+          <a class="feature-link">Compliance details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="section-eyebrow" style="color: rgba(255,255,255,0.5);">By the numbers</div>
+      <h2 class="section-h">Real results,<br><em>real customers.</em></h2>
+      <p class="section-sub">From the last quarter, across our customer base.</p>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num">38<em>%</em></div>
+          <div class="stat-label">Average reduction in document review costs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$1.2<em>M</em></div>
+          <div class="stat-label">Saved per matter on average through agentic workflows</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">14<em>d</em></div>
+          <div class="stat-label">Time-to-production, down from 23 days last year</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Spoliation events across 90 days. Zero. None.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <div class="how-grid">
+        <div class="how-text">
+          <div class="section-eyebrow" style="justify-content: flex-start;">Configure once, run forever</div>
+          <h3>Your admin builds the playbook. <em>Everyone else just uses it.</em></h3>
+          <p>Most platforms force every team to learn complex workflows. RK Space inverts the model: your administrator configures forms, automation rules, permissions, and AI agents in Studio. Your end users — counsel, custodians, IPP operators — see only the polished form they need to fill out.</p>
+          <div class="how-features">
+            <div class="how-feat">
+              <div class="how-feat-num">01</div>
+              <div class="how-feat-text">
+                <strong>Drag-and-drop form builder</strong>
+                <span>Define field types, validations, conditional logic, and AI auto-suggestions per playbook.</span>
+              </div>
+            </div>
+            <div class="how-feat">
+              <div class="how-feat-num">02</div>
+              <div class="how-feat-text">
+                <strong>WHEN / THEN automation</strong>
+                <span>"When custodian list is approved, auto-issue holds." 22 pre-built rules, fully editable.</span>
+              </div>
+            </div>
+            <div class="how-feat">
+              <div class="how-feat-num">03</div>
+              <div class="how-feat-text">
+                <strong>Per-role permissions</strong>
+                <span>8 roles × 14 playbooks = 112 permission entries. Granular, auditable, RBAC-compliant.</span>
+              </div>
+            </div>
+            <div class="how-feat">
+              <div class="how-feat-num">04</div>
+              <div class="how-feat-text">
+                <strong>One-click publish</strong>
+                <span>Versioned playbooks. Test in sandbox, ship to production with full rollback.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="how-visual">
+          <div style="font-size: 11px; color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 14px;">Live preview · admin Studio</div>
+          <div style="background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 14px; margin-bottom: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--info); font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;">RULE-002 · WHEN</div>
+            <div style="font-size: 13px; color: var(--ink-2); margin-bottom: 8px;"><strong style="color:var(--ink);">24 hours</strong> elapsed on hold instance with <code style="font-family: 'JetBrains Mono', monospace; background: white; padding: 1px 5px; border-radius: 3px; font-size: 11.5px; border: 1px solid var(--line);">ack_status = "pending"</code></div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--action); font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;">THEN</div>
+            <div style="font-size: 13px; color: var(--ink-2);">Send email reminder to custodian + log event in audit trail</div>
+          </div>
+          <div style="font-size: 11px; color: var(--ink-4);">Fired 47× this week · last fired 09:00 today</div>
+
+          <div style="margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line);">
+            <div style="font-size: 11px; color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 12px;">Resulting end-user experience</div>
+            <div style="background: var(--bg); padding: 12px; border-radius: 6px; border: 1px solid var(--line); font-size: 12px;">
+              <div style="font-size: 10px; color: var(--ink-4); margin-bottom: 4px;">Custodian inbox · Marcus Tellman</div>
+              <div style="font-weight: 600; margin-bottom: 4px;">Reminder: Acknowledge hold notice</div>
+              <div style="color: var(--ink-3);">You haven't yet acknowledged the Wingate v. Meridian legal hold. Please review and confirm within 2 days.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-eyebrow">Built for every role</div>
+      <h2 class="section-h">One platform.<br><em>Four tailored experiences.</em></h2>
+      <p class="section-sub">Each role gets a workspace built for their job — not a watered-down version of the admin's view.</p>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-eyebrow">
+            <span class="role-dot admin"></span>
+            <span class="role-tag">Admin</span>
+          </div>
+          <h3>Playbook architect</h3>
+          <p>Configure forms, automation, permissions, and AI agents. Orchestrate the master workflow that connects every playbook into a defensible EDRM lifecycle.</p>
+          <ul class="role-features">
+            <li>Drag-and-drop form builder</li>
+            <li>22 automation rules · WHEN/THEN engine</li>
+            <li>Master workflow visual editor</li>
+            <li>Permission matrix · 8 roles × 14 playbooks</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-eyebrow">
+            <span class="role-dot counsel"></span>
+            <span class="role-tag">Lead counsel</span>
+          </div>
+          <h3>Matter quarterback</h3>
+          <p>Open matters, issue holds, run reviews, deliver productions. AI agents handle the routine; you make the judgment calls.</p>
+          <ul class="role-features">
+            <li>One-click matter initiation</li>
+            <li>AI-suggested custodians + scope</li>
+            <li>Privilege classification at scale</li>
+            <li>Prompt-based analytics</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-eyebrow">
+            <span class="role-dot ipp"></span>
+            <span class="role-tag">IPP operator</span>
+          </div>
+          <h3>Preservation engineer</h3>
+          <p>Manage 9 connector integrations, monitor source health, activate in-place preservation profiles, and watch for employee changes that affect data.</p>
+          <ul class="role-features">
+            <li>Connector health dashboard</li>
+            <li>142 active preservation profiles</li>
+            <li>Real-time employee change alerts</li>
+            <li>Spoliation risk monitoring</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-eyebrow">
+            <span class="role-dot custodian"></span>
+            <span class="role-tag">Custodian</span>
+          </div>
+          <h3>Hold acknowledger</h3>
+          <p>Receive hold notices, acknowledge with one click, ask questions, and stay compliant — without ever opening a 40-page eDiscovery training manual.</p>
+          <ul class="role-features">
+            <li>Plain-language hold notices</li>
+            <li>One-click acknowledgment</li>
+            <li>FAQ + ask-a-question portal</li>
+            <li>Mobile-friendly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Stop chasing acknowledgments.<br><em>Start running matters.</em></h2>
+      <p>Deploy in 14 days. SOC 2 Type II. FRCP 37(e) defensible. No credit card required.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary btn-xl" data-goto="login">Start free trial →</button>
+        <button class="btn btn-xl">Book a demo</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-mark">R</div>
+            <span class="logo-name">RK Space</span>
+          </div>
+          <p>The agentic data risk management platform for legal &amp; compliance teams. Built for the EDRM lifecycle.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a>Playbooks</a></li>
+            <li><a>AI Agents</a></li>
+            <li><a>Master Workflow</a></li>
+            <li><a>Analytics</a></li>
+            <li><a>Integrations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Solutions</h5>
+          <ul>
+            <li><a>Litigation</a></li>
+            <li><a>Investigations</a></li>
+            <li><a>Compliance</a></li>
+            <li><a>M&amp;A Diligence</a></li>
+            <li><a>Privacy &amp; DSARs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><a>Documentation</a></li>
+            <li><a>API Reference</a></li>
+            <li><a>Customer Stories</a></li>
+            <li><a>Security &amp; Trust</a></li>
+            <li><a>Status</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 RK Space, Inc. · All rights reserved.</span>
+        <div class="footer-legal">
+          <a>Privacy</a>
+          <a>Terms</a>
+          <a>SOC 2</a>
+          <a>HIPAA</a>
+          <a>Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCREEN 2: LOGIN                                              -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-login">
+  <div class="login-wrap">
+    <!-- Left side: brand panel -->
+    <div class="login-side">
+      <div class="login-brand" data-goto="landing">
+        <div class="logo-mark">R</div>
+        <span class="logo-name">RK Space</span>
+      </div>
+      <div class="login-side-content">
+        <h2>The platform <em>that runs</em><br>your eDiscovery <em>for you.</em></h2>
+        <p>Sign in to access your matters, holds, and AI agents. New here? Start with a free trial — no credit card required.</p>
+
+        <div class="login-quote">
+          <p>"We deployed RK Space in two weeks and cut our review costs by 41% on the very first matter. The agents do the work; we make the calls."</p>
+          <div class="login-quote-author"><strong>Sarah Reyes</strong>, Lead Counsel · Wingate Capital</div>
+        </div>
+
+        <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 32px; font-size: 12px; color: rgba(255,255,255,0.5);">
+          <span>SOC 2 Type II</span>
+          <span>·</span>
+          <span>FRCP 37(e) defensible</span>
+          <span>·</span>
+          <span>HIPAA-ready</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: form -->
+    <div class="login-form-wrap">
+      <div class="login-form">
+        <h2 class="login-form-h">Sign in</h2>
+        <p class="login-form-sub">Welcome back. Choose how you'll use the platform today.</p>
+
+        <div class="login-error" id="loginError">
+          Email or password incorrect. Try <strong>demo@rkspace.com</strong> with any password.
+        </div>
+
+        <!-- Role selector -->
+        <div class="role-select-h">I'm signing in as</div>
+        <div class="role-select" id="roleSelect">
+          <div class="role-option selected" data-role="admin">
+            <div class="role-option-head"><span class="role-dot admin"></span>Admin</div>
+            <div class="role-option-name">Platform admin</div>
+            <div class="role-option-desc">Configure playbooks, rules, permissions</div>
+          </div>
+          <div class="role-option" data-role="user">
+            <div class="role-option-head"><span class="role-dot custodian"></span>Hold user</div>
+            <div class="role-option-name">Custodian / Counsel</div>
+            <div class="role-option-desc">Manage matters, holds, &amp; tasks</div>
+          </div>
+        </div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label>Work email</label>
+            <input type="email" id="loginEmail" placeholder="you@company.com" autocomplete="email" value="demo@rkspace.com">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" value="••••••••">
+          </div>
+
+          <div class="form-row-between">
+            <label class="checkbox-inline">
+              <input type="checkbox" checked>
+              <span>Keep me signed in</span>
+            </label>
+            <a class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button class="login-btn-full" type="button" id="loginSubmit">
+            <span id="loginBtnText">Sign in →</span>
+          </button>
+
+          <div class="login-divider">or continue with</div>
+
+          <button class="sso-btn" type="button">
+            <svg class="sso-ico" viewBox="0 0 24 24" fill="none"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z" fill="currentColor"/></svg>
+            Continue with Google Workspace
+          </button>
+          <button class="sso-btn" type="button">
+            <svg class="sso-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zM24 11.4H12.6V0H24v11.4z"/></svg>
+            Continue with Microsoft 365
+          </button>
+          <button class="sso-btn" type="button">
+            <svg class="sso-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Continue with SAML SSO
+          </button>
+
+          <div class="login-foot">
+            New to RK Space? <a data-goto="landing">Start a free trial →</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCREEN 3: PORTAL HUB (after login, before app)               -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-portal">
+  <div class="portal-shell">
+    <div class="portal-topbar">
+      <div class="logo" data-goto="landing">
+        <div class="logo-mark">R</div>
+        <span class="logo-name">RK Space</span>
+      </div>
+      <div class="breadcrumb">
+        <span>Sign in</span>
+        <span>→</span>
+        <span style="color: var(--ink); font-weight: 600;">Choose your workspace</span>
+      </div>
+      <div class="portal-user-menu">
+        <div class="portal-user-info">
+          <div class="n" id="portalUserName">Sarah Reyes</div>
+          <div class="r" id="portalUserEmail">sarah.reyes@wingate-cap.com</div>
+        </div>
+        <div class="portal-avatar" id="portalUserAvatar">SR</div>
+        <button class="btn btn-sm" data-goto="login" style="margin-left: 8px;">Sign out</button>
+      </div>
+    </div>
+
+    <div class="portal-content">
+      <h1 class="portal-h">Welcome back, <em><span id="portalGreetName">Sarah</span></em></h1>
+      <p class="portal-sub">You have access to <strong id="portalAccessCount">2 workspaces</strong>. Pick one to continue.</p>
+
+      <div class="portal-info">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div><strong>Demo mode.</strong> Both workspaces below are fully interactive — explore freely. The Admin workspace lets you configure playbooks, automation rules, and permissions. The User workspace is what your team experiences when they sign in.</div>
+      </div>
+
+      <div class="portal-cards">
+        <div class="portal-card" data-portal="admin">
+          <div class="portal-card-tag"><span class="dot admin"></span>Admin Console</div>
+          <h3>Playbook Studio</h3>
+          <p>Configure 14 playbooks, 22 automation rules, 8 AI agents, and the master workflow that ties them together. This is where admins shape what end users will see.</p>
+          <div class="portal-card-cta">Enter Admin Studio</div>
+        </div>
+
+        <div class="portal-card" data-portal="user">
+          <div class="portal-card-tag"><span class="dot user"></span>End-User Workspace</div>
+          <h3>Counsel · IPP · Custodian</h3>
+          <p>Run matters, issue holds, manage preservation, acknowledge notices. Switch between four end-user personas (Counsel, IPP, Custodian, Admin-as-User) once inside.</p>
+          <div class="portal-card-cta">Enter Workspace</div>
+        </div>
+      </div>
+
+      <div class="portal-recent">
+        <div class="portal-recent-h">Recent sessions</div>
+        <div class="portal-recent-list">
+          <div class="portal-recent-item">
+            <div class="portal-recent-time">14:42 today</div>
+            <div class="portal-recent-text"><strong>Admin Studio</strong> · Updated automation rule RULE-014 escalation threshold</div>
+            <div style="font-size: 11px; color: var(--ink-4);">Chrome · macOS</div>
+          </div>
+          <div class="portal-recent-item">
+            <div class="portal-recent-time">11:30 today</div>
+            <div class="portal-recent-text"><strong>End-User Workspace</strong> · Reviewed 240 documents in Wingate privilege queue</div>
+            <div style="font-size: 11px; color: var(--ink-4);">Chrome · macOS</div>
+          </div>
+          <div class="portal-recent-item">
+            <div class="portal-recent-time">Yesterday</div>
+            <div class="portal-recent-text"><strong>Admin Studio</strong> · Added field "Renewal interval" to PB-03 Legal Holds</div>
+            <div style="font-size: 11px; color: var(--ink-4);">Safari · iPhone</div>
+          </div>
+          <div class="portal-recent-item">
+            <div class="portal-recent-time">2 days ago</div>
+            <div class="portal-recent-text"><strong>End-User Workspace</strong> · Issued legal hold to 8 custodians (Wingate v. Meridian)</div>
+            <div style="font-size: 11px; color: var(--ink-4);">Chrome · macOS</div>
+          </div>
+          <div class="portal-recent-item">
+            <div class="portal-recent-time">5 days ago</div>
+            <div class="portal-recent-text"><strong>Analytics</strong> · Asked: "Show hold acknowledgment rates by matter"</div>
+            <div style="font-size: 11px; color: var(--ink-4);">Chrome · macOS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCREEN 4: ADMIN WORKSPACE                                    -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-admin-workspace">
+  <div class="ws-shell">
+    <div class="ws-topbar">
+      <div class="ws-brand" data-goto="portal">
+        <div class="logo-mark">R</div>
+        <span class="logo-name">RK Space</span>
+        <span class="ws-env-pill ws-env-admin">Admin Studio</span>
+      </div>
+      <div class="ws-topnav">
+        <a class="ws-tab active" data-ws-tab="overview">Overview</a>
+        <a class="ws-tab" data-ws-tab="playbooks">Playbooks</a>
+        <a class="ws-tab" data-ws-tab="workflow">Master Workflow</a>
+        <a class="ws-tab" data-ws-tab="automation">Automation</a>
+        <a class="ws-tab" data-ws-tab="permissions">Permissions</a>
+      </div>
+      <div class="ws-user-menu">
+        <div class="ws-env-pill ws-env-prod">● Production</div>
+        <div class="portal-user-info">
+          <div class="n">Rajesh Kandasamy</div>
+          <div class="r">Administrator</div>
+        </div>
+        <div class="portal-avatar" style="background: var(--danger);">RK</div>
+        <button class="btn btn-sm" data-goto="portal">Switch workspace</button>
+      </div>
+    </div>
+
+    <div class="ws-body">
+      <!-- Overview -->
+      <div class="ws-tab-content active" data-ws-content="overview">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>RK Space Admin</span><span>/</span><span class="current">Overview</span></div>
+            <h1 class="ws-title">Playbook <em>Studio</em></h1>
+            <p class="ws-desc">Configure modular playbooks, define forms and permissions, and orchestrate the master workflow.</p>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn">Import config</button>
+            <button class="btn btn-primary">+ New playbook</button>
+          </div>
+        </div>
+
+        <div class="ws-status-legend">
+          <span class="ws-legend-label">Status</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--success);"></span>Published</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--info);"></span>Draft</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--warning);"></span>Needs Review</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--danger);"></span>Failed</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--action);"></span>Running</span>
+          <span class="ws-legend-item"><span class="ws-legend-dot" style="background:var(--agent);"></span>AI Agent</span>
+        </div>
+
+        <div class="ws-kpi-row">
+          <div class="ws-kpi"><div class="ws-kpi-label">Playbooks configured</div><div class="ws-kpi-value">14</div><div class="ws-kpi-trend up">12 published · 2 draft</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Automation rules</div><div class="ws-kpi-value">22</div><div class="ws-kpi-trend up">Last fired 14s ago</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Active AI agents</div><div class="ws-kpi-value">8</div><div class="ws-kpi-trend up">All healthy</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Users / roles</div><div class="ws-kpi-value">42<span style="font-size:13px;color:var(--ink-4);">/8</span></div><div class="ws-kpi-trend">8 role types</div></div>
+        </div>
+
+        <div class="ws-alert agent">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div><strong>Lex AI suggestion:</strong> The Master Workflow has an unconnected branch — "Hot Doc Escalation" never feeds back into Production. <a style="color:var(--agent); font-weight:600;">Review →</a></div>
+        </div>
+
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">Recent admin activity</div></div>
+          <table class="ws-table">
+            <thead><tr><th>Time</th><th>Admin</th><th>Action</th><th>Target</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>14:38</td><td><strong>Rajesh K.</strong></td><td>Updated rule</td><td>Auto-escalate threshold 48h → 72h</td><td><span class="ws-badge success">● Saved</span></td></tr>
+              <tr><td>13:22</td><td><strong>Sarah Reyes</strong></td><td>Added field</td><td>PB-03 → "Renewal interval"</td><td><span class="ws-badge success">● Saved</span></td></tr>
+              <tr><td>11:04</td><td><strong>Rajesh K.</strong></td><td>Granted permission</td><td>Reviewer + Approve in Review</td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr><td>09:42</td><td><strong>D. Patel</strong></td><td>Test run</td><td>Master Workflow → stages 4-5</td><td><span class="ws-badge info">● Test passed</span></td></tr>
+              <tr><td>Yesterday</td><td><strong>System</strong></td><td>Agent deployed</td><td>AGT-Investigator-v2</td><td><span class="ws-badge agent">● Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Playbooks -->
+      <div class="ws-tab-content" data-ws-content="playbooks">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Admin</span><span>/</span><span class="current">Playbooks</span></div>
+            <h1 class="ws-title">Playbooks <em>library</em></h1>
+            <p class="ws-desc">14 configured playbooks. Click any to edit form, automation, permissions.</p>
+          </div>
+          <button class="btn btn-primary">+ New playbook</button>
+        </div>
+        <div class="ws-panel">
+          <table class="ws-table">
+            <thead><tr><th>Code</th><th>Playbook</th><th>Phase</th><th>Fields</th><th>Rules</th><th>AI Agent</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td><code>PB-01</code></td><td><strong>Information Governance</strong></td><td>Pre-litigation</td><td>22</td><td>4</td><td><span class="ws-badge muted">● None</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-02</code></td><td><strong>Identification</strong></td><td>Pre-litigation</td><td>14</td><td>2</td><td><span class="ws-badge agent">● Triage</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-03</code></td><td><strong>Legal Holds</strong></td><td>Preservation</td><td>14</td><td>3</td><td><span class="ws-badge agent">● Hold Tracker</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-04</code></td><td><strong>Custodian Interviews</strong></td><td>Preservation</td><td>9</td><td>2</td><td><span class="ws-badge agent">● Interviewer</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-05</code></td><td><strong>Collection</strong></td><td>Collection</td><td>16</td><td>5</td><td><span class="ws-badge muted">● None</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-06</code></td><td><strong>Processing</strong></td><td>Processing</td><td>11</td><td>5</td><td><span class="ws-badge agent">● Triage + OCR</span></td><td><span class="ws-badge action">● Running</span></td></tr>
+              <tr class="clickable"><td><code>PB-07</code></td><td><strong>ECA / Cull</strong></td><td>Processing</td><td>12</td><td>4</td><td><span class="ws-badge agent">● Triage</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-08</code></td><td><strong>Review</strong></td><td>Review</td><td>18</td><td>7</td><td><span class="ws-badge agent">● Privilege</span></td><td><span class="ws-badge warning">● Needs review</span></td></tr>
+              <tr class="clickable"><td><code>PB-09</code></td><td><strong>Privilege Logging</strong></td><td>Review</td><td>12</td><td>3</td><td><span class="ws-badge agent">● Privilege</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-10</code></td><td><strong>Redaction</strong></td><td>Review</td><td>10</td><td>4</td><td><span class="ws-badge agent">● Redaction</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-11</code></td><td><strong>Hot Doc Analysis</strong></td><td>Analysis</td><td>13</td><td>4</td><td><span class="ws-badge agent">● Investigator</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-12</code></td><td><strong>Production</strong></td><td>Production</td><td>15</td><td>6</td><td><span class="ws-badge agent">● Production</span></td><td><span class="ws-badge success">● Published</span></td></tr>
+              <tr class="clickable"><td><code>PB-13</code></td><td><strong>Trial Exhibits</strong></td><td>Presentation</td><td>9</td><td>2</td><td><span class="ws-badge muted">● None</span></td><td><span class="ws-badge info">● Draft</span></td></tr>
+              <tr class="clickable"><td><code>PB-14</code></td><td><strong>Compliance Audit</strong></td><td>Cross-cutting</td><td>8</td><td>3</td><td><span class="ws-badge agent">● Auditor</span></td><td><span class="ws-badge info">● Draft</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Master Workflow -->
+      <div class="ws-tab-content" data-ws-content="workflow">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Admin</span><span>/</span><span class="current">Master Workflow</span></div>
+            <h1 class="ws-title">Master <em>workflow</em></h1>
+            <p class="ws-desc">The orchestration layer. Each block is a configured playbook; arrows define hand-offs between them.</p>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn">Test run</button>
+            <button class="btn btn-primary">Publish workflow</button>
+          </div>
+        </div>
+
+        <div class="ws-alert info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/></svg>
+          <div>The master workflow stitches all 14 playbooks into the EDRM lifecycle. <strong>Click any block to edit its configuration.</strong></div>
+        </div>
+
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">EDRM lifecycle pipeline</div></div>
+          <div style="padding: 24px 18px; background-image: radial-gradient(circle at 1px 1px, var(--line-2) 1px, transparent 0); background-size: 16px 16px; overflow-x: auto;">
+            <div style="display: flex; align-items: center; min-width: max-content; gap: 4px;">
+              <div class="ws-wf-block done"><div class="ws-wf-num" style="color:var(--success);">PB-01 · DONE</div><div class="ws-wf-name">Governance</div><div class="ws-wf-meta">Pre-litigation</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block done"><div class="ws-wf-num" style="color:var(--success);">PB-02 · DONE</div><div class="ws-wf-name">Identification</div><div class="ws-wf-meta">Triage agent</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block done"><div class="ws-wf-num" style="color:var(--success);">PB-03 · DONE</div><div class="ws-wf-name">Legal Holds</div><div class="ws-wf-meta">Hold Tracker</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block done"><div class="ws-wf-num" style="color:var(--success);">PB-05 · DONE</div><div class="ws-wf-name">Collection</div><div class="ws-wf-meta">Hash-verified</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block live"><div class="ws-wf-num" style="color:var(--action);">PB-06 · LIVE</div><div class="ws-wf-name">Processing</div><div class="ws-wf-meta">OCR + Triage</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block"><div class="ws-wf-num">PB-08 · QUEUED</div><div class="ws-wf-name">Review</div><div class="ws-wf-meta">Privilege</div></div>
+              <div class="ws-wf-arrow"></div>
+              <div class="ws-wf-block"><div class="ws-wf-num">PB-11 · QUEUED</div><div class="ws-wf-name">Analysis</div><div class="ws-wf-meta">Investigator</div></div>
+              <div class="ws-wf-arrow ws-disabled"></div>
+              <div class="ws-wf-block ws-disabled"><div class="ws-wf-num">PB-12</div><div class="ws-wf-name">Production</div><div class="ws-wf-meta">Bates · TIFF</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">Hand-off rules between playbooks</div></div>
+          <table class="ws-table">
+            <thead><tr><th>Code</th><th>From</th><th>To</th><th>Trigger</th><th>Action on hand-off</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><code>HO-01</code></td><td><strong>PB-02 Identification</strong></td><td><strong>PB-03 Legal Holds</strong></td><td>Custodian list approved</td><td>Auto-issue hold notices</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr><td><code>HO-02</code></td><td><strong>PB-03 Legal Holds</strong></td><td><strong>PB-05 Collection</strong></td><td>100% acknowledged</td><td>Trigger collection job</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr><td><code>HO-03</code></td><td><strong>PB-05 Collection</strong></td><td><strong>PB-06 Processing</strong></td><td>Hash verified + CoC</td><td>Auto-start Triage agent</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr><td><code>HO-04</code></td><td><strong>PB-06 Processing</strong></td><td><strong>PB-08 Review</strong></td><td>Processing ≥ 95%</td><td>Notify reviewers</td><td><span class="ws-badge warning">● Pending</span></td></tr>
+              <tr><td><code>HO-05</code></td><td><strong>PB-08 Review</strong></td><td><strong>PB-09 Privilege Log</strong></td><td>Privileged docs flagged</td><td>Auto-generate FRCP entries</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr><td><code>HO-06</code></td><td><strong>PB-08 Review</strong></td><td><strong>PB-11 Analysis</strong></td><td>Hot doc detected</td><td>Open Investigator hypothesis</td><td><span class="ws-badge success">● Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Automation -->
+      <div class="ws-tab-content" data-ws-content="automation">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Admin</span><span>/</span><span class="current">Automation</span></div>
+            <h1 class="ws-title">Automation <em>rules</em></h1>
+            <p class="ws-desc">When this happens, do that. 22 WHEN/THEN rules across all playbooks.</p>
+          </div>
+          <button class="btn btn-primary">+ New rule</button>
+        </div>
+        <div class="ws-kpi-row">
+          <div class="ws-kpi"><div class="ws-kpi-label">Total rules</div><div class="ws-kpi-value">22</div><div class="ws-kpi-trend up">+4 this month</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Fired (24h)</div><div class="ws-kpi-value">184</div><div class="ws-kpi-trend up">All successful</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">AI-driven</div><div class="ws-kpi-value">9</div><div class="ws-kpi-trend">41% of rules</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Failures</div><div class="ws-kpi-value">0</div><div class="ws-kpi-trend up">Healthy</div></div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Auto-issue holds when custodian list is approved <span class="ws-badge success">● Active</span></div>
+            <span class="ws-rule-id">RULE-001 · fired 14× this week</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span>Field <code>custodian_list_status</code> changes to <strong>"approved"</strong> in <strong>PB-02</strong></span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label then">Then</span>
+            <span>Create instance in <strong>PB-03</strong> and trigger Hold Tracker agent</span>
+          </div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Send 24h reminder for unacknowledged holds <span class="ws-badge success">● Active</span></div>
+            <span class="ws-rule-id">RULE-002 · fired 47× this week</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span><strong>24 hours</strong> elapsed with <code>ack_status = "pending"</code></span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label then">Then</span>
+            <span>Send email reminder + log audit event</span>
+          </div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Escalate to manager after 72h overdue <span class="ws-badge success">● Active</span></div>
+            <span class="ws-rule-id">RULE-003 · fired 2× this week</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span><strong>72h past deadline</strong> AND no manual intervention</span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label then">Then</span>
+            <span>Notify <strong>direct manager</strong> + Lead Counsel</span>
+          </div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Hot doc detection → open hypothesis <span class="ws-badge agent">● AI-driven</span></div>
+            <span class="ws-rule-id">RULE-005 · fired 28× this month</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span>Document <code>relevance_score ≥ 0.92</code></span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label agent">AI Agent</span>
+            <span>Open hypothesis in <strong>PB-11</strong> for Investigator</span>
+          </div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Auto-redact PII when detected <span class="ws-badge agent">● AI-driven</span></div>
+            <span class="ws-rule-id">RULE-006 · fired 9,201× this month</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span>PII pattern <strong>(SSN, ABA)</strong> with conf ≥ 0.95</span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label agent">AI Agent</span>
+            <span>Apply <strong>Redaction Agent</strong> overlay</span>
+          </div>
+        </div>
+
+        <div class="ws-rule-card">
+          <div class="ws-rule-head">
+            <div class="ws-rule-name">Spoliation alert when departure detected <span class="ws-badge success">● Active</span></div>
+            <span class="ws-rule-id">RULE-008 · fired 1× this month</span>
+          </div>
+          <div class="ws-rule-flow">
+            <span class="ws-rule-label when">When</span>
+            <span>Custodian on hold <strong>departs the company</strong></span>
+            <span style="color:var(--ink-4);">→</span>
+            <span class="ws-rule-label then">Then</span>
+            <span>Lock archive + notify Lead Counsel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permissions -->
+      <div class="ws-tab-content" data-ws-content="permissions">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Admin</span><span>/</span><span class="current">Permissions</span></div>
+            <h1 class="ws-title">Roles &amp; <em>permissions</em></h1>
+            <p class="ws-desc">8 roles · 14 playbooks · 112 permission entries.</p>
+          </div>
+        </div>
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">Permission matrix</div></div>
+          <table class="ws-table">
+            <thead><tr><th>Playbook</th><th>Admin</th><th>Lead Counsel</th><th>Reviewer</th><th>Custodian</th><th>IPP</th><th>Compliance</th><th>External</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PB-01 Governance</strong></td><td>●</td><td>◐</td><td>○</td><td>○</td><td>○</td><td>●</td><td>○</td></tr>
+              <tr><td><strong>PB-02 Identification</strong></td><td>●</td><td>●</td><td>◐</td><td>○</td><td>◐</td><td>◐</td><td>◐</td></tr>
+              <tr><td><strong>PB-03 Legal Holds</strong></td><td>●</td><td>●</td><td>◐</td><td>◐</td><td>●</td><td>◐</td><td>◐</td></tr>
+              <tr><td><strong>PB-04 Interviews</strong></td><td>●</td><td>●</td><td>◐</td><td>○</td><td>○</td><td>○</td><td>◐</td></tr>
+              <tr><td><strong>PB-05 Collection</strong></td><td>●</td><td>●</td><td>○</td><td>○</td><td>●</td><td>◐</td><td>○</td></tr>
+              <tr><td><strong>PB-06 Processing</strong></td><td>●</td><td>●</td><td>◐</td><td>○</td><td>●</td><td>○</td><td>○</td></tr>
+              <tr><td><strong>PB-08 Review</strong></td><td>●</td><td>●</td><td>●</td><td>○</td><td>○</td><td>○</td><td>◐</td></tr>
+              <tr><td><strong>PB-09 Privilege Log</strong></td><td>●</td><td>●</td><td>●</td><td>○</td><td>○</td><td>○</td><td>●</td></tr>
+              <tr><td><strong>PB-10 Redaction</strong></td><td>●</td><td>●</td><td>●</td><td>○</td><td>○</td><td>○</td><td>◐</td></tr>
+              <tr><td><strong>PB-12 Production</strong></td><td>●</td><td>●</td><td>◐</td><td>○</td><td>○</td><td>○</td><td>◐</td></tr>
+            </tbody>
+          </table>
+          <div style="padding: 12px 16px; border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-3); display:flex; gap:14px; background: var(--surface-2);">
+            <span>● Full access</span>
+            <span>◐ View only</span>
+            <span>○ No access</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCREEN 5: END USER WORKSPACE                                 -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-user-workspace">
+  <div class="ws-shell">
+    <div class="ws-topbar">
+      <div class="ws-brand" data-goto="portal">
+        <div class="logo-mark">R</div>
+        <span class="logo-name">RK Space</span>
+        <span class="ws-env-pill ws-env-user">Workspace</span>
+      </div>
+      <div class="ws-topnav">
+        <a class="ws-tab active" data-ws-tab="user-home">Home</a>
+        <a class="ws-tab" data-ws-tab="user-matters">Matters</a>
+        <a class="ws-tab" data-ws-tab="user-holds">Legal Holds</a>
+        <a class="ws-tab" data-ws-tab="user-ipp">IPP</a>
+        <a class="ws-tab" data-ws-tab="user-analytics">Analytics</a>
+      </div>
+      <div class="ws-user-menu">
+        <div class="ws-role-switcher">
+          <button class="ws-role-btn active" data-user-role="counsel"><span class="role-dot counsel"></span>Counsel</button>
+          <button class="ws-role-btn" data-user-role="ipp"><span class="role-dot ipp"></span>IPP</button>
+          <button class="ws-role-btn" data-user-role="custodian"><span class="role-dot custodian"></span>Custodian</button>
+        </div>
+        <div class="portal-user-info">
+          <div class="n" id="userPortalName">Sarah Reyes</div>
+          <div class="r" id="userPortalRole">Lead Counsel</div>
+        </div>
+        <div class="portal-avatar" id="userPortalAvatar" style="background:var(--info);">SR</div>
+        <button class="btn btn-sm" data-goto="portal">Switch workspace</button>
+      </div>
+    </div>
+
+    <div class="ws-body">
+
+      <!-- Home -->
+      <div class="ws-tab-content active" data-ws-content="user-home">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>RK Space</span><span>/</span><span class="current">Home</span></div>
+            <h1 class="ws-title">Good morning, <em><span id="userGreetName">Sarah</span></em></h1>
+            <p class="ws-desc">Pick a playbook to begin. Each module follows the workflow your administrator configured.</p>
+          </div>
+          <button class="btn btn-action">+ Initiate</button>
+        </div>
+
+        <div class="ws-alert warning">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+          <div><strong>3 items need your attention:</strong> SEC investigation hold expires in 2 days · K. Nguyen has not acknowledged hold (overdue) · Wingate matter ready for production review.</div>
+        </div>
+
+        <div class="ws-kpi-row">
+          <div class="ws-kpi"><div class="ws-kpi-label">Active matters</div><div class="ws-kpi-value">14</div><div class="ws-kpi-trend up">2 new this month</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Holds I own</div><div class="ws-kpi-value">42</div><div class="ws-kpi-trend warn">2 overdue acks</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Pending tasks</div><div class="ws-kpi-value">3</div><div class="ws-kpi-trend">1 high priority</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">AI work today</div><div class="ws-kpi-value">9,201</div><div class="ws-kpi-trend up">Auto-redactions</div></div>
+        </div>
+
+        <h3 style="font-family: 'Instrument Serif', serif; font-size: 21px; margin: 18px 0 12px; font-weight: 400;">Initiate a workflow</h3>
+        <div class="ws-card-grid">
+          <div class="ws-action-card featured" data-ws-tab="user-matters">
+            <div class="ws-ac-num">PB-01 · MATTER</div>
+            <div class="ws-ac-name">Open a new matter</div>
+            <div class="ws-ac-desc">Start the EDRM lifecycle. Triggers identification, hold, and collection workflows.</div>
+            <div class="ws-ac-foot"><span>Avg setup · 8 min</span><span>→</span></div>
+          </div>
+          <div class="ws-action-card" data-ws-tab="user-holds">
+            <div class="ws-ac-num">PB-03 · LEGAL HOLD</div>
+            <div class="ws-ac-name">Issue legal hold</div>
+            <div class="ws-ac-desc">Send preservation notice to custodians. AI pre-fills scope and recommends recipients.</div>
+            <div class="ws-ac-foot"><span>Avg setup · 5 min</span><span>→</span></div>
+          </div>
+          <div class="ws-action-card" data-ws-tab="user-ipp">
+            <div class="ws-ac-num">PB-IPP · PRESERVATION</div>
+            <div class="ws-ac-name">In-Place Preservation</div>
+            <div class="ws-ac-desc">Suspend retention rules across M365, Slack, SharePoint without copying data.</div>
+            <div class="ws-ac-foot"><span>Avg setup · 4 min</span><span>→</span></div>
+          </div>
+        </div>
+
+        <div class="ws-panel" style="margin-top: 22px;">
+          <div class="ws-panel-head"><div class="ws-panel-title">Recent activity</div></div>
+          <div style="padding: 8px 16px;">
+            <div class="ws-tl-item">
+              <div class="ws-tl-time">14:42</div>
+              <div class="ws-tl-dot agent"></div>
+              <div><div style="font-size: 11px; color: var(--ink-4); margin-bottom: 2px;"><span class="ws-badge agent" style="font-size:10px;">● Hold Tracker</span></div><strong>Sent reminder</strong> to K. Nguyen — 24h overdue on Wingate hold.</div>
+            </div>
+            <div class="ws-tl-item">
+              <div class="ws-tl-time">11:30</div>
+              <div class="ws-tl-dot user"></div>
+              <div><div style="font-size: 11px; color: var(--ink-4); margin-bottom: 2px;"><strong>You</strong></div>Reviewed 240 documents in Wingate privilege queue · 98% concur with AI.</div>
+            </div>
+            <div class="ws-tl-item">
+              <div class="ws-tl-time">09:00</div>
+              <div class="ws-tl-dot system"></div>
+              <div><div style="font-size: 11px; color: var(--ink-4); margin-bottom: 2px;">System</div><strong>Daily processing window opened.</strong> Triage agent resumed at 312 docs/min.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matters -->
+      <div class="ws-tab-content" data-ws-content="user-matters">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Workspace</span><span>/</span><span class="current">Matters</span></div>
+            <h1 class="ws-title">My <em>matters</em></h1>
+            <p class="ws-desc">14 active matters across the firm.</p>
+          </div>
+          <button class="btn btn-action">+ New matter</button>
+        </div>
+        <div class="ws-panel">
+          <table class="ws-table">
+            <thead><tr><th>Matter ID</th><th>Name</th><th>Type</th><th>Lead</th><th>Custodians</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td><code>WGN-2024-1142</code></td><td><strong>Wingate v. Meridian</strong></td><td>Securities Litigation</td><td>Sarah Reyes</td><td>42</td><td><span class="ws-badge action">● Live · Production</span></td></tr>
+              <tr class="clickable"><td><code>SEC-2025-0408</code></td><td><strong>SEC Investigation 2025-04</strong></td><td>Regulatory</td><td>D. Patel</td><td>18</td><td><span class="ws-badge warning">● Response Due</span></td></tr>
+              <tr class="clickable"><td><code>WB-2025-0810</code></td><td><strong>Internal Whistleblower 2025-08</strong></td><td>Internal</td><td>M. Chen</td><td>6</td><td><span class="ws-badge info">● Investigation</span></td></tr>
+              <tr class="clickable"><td><code>ACQ-2025-0921</code></td><td><strong>Trinity Corp Acquisition</strong></td><td>M&amp;A Diligence</td><td>R. Patel</td><td>24</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr class="clickable"><td><code>EMP-2025-1018</code></td><td><strong>Tellman Employment</strong></td><td>Employment</td><td>L. Chang</td><td>4</td><td><span class="ws-badge muted">● Discovery</span></td></tr>
+              <tr class="clickable"><td><code>IP-2024-0822</code></td><td><strong>Phoenix Patent Defense</strong></td><td>IP Litigation</td><td>S. Reyes</td><td>12</td><td><span class="ws-badge danger">● Trial in 14d</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Holds -->
+      <div class="ws-tab-content" data-ws-content="user-holds">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Workspace</span><span>/</span><span class="current">Legal Holds</span></div>
+            <h1 class="ws-title">Legal <em>holds</em></h1>
+            <p class="ws-desc">All preservation notices across your matters.</p>
+          </div>
+          <button class="btn btn-action">+ New hold</button>
+        </div>
+        <div class="ws-kpi-row">
+          <div class="ws-kpi"><div class="ws-kpi-label">Active</div><div class="ws-kpi-value">42</div><div class="ws-kpi-trend up">All issued</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Acknowledged</div><div class="ws-kpi-value">95<span style="font-size:13px;color:var(--ink-4);">%</span></div><div class="ws-kpi-trend up">40 of 42</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Overdue</div><div class="ws-kpi-value">2</div><div class="ws-kpi-trend warn">Auto-escalating</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Expiring soon</div><div class="ws-kpi-value">2</div><div class="ws-kpi-trend warn">Within 7 days</div></div>
+        </div>
+        <div class="ws-panel">
+          <table class="ws-table">
+            <thead><tr><th>Hold ID</th><th>Matter</th><th>Custodians</th><th>Issued</th><th>Days live</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td><code>LH-1142-01</code></td><td><strong>Wingate v. Meridian</strong></td><td>42</td><td>Sep 20, 2024</td><td>42</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr class="clickable"><td><code>LH-1142-15</code></td><td><strong>Wingate v. Meridian</strong></td><td>1 (K. Nguyen)</td><td>Oct 30, 2024</td><td>2</td><td><span class="ws-badge warning">● Overdue ack</span></td></tr>
+              <tr class="clickable"><td><code>LH-0408-01</code></td><td><strong>SEC Investigation 2025-04</strong></td><td>18</td><td>Apr 8, 2025</td><td>88</td><td><span class="ws-badge danger">● Expires in 2d</span></td></tr>
+              <tr class="clickable"><td><code>LH-0810-03</code></td><td><strong>Whistleblower 2025-08</strong></td><td>6</td><td>Aug 10, 2025</td><td>14</td><td><span class="ws-badge success">● Active</span></td></tr>
+              <tr class="clickable"><td><code>LH-0921-07</code></td><td><strong>Trinity Corp DD</strong></td><td>24</td><td>Sep 21, 2025</td><td>10</td><td><span class="ws-badge success">● Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- IPP -->
+      <div class="ws-tab-content" data-ws-content="user-ipp">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Workspace</span><span>/</span><span class="current">In-Place Preservation</span></div>
+            <h1 class="ws-title">In-Place <em>preservation</em></h1>
+            <p class="ws-desc">Active preservation profiles suspending retention across connected sources.</p>
+          </div>
+          <button class="btn btn-action">+ New IPP</button>
+        </div>
+        <div class="ws-kpi-row">
+          <div class="ws-kpi"><div class="ws-kpi-label">Active IPPs</div><div class="ws-kpi-value">142</div><div class="ws-kpi-trend">Across 14 matters</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Volume preserved</div><div class="ws-kpi-value">8.4<span style="font-size:13px;color:var(--ink-4);">TB</span></div><div class="ws-kpi-trend up">+0.6 TB</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Sources</div><div class="ws-kpi-value">9</div><div class="ws-kpi-trend warn">2 issues</div></div>
+          <div class="ws-kpi"><div class="ws-kpi-label">Spoliation events</div><div class="ws-kpi-value">0</div><div class="ws-kpi-trend up">90 days clean</div></div>
+        </div>
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">Active preservation profiles</div></div>
+          <table class="ws-table">
+            <thead><tr><th>Profile</th><th>Matter</th><th>Sources</th><th>Volume</th><th>Days active</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td><strong>Wingate IPP — Q3 Meridian</strong></td><td>Wingate v. Meridian</td><td>5</td><td><code>4.8 TB</code></td><td>42</td><td><span class="ws-badge success">● Holding</span></td></tr>
+              <tr class="clickable"><td><strong>SEC IPP — Investigation</strong></td><td>SEC 2025-04</td><td>4</td><td><code>820 GB</code></td><td>88</td><td><span class="ws-badge danger">● Expires 2d</span></td></tr>
+              <tr class="clickable"><td><strong>Trinity IPP — DD scope</strong></td><td>Trinity Corp</td><td>6</td><td><code>1.2 TB</code></td><td>10</td><td><span class="ws-badge success">● Holding</span></td></tr>
+              <tr class="clickable"><td><strong>Whistleblower IPP</strong></td><td>WB 2025-08</td><td>3</td><td><code>140 GB</code></td><td>14</td><td><span class="ws-badge success">● Holding</span></td></tr>
+              <tr class="clickable"><td><strong>Trial-prep Phoenix IPP</strong></td><td>Phoenix Patent</td><td>4</td><td><code>320 GB</code></td><td>180</td><td><span class="ws-badge warning">● Renewal due</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="ws-tab-content" data-ws-content="user-analytics">
+        <div class="ws-page-head">
+          <div>
+            <div class="ws-crumbs"><span>Workspace</span><span>/</span><span class="current">Analytics</span></div>
+            <h1 class="ws-title">Analytics <em>by prompt</em></h1>
+            <p class="ws-desc">Ask any question about your matters, holds, custodians, or workflows. Lex AI generates a chart, table, or summary.</p>
+          </div>
+        </div>
+
+        <div class="ws-analytics-prompt">
+          <input type="text" id="wsAnalyticsPrompt" placeholder="Ask about your data — e.g., 'Show me hold acknowledgment rates by matter'">
+          <button id="wsAskLexBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Ask Lex
+          </button>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px;">
+          <button class="ws-suggest-chip" data-prompt="Show hold acknowledgment rates by matter">Hold ack rates by matter</button>
+          <button class="ws-suggest-chip" data-prompt="Which custodians are at highest spoliation risk?">Spoliation risk by custodian</button>
+          <button class="ws-suggest-chip" data-prompt="Compare AI agent throughput last 7 days">Agent throughput last 7d</button>
+          <button class="ws-suggest-chip" data-prompt="Cost per matter year-to-date">Cost per matter YTD</button>
+          <button class="ws-suggest-chip" data-prompt="Time to production trend">Time to production trend</button>
+        </div>
+
+        <div id="wsAnalyticsResults"></div>
+
+        <div class="ws-panel">
+          <div class="ws-panel-head"><div class="ws-panel-title">Recent prompts</div></div>
+          <table class="ws-table">
+            <thead><tr><th>Prompt</th><th>By</th><th>Result type</th><th>When</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td><strong>"Show hot docs from Wingate by week"</strong></td><td>Sarah Reyes</td><td>Time series</td><td>1 hour ago</td></tr>
+              <tr class="clickable"><td><strong>"Which holds are expiring this month?"</strong></td><td>Sarah Reyes</td><td>Table</td><td>Yesterday</td></tr>
+              <tr class="clickable"><td><strong>"Total cost saved by AI agents YTD"</strong></td><td>Rajesh K.</td><td>Number + summary</td><td>2 days ago</td></tr>
+              <tr class="clickable"><td><strong>"Custodians with multiple active holds"</strong></td><td>D. Patel</td><td>Table</td><td>3 days ago</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============ ROUTING ============
+  const screens = {
+    'landing': 'screen-landing',
+    'login': 'screen-login',
+    'portal': 'screen-portal',
+    'admin-workspace': 'screen-admin-workspace',
+    'user-workspace': 'screen-user-workspace'
+  };
+
+  const state = {
+    selectedRole: 'admin'  // admin | user
+  };
+
+  function navigate(target) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const id = screens[target];
+    if (id) {
+      document.getElementById(id).classList.add('active');
+    } else {
+      document.getElementById('screen-landing').classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  // ============ LOGIN HANDLERS ============
+  function selectRole(role) {
+    state.selectedRole = role;
+    document.querySelectorAll('.role-option').forEach(r => {
+      r.classList.toggle('selected', r.dataset.role === role);
+    });
+  }
+
+  function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+    const btn = document.getElementById('loginSubmit');
+    const btnText = document.getElementById('loginBtnText');
+
+    errorEl.classList.remove('show');
+
+    if (!email || !password) {
+      errorEl.textContent = 'Please enter your email and password.';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      errorEl.textContent = 'Please enter a valid email address.';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    // Simulate login
+    btn.disabled = true;
+    btnText.innerHTML = '<span class="spinner"></span> Signing in...';
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btnText.textContent = 'Sign in →';
+
+      // Update portal user info based on role
+      const userInfo = state.selectedRole === 'admin'
+        ? { name: 'Rajesh Kandasamy', email: 'rajesh@rkspace.com', avatar: 'RK', greet: 'Rajesh' }
+        : { name: 'Sarah Reyes', email: 'sarah.reyes@wingate-cap.com', avatar: 'SR', greet: 'Sarah' };
+
+      document.getElementById('portalUserName').textContent = userInfo.name;
+      document.getElementById('portalUserEmail').textContent = userInfo.email;
+      document.getElementById('portalUserAvatar').textContent = userInfo.avatar;
+      document.getElementById('portalGreetName').textContent = userInfo.greet;
+
+      // Both roles see both workspaces in demo mode, but admin role has access count of 2
+      // Hold user / End user only sees their own + analytics
+      navigate('portal');
+    }, 800);
+  }
+
+  function openWorkspace(portal) {
+    if (portal === 'admin') {
+      navigate('admin-workspace');
+    } else if (portal === 'user') {
+      navigate('user-workspace');
+    }
+  }
+
+  // ============ EVENT WIRING ============
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-goto]');
+    if (link) {
+      e.preventDefault();
+      navigate(link.dataset.goto);
+      return;
+    }
+
+    const role = e.target.closest('.role-option');
+    if (role) { selectRole(role.dataset.role); return; }
+
+    if (e.target.id === 'loginSubmit' || e.target.closest('#loginSubmit')) {
+      handleLogin();
+      return;
+    }
+
+    const portalCard = e.target.closest('[data-portal]');
+    if (portalCard) {
+      openWorkspace(portalCard.dataset.portal);
+      return;
+    }
+
+    // Workspace tab switching (top nav inside admin/user workspaces)
+    const wsTab = e.target.closest('[data-ws-tab]');
+    if (wsTab) {
+      const screen = wsTab.closest('.screen');
+      if (screen) {
+        screen.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('active'));
+        // Find matching tab in topnav (for action cards that link to tabs)
+        const topnavTab = screen.querySelector(`.ws-topnav .ws-tab[data-ws-tab="${wsTab.dataset.wsTab}"]`);
+        if (topnavTab) topnavTab.classList.add('active');
+        else wsTab.classList.add('active');
+
+        screen.querySelectorAll('.ws-tab-content').forEach(c => c.classList.remove('active'));
+        const target = screen.querySelector(`[data-ws-content="${wsTab.dataset.wsTab}"]`);
+        if (target) target.classList.add('active');
+        // Scroll to top of workspace body
+        window.scrollTo(0, 0);
+      }
+      return;
+    }
+
+    // Role switcher inside user workspace
+    const roleBtn = e.target.closest('.ws-role-btn');
+    if (roleBtn) {
+      const roleSwitcher = roleBtn.parentElement;
+      roleSwitcher.querySelectorAll('.ws-role-btn').forEach(b => b.classList.remove('active'));
+      roleBtn.classList.add('active');
+
+      const role = roleBtn.dataset.userRole;
+      const userMap = {
+        counsel: { name: 'Sarah Reyes', role: 'Lead Counsel', avatar: 'SR', greet: 'Sarah', color: 'var(--info)' },
+        ipp: { name: 'Alex Morgan', role: 'IPP Operator', avatar: 'AM', greet: 'Alex', color: 'var(--action)' },
+        custodian: { name: 'Marcus Tellman', role: 'Custodian · CFO', avatar: 'MT', greet: 'Marcus', color: 'var(--success)' }
+      };
+      const u = userMap[role];
+      const nameEl = document.getElementById('userPortalName');
+      const roleEl = document.getElementById('userPortalRole');
+      const avatarEl = document.getElementById('userPortalAvatar');
+      const greetEl = document.getElementById('userGreetName');
+      if (nameEl) nameEl.textContent = u.name;
+      if (roleEl) roleEl.textContent = u.role;
+      if (avatarEl) { avatarEl.textContent = u.avatar; avatarEl.style.background = u.color; }
+      if (greetEl) greetEl.textContent = u.greet;
+      return;
+    }
+
+    // Analytics in workspace
+    if (e.target.id === 'wsAskLexBtn' || e.target.closest('#wsAskLexBtn')) {
+      const v = document.getElementById('wsAnalyticsPrompt').value.trim();
+      if (v) renderWsAnalytics(v);
+      return;
+    }
+    const sc = e.target.closest('.ws-suggest-chip');
+    if (sc) {
+      document.getElementById('wsAnalyticsPrompt').value = sc.dataset.prompt;
+      renderWsAnalytics(sc.dataset.prompt);
+      return;
+    }
+  });
+
+  function renderWsAnalytics(prompt) {
+    const results = document.getElementById('wsAnalyticsResults');
+    if (!results) return;
+    const lower = prompt.toLowerCase();
+    let result;
+
+    if (lower.includes('hold') && (lower.includes('ack') || lower.includes('rate'))) {
+      result = {
+        summary: '<strong>Across 14 active matters,</strong> the average hold acknowledgment rate is <strong>95.2%</strong>. Wingate v. Meridian leads at 100%; Tellman Employment trails at 75%.',
+        chart: [
+          { label: 'SEC 2025-04', value: 100, fill: 'success', text: '18 / 18' },
+          { label: 'Whistleblower 2025-08', value: 100, fill: 'success', text: '6 / 6' },
+          { label: 'Trinity Corp DD', value: 100, fill: 'success', text: '24 / 24' },
+          { label: 'Wingate v. Meridian', value: 95, fill: 'success', text: '40 / 42' },
+          { label: 'Phoenix Patent', value: 92, fill: 'warning', text: '11 / 12' },
+          { label: 'Tellman Employment', value: 75, fill: 'action', text: '3 / 4' }
+        ]
+      };
+    } else if (lower.includes('spoliation') || lower.includes('risk')) {
+      result = {
+        summary: 'Currently <strong>2 custodians</strong> have elevated spoliation risk. Most concerning: <strong>L. Okafor</strong> (departed, archive preserved).',
+        chart: [
+          { label: 'L. Okafor (departed)', value: 78, fill: 'action', text: 'Med-high' },
+          { label: 'K. Nguyen (overdue)', value: 42, fill: 'warning', text: 'Medium' },
+          { label: 'Marcus Tellman', value: 12, fill: 'success', text: 'Low' },
+          { label: 'Erik Darrow', value: 10, fill: 'success', text: 'Low' }
+        ]
+      };
+    } else if (lower.includes('agent') && lower.includes('throughput')) {
+      result = {
+        summary: '<strong>Triage agent</strong> handled 1.2M items last 7 days. <strong>Redaction agent</strong> processed 64k PII targets — up 22% week-over-week.',
+        chart: [
+          { label: 'Triage', value: 100, fill: 'agent', text: '1.2M' },
+          { label: 'OCR', value: 92, fill: 'agent', text: '1.1M pages' },
+          { label: 'Privilege', value: 22, fill: 'agent', text: '264k' },
+          { label: 'Redaction', value: 14, fill: 'agent', text: '64k' },
+          { label: 'Auditor', value: 38, fill: 'agent', text: '450k' },
+          { label: 'Investigator', value: 1, fill: 'agent', text: '14 hyp.' }
+        ]
+      };
+    } else if (lower.includes('cost')) {
+      result = {
+        summary: 'YTD spend across 14 matters is <strong>$1.84M</strong>. <strong>AI agents have saved an estimated $1.2M</strong> compared to traditional manual review (38% reduction).',
+        chart: [
+          { label: 'Wingate v. Meridian', value: 100, fill: 'action', text: '$420k' },
+          { label: 'SEC 2025-04', value: 71, fill: 'action', text: '$298k' },
+          { label: 'Trinity Corp DD', value: 52, fill: 'success', text: '$220k' },
+          { label: 'Phoenix Patent', value: 44, fill: 'success', text: '$184k' },
+          { label: 'All others', value: 90, fill: '', text: '$716k' }
+        ]
+      };
+    } else if (lower.includes('time') || lower.includes('production') || lower.includes('cycle')) {
+      result = {
+        summary: 'Average time-to-production has decreased <strong>38%</strong> over the past 12 months. Current Q4 average: <strong>14.2 days</strong>.',
+        chart: [
+          { label: 'Q1 2025', value: 100, fill: '', text: '23.0 days' },
+          { label: 'Q2 2025', value: 84, fill: '', text: '19.4 days' },
+          { label: 'Q3 2025', value: 72, fill: 'warning', text: '16.5 days' },
+          { label: 'Q4 2025', value: 62, fill: 'success', text: '14.2 days' },
+          { label: 'Q1 2026 (proj)', value: 53, fill: 'success', text: '12.1 days' }
+        ]
+      };
+    } else {
+      result = {
+        summary: `I analyzed your data for: <strong>"${prompt}"</strong>. Found <strong>14 matters</strong>, <strong>42 active holds</strong>, <strong>2,148 employees</strong>, and <strong>847k documents</strong>.`,
+        chart: [
+          { label: 'Active matters', value: 28, fill: '', text: '14' },
+          { label: 'Active holds', value: 84, fill: 'success', text: '42' },
+          { label: 'Custodians', value: 100, fill: 'success', text: '2,148' },
+          { label: 'Documents', value: 100, fill: 'agent', text: '847k' }
+        ]
+      };
+    }
+
+    const html = `
+      <div class="ws-analytics-result">
+        <div class="ws-ar-head">
+          <div class="ws-ar-icon">L</div>
+          <div class="ws-ar-query">${prompt}</div>
+          <span class="ws-ar-meta">Generated 1.4s · 6 tools</span>
+        </div>
+        <div class="ws-ar-body">
+          <div class="ws-ar-summary">${result.summary}</div>
+          <div>
+            ${result.chart.map(b => `
+              <div class="ws-chart-row">
+                <div>${b.label}</div>
+                <div class="ws-chart-track"><div class="ws-chart-fill ${b.fill || ''}" style="width: ${Math.min(b.value, 100)}%;"></div></div>
+                <div class="ws-chart-value">${b.text}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>`;
+    results.insertAdjacentHTML('afterbegin', html);
+  }
+
+  // Enter key on login
+  document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleLogin();
+  });
+  document.getElementById('loginEmail').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleLogin();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Claude Code local settings (do not commit)
+.claude/
+
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor junk
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / build (none today, but future-proof)
+node_modules/
+dist/
+build/
